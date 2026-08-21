@@ -1,0 +1,39 @@
+// Font families and sizes are charter tokens in sass/default.scss.
+body {
+    font-family: var(--ife-font-body);
+    font-size: var(--ife-fs-base);
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: var(--ife-font-title);
+    border-bottom: none;
+}
+
+h1, .h1 {
+    font-size: var(--ife-fs-h1);
+}
+
+h2, .h2 {
+    font-size: var(--ife-fs-h2);
+}
+
+h3, .h3 {
+    font-size: var(--ife-fs-h3);
+}
+
+h4, .h4 {
+    font-size: var(--ife-fs-h4);
+}
+
+h5, .h5 {
+    font-size: var(--ife-fs-h5);
+}
+
+h6, .h6 {
+    font-size: var(--ife-fs-h6);
+}
+
+code, kbd, pre, samp {
+    font-family: var(--ife-font-mono);
+}

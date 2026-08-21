@@ -1,0 +1,117 @@
+/*-- scss:defaults --*/
+
+// =============================================================================
+// Charte IFE — tokens
+//
+// Cinq couleurs : anthracite, blanc, gris, bordeaux, turquoise.
+// Titres : Merriweather 700. Corps : Arimo 400, 700, italic.
+// Tailles : --ife-fs-* (échelle IFE). Mobile sous $ife-bp-nav.
+// Les composants lisent les custom properties CSS, pas ces variables Sass.
+// =============================================================================
+
+@import url("https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400;1,700&family=Fira+Code:wght@400&family=Merriweather:wght@700&display=swap");
+
+// Typography
+$ife-font-title: "Merriweather", serif;
+$ife-font-body: "Arimo", sans-serif;
+$ife-font-mono: "Fira Code", monospace;
+
+// Palette
+$ife-anthracite: #110000;
+$ife-blanc: #FFFFFF;
+$ife-gris: #DDDBDB;
+$ife-bordeaux: #7D0000;
+$ife-turquoise: #21606E;
+
+// Voile : anthracite à 72 %, lisibilité du texte blanc sur les photos des bandeaux.
+$ife-voile: rgba($ife-anthracite, 0.72);
+
+// Layout — desktop 1280px / mobile 393px (conteneur 361px, pad 16px)
+$ife-page-max: 1280px;
+$ife-page-pad: 48px;
+$ife-page-pad-sm: 16px;
+$ife-gutter: 24px;
+$ife-gutter-sm: 16px;
+$ife-header-height: 119px;
+$ife-band-height: 410px;
+$ife-ecograph-height: 460px;
+$ife-bp-nav: 900px;
+$ife-bp-sm: 600px;
+
+// Bootstrap / Quarto mapping
+$font-family-sans-serif: $ife-font-body;
+$font-family-monospace: $ife-font-mono;
+$headings-font-family: $ife-font-title;
+$headings-font-weight: 700;
+$primary: $ife-anthracite;
+$link-color: $ife-anthracite;
+$link-hover-color: $ife-anthracite;
+$body-bg: $ife-blanc;
+$body-color: $ife-anthracite;
+$headings-color: $ife-anthracite;
+$border-color: $ife-gris;
+$navbar-bg: $ife-anthracite;
+$navbar-fg: $ife-blanc;
+$navbar-hl: $ife-blanc;
+$sidebar-hl: $ife-anthracite;
+$callout-color-tip: $ife-gris;
+
+/*-- scss:rules --*/
+
+// Semantic tokens consumed by layout/ and components/.
+:root {
+    --ife-anthracite: #{$ife-anthracite};
+    --ife-blanc: #{$ife-blanc};
+    --ife-gris: #{$ife-gris};
+    --ife-bordeaux: #{$ife-bordeaux};
+    --ife-turquoise: #{$ife-turquoise};
+    --ife-voile: #{$ife-voile};
+    --ife-font-title: #{$ife-font-title};
+    --ife-font-body: #{$ife-font-body};
+    --ife-font-mono: #{$ife-font-mono};
+    --ife-fs-sm: 0.875rem;
+    --ife-fs-lg: 1.25rem;
+    --ife-fs-base: 1rem;
+    --ife-fs-h1: 3.8125rem;
+    --ife-fs-h2: 3rem;
+    --ife-fs-h3: 2.4375rem;
+    --ife-fs-h3-article: 1.25rem;
+    --ife-fs-h4: 1.9375rem;
+    --ife-fs-h5: 1.5625rem;
+    --ife-fs-h6: 1.25rem;
+    --ife-fs-date: var(--ife-fs-sm);
+    --ife-fs-label: var(--ife-fs-sm);
+    --ife-fs-localisation: var(--ife-fs-sm);
+    --ife-fs-autor: var(--ife-fs-sm);
+    --ife-fs-tag: 0.625rem;
+    --ife-fs-category: 0.75rem;
+    --ife-page-max: #{$ife-page-max};
+    --ife-page-pad: #{$ife-page-pad};
+    --ife-gutter: #{$ife-gutter};
+    --ife-header-height: #{$ife-header-height};
+    --ife-band-height: #{$ife-band-height};
+    --ife-ecograph-height: #{$ife-ecograph-height};
+}
+
+@media (max-width: #{$ife-bp-nav - 0.02px}) {
+    :root {
+        --ife-fs-sm: 0.75rem;
+        --ife-fs-lg: 1.125rem;
+        --ife-fs-base: 0.875rem;
+        --ife-fs-h1: 3rem;
+        --ife-fs-h2: 2.4375rem;
+        --ife-fs-h3: 1.25rem;
+        --ife-fs-h3-article: 1.125rem;
+        --ife-fs-h4: 1.5625rem;
+        --ife-fs-h5: 1.25rem;
+        --ife-fs-h6: 1.125rem;
+        --ife-fs-tag: 0.625rem;
+        --ife-fs-category: 0.625rem;
+    }
+}
+
+.btn-primary {
+    --bs-btn-color: #{$ife-blanc} !important;
+    --bs-btn-bg: #{$ife-anthracite};
+    --bs-btn-border-color: #{$ife-anthracite};
+}

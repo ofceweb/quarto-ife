@@ -1,0 +1,22 @@
+// Grille de page : 1184px + pad 48px au desktop, 361px + pad 16px à 393px.
+html {
+    overflow-x: hidden;
+}
+
+body.fullcontent {
+    #quarto-sidebar,
+    #quarto-sidebar-glass {
+        display: none;
+    }
+    main {
+        margin: 0;
+    }
+}
+
+@media (max-width: #{$ife-bp-nav - 0.02px}) {
+    :root {
+        --ife-page-pad: #{$ife-page-pad-sm};
+        --ife-gutter: #{$ife-gutter-sm};
+        --ife-header-height: auto;
+    }
+}

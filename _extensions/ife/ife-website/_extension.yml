@@ -1,0 +1,30 @@
+title: IFE Website
+author: IFE
+version: 0.1.0
+quarto-required: ">=1.9.38"
+
+contributes:
+  # ------ Project Type: IFE Website -------------------------------------------
+  # Defaults partagés : favicon et bandeau de cookies.
+  project:
+    project:
+      type: website
+    website:
+      title: "IFE"
+      favicon: "img/favicon.ico"
+      cookie-consent:
+        type: implied
+        style: simple
+        palette: light
+        language: fr
+        policy-url: https://PLACEHOLDER-DOMAINE-IFE/legal/cookies.html
+      navbar: false
+
+  shortcodes:
+    - home/quisommesnous.lua
+    - home/alaune.lua
+    - home/ecograph.lua
+    - home/actualite.lua
+    - home/publications.lua
+    - home/outils.lua
+    - home/apropos.lua

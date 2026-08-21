@@ -1,0 +1,85 @@
+// Notre actualité : trois cartes avec image 16:9, puis trois lignes.
+// Contrat de classes pour le shortcode `actualite` (ife-website).
+.actualite {
+    color: var(--ife-anthracite);
+    &__cards {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--ife-gutter);
+    }
+    &__card,
+    &__line {
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        min-width: 0;
+        border-bottom: 1px solid var(--ife-gris);
+        color: inherit;
+        .ife-meta {
+            margin-top: 0.5rem;
+        }
+    }
+    &__card {
+        padding-bottom: 1.25rem;
+    }
+    &__lines {
+        display: flex;
+        flex-direction: column;
+        margin-top: 0.5rem;
+    }
+    &__line {
+        padding: 1.25rem 0;
+    }
+    &__title {
+        margin: 0;
+        font-family: var(--ife-font-title);
+        font-size: var(--ife-fs-h3-article);
+        font-weight: 700;
+        line-height: 1.3;
+        color: var(--ife-anthracite);
+        a {
+            color: inherit;
+            text-decoration: none;
+            &:hover,
+            &:focus {
+                color: inherit;
+                text-decoration: underline;
+                text-underline-offset: 0.15em;
+            }
+        }
+    }
+    &__image {
+        width: 100%;
+        margin-top: 1rem;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        background-color: var(--ife-gris);
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+    }
+    &__more {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 1.5rem;
+    }
+}
+
+@media (max-width: #{$ife-bp-nav - 0.02px}) {
+    .actualite__cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: #{$ife-bp-sm - 0.02px}) {
+    .actualite__more {
+        justify-content: stretch;
+        .ife-btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+}

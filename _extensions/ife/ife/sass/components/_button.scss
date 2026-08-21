@@ -1,0 +1,87 @@
+// Boutons d'action. Trois variantes : solid, outline, outline-dark.
+// Contrat de classes pour `components.cta_button()` (`_modules/components.lua`).
+.ife-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-sizing: border-box;
+    padding: 0.65rem 1.25rem;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    background-color: transparent;
+    font-family: var(--ife-font-body);
+    font-size: var(--ife-fs-label);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    i {
+        font-size: 0.875rem;
+        line-height: 1;
+    }
+    &:hover,
+    &:focus {
+        text-decoration: none;
+    }
+    &:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 2px;
+    }
+    &.external::after,
+    &.external > *:last-child::after {
+        content: none !important;
+        display: none !important;
+    }
+    &--solid {
+        background-color: var(--ife-blanc);
+        border-color: var(--ife-blanc);
+        color: var(--ife-anthracite);
+        &:link,
+        &:visited {
+            color: var(--ife-anthracite);
+        }
+        &:hover,
+        &:focus {
+            background-color: var(--ife-gris);
+            border-color: var(--ife-gris);
+            color: var(--ife-anthracite);
+        }
+    }
+    &--outline {
+        background-color: transparent;
+        border-color: var(--ife-blanc);
+        color: var(--ife-blanc);
+        &:link,
+        &:visited {
+            color: var(--ife-blanc);
+        }
+        &:hover,
+        &:focus {
+            background-color: var(--ife-blanc);
+            color: var(--ife-anthracite);
+        }
+    }
+    &--outline-dark {
+        background-color: transparent;
+        border-color: var(--ife-anthracite);
+        color: var(--ife-anthracite);
+        &:link,
+        &:visited {
+            color: var(--ife-anthracite);
+        }
+        &:hover,
+        &:focus {
+            background-color: var(--ife-anthracite);
+            border-color: var(--ife-anthracite);
+            color: var(--ife-blanc);
+        }
+    }
+}
+
+@media (max-width: #{$ife-bp-sm - 0.02px}) {
+    .ife-btn {
+        max-width: 100%;
+        white-space: normal;
+    }
+}

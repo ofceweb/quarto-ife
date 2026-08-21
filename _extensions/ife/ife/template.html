@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="$lang$" xml:lang="$lang$"$if(dir)$ dir="$dir$"$endif$>
+
+<head>
+
+$metadata.html()$
+
+<style>
+$styles.html()$
+</style>
+
+<!-- htmldependencies:E3FAD763 -->
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+$if(math)$
+$if(mathjax)$
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+$endif$
+  $math$
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+$endif$
+
+$for(css)$
+<link rel="stylesheet" href="$css$" />
+$endfor$
+</head>
+
+<body>
+
+$for(include-before)$
+$include-before$
+$endfor$
+
+<header class="ife-chrome ife-header">
+  <div class="ife-chrome__inner">
+    <a class="ife-lockup" href="/" aria-label="IFE, Institut Français d’Économie — Accueil">
+      <img class="ife-lockup__logo" src="/www/IFE-Logo.png" alt="" />
+    </a>
+    <button type="button" class="ife-nav-toggle" aria-controls="ife-header-menu" aria-expanded="false" aria-label="Ouvrir le menu">
+      <i class="bi bi-list" aria-hidden="true"></i>
+    </button>
+    <div class="ife-header__end" id="ife-header-menu">
+      <a class="ife-header__about" href="/ife/qui_sommes_nous.html">À propos &amp; contact</a>
+      <div class="ife-brand-btns">
+        <a class="ife-brand-btn ife-brand-btn--ofce" href="https://www.ofce.fr/" target="_blank" rel="noopener noreferrer">
+          <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+          OFCE
+          <span class="visually-hidden"> (nouvelle fenêtre)</span>
+        </a>
+        <a class="ife-brand-btn ife-brand-btn--cepii" href="https://www.cepii.fr/" target="_blank" rel="noopener noreferrer">
+          <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+          CEPII
+          <span class="visually-hidden"> (nouvelle fenêtre)</span>
+        </a>
+      </div>
+      <nav class="ife-lang" aria-label="Choix de la langue">
+        <a class="ife-lang__current" href="/" lang="fr" hreflang="fr" aria-current="page">FR</a>
+        <span class="ife-lang__sep" aria-hidden="true"> / </span>
+        <a class="ife-lang__other" href="#" lang="en" hreflang="en" aria-disabled="true" tabindex="-1" title="Version anglaise à venir">EN</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<script>
+(function () {
+  var header = document.querySelector("header.ife-header");
+  if (header && header.parentElement !== document.body) {
+    document.body.insertBefore(header, document.body.firstChild);
+  }
+  var toggle = document.querySelector(".ife-nav-toggle");
+  if (!header || !toggle) return;
+  var icon = toggle.querySelector("i");
+  toggle.addEventListener("click", function () {
+    var open = header.classList.toggle("is-open");
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    toggle.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
+    if (icon) {
+      icon.classList.toggle("bi-list", !open);
+      icon.classList.toggle("bi-x-lg", open);
+    }
+  });
+})();
+</script>
+
+$if(title)$
+$title-block.html()$
+$elseif(subtitle)$
+$title-block.html()$
+$elseif(by-author)$
+$title-block.html()$
+$elseif(date)$
+$title-block.html()$
+$elseif(categories)$
+$title-block.html()$
+$elseif(date-modified)$
+$title-block.html()$
+$elseif(doi)$
+$title-block.html()$
+$elseif(abstract)$
+$title-block.html()$
+$elseif(keywords)$
+$title-block.html()$
+$endif$
+
+
+$if(toc)$
+$toc.html()$
+$endif$
+
+$body$
+
+$for(include-after)$
+$include-after$
+$endfor$
+
+
+<footer class="ife-chrome ife-footer">
+  <div class="ife-chrome__inner">
+    <a class="ife-lockup" href="/" aria-label="IFE, Institut Français d’Économie — Accueil">
+      <img class="ife-lockup__logo" src="/www/IFE-Logo.png" alt="" />
+    </a>
+    <div class="ife-footer__end">
+      <nav class="ife-footer__legal" aria-label="Liens légaux">
+        <ul>
+          <li><a href="/legal/cookies.html">Cookies</a></li>
+          <li><a href="/legal/mentions_legales.html">Mentions légales</a></li>
+          <li><a href="/legal/confidentialite.html">Confidentialité</a></li>
+          <li><a href="/legal/conditions_generales.html">Conditions générales</a></li>
+          <li><a href="/sitemap.xml">Plan du site</a></li>
+          <li><a href="/ife/qui_sommes_nous.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="ife-brand-btns">
+        <a class="ife-brand-btn ife-brand-btn--ofce" href="https://www.ofce.fr/" target="_blank" rel="noopener noreferrer">
+          <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+          OFCE
+          <span class="visually-hidden"> (nouvelle fenêtre)</span>
+        </a>
+        <a class="ife-brand-btn ife-brand-btn--cepii" href="https://www.cepii.fr/" target="_blank" rel="noopener noreferrer">
+          <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+          CEPII
+          <span class="visually-hidden"> (nouvelle fenêtre)</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+(function () {
+  var footer = document.querySelector("footer.ife-footer");
+  if (footer) {
+    document.body.appendChild(footer);
+  }
+})();
+</script>
+
+</body>
+
+</html>
