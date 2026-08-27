@@ -4,12 +4,12 @@
 // Charte IFE — tokens
 //
 // Cinq couleurs : anthracite, blanc, gris, bordeaux, turquoise.
-// Titres : Merriweather 700. Corps : Arimo 400, 700, italic.
+// Titres : Merriweather 600, 700. Corps : Arimo 400, 700, italic.
 // Tailles : --ife-fs-* (échelle IFE). Mobile sous $ife-bp-nav.
 // Les composants lisent les custom properties CSS, pas ces variables Sass.
 // =============================================================================
 
-@import url("https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400;1,700&family=Fira+Code:wght@400&family=Merriweather:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400;1,700&family=Fira+Code:wght@400&family=Merriweather:wght@600;700&display=swap");
 
 // Typography
 $ife-font-title: "Merriweather", serif;
@@ -42,7 +42,7 @@ $ife-bp-sm: 600px;
 $font-family-sans-serif: $ife-font-body;
 $font-family-monospace: $ife-font-mono;
 $headings-font-family: $ife-font-title;
-$headings-font-weight: 700;
+$headings-font-weight: 600;
 $primary: $ife-anthracite;
 $link-color: $ife-anthracite;
 $link-hover-color: $ife-anthracite;

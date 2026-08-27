@@ -6,12 +6,12 @@
     gap: 0.5rem;
     box-sizing: border-box;
     padding: 0.65rem 1.25rem;
-    border: 1px solid transparent;
+    border: 4px solid transparent;
     border-radius: 2px;
     background-color: transparent;
     font-family: var(--ife-font-body);
     font-size: var(--ife-fs-label);
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.02em;
     line-height: 1;
     text-decoration: none;
@@ -60,6 +60,9 @@
         &:focus {
             background-color: var(--ife-blanc);
             color: var(--ife-anthracite);
+            img {
+                filter: brightness(0);
+            }
         }
     }
     &--outline-dark {

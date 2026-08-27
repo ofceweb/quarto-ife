@@ -11,15 +11,21 @@ local components = {}
 
 local ICONS = {
     arrow = "bi-arrow-right",
-    envelope = "bi-envelope",
-    pdf = "bi-file-earmark-pdf",
-    calendar = "bi-calendar3",
-    pin = "bi-geo-alt",
+}
+
+local SVG_ICONS = {
+    envelope = "/www/mail_icon.svg",
 }
 
 local SOURCE_LABELS = {
     ofce = "OFCE",
     cepii = "CEPII",
+}
+
+local REGION_ICONS = {
+    fr = "/www/fr_icon.svg",
+    eu = "/www/eu_icon.svg",
+    world = "/www/world_icon.svg",
 }
 
 local VARIANTS = {
@@ -44,6 +50,22 @@ local function bi_icon(name)
         class_name = "bi-" .. class_name
     end
     return string.format('<i class="bi %s" aria-hidden="true"></i>', class_name)
+end
+
+--- Icône CTA : SVG du projet, sinon Bootstrap Icons. Chaîne vide si name est vide.
+--- @param name string|nil Clé courte (`arrow`, `envelope`) ou classe (`bi-arrow-right`)
+--- @return string
+local function cta_icon(name)
+    local key = utils.to_str(name)
+    if key == "" then return "" end
+    local src = SVG_ICONS[key]
+    if src then
+        return string.format(
+            '<img src="%s" alt="" aria-hidden="true" />',
+            src
+        )
+    end
+    return bi_icon(key)
 end
 
 --- Jeton CSS : minuscules, lettres, chiffres et tirets uniquement
@@ -102,10 +124,9 @@ function components.pdf_icon(url)
     local href = utils.to_str(url)
     if href == "" then return "" end
     return string.format(
-        '<a class="ife-pdf" href="%s"%s aria-label="Télécharger le PDF">%s</a>',
+        '<a class="ife-pdf" href="%s"%s aria-label="Télécharger le PDF"><img src="/www/pdf_icon.svg" alt="" /></a>',
         utils.html_escape(href),
-        utils.link_attrs(href),
-        bi_icon("pdf")
+        utils.link_attrs(href)
     )
 end
 
@@ -118,15 +139,15 @@ function components.source_badge(source, region)
     if key == "" then return "" end
     local label = SOURCE_LABELS[key] or utils.html_escape(utils.to_str(source))
     local flag = ""
-    local region_tok = region_key(region)
-    if region_tok ~= "" then
+    local icon_src = REGION_ICONS[region_key(region)]
+    if icon_src then
         flag = string.format(
-            '<span class="ife-source__flag ife-source__flag--%s" aria-hidden="true"></span>',
-            region_tok
+            '<img class="ife-source__flag" src="%s" alt="" aria-hidden="true" />',
+            icon_src
         )
     end
     return string.format(
-        '<span class="ife-source ife-source--%s">%s%s</span>',
+        '<span class="ife-source ife-source--%s">%s<span class="ife-source__label">%s</span></span>',
         key,
         flag,
         label
@@ -157,13 +178,14 @@ function components.keywords_row(keywords)
         ))
     end
     return string.format(
-        '<ul class="ife-keywords">%s</ul>',
+        '<ul class="ife-keywords"><li class="ife-keywords__icon" aria-hidden="true">%s</li>%s</ul>',
+        bi_icon("arrow"),
         table.concat(lis)
     )
 end
 
 --- Bouton d'action. Variantes : `solid`, `outline`, `outline-dark`.
---- `icon` : `arrow`, `envelope`, ou une classe Bootstrap Icons.
+--- `icon` : `arrow` (Bootstrap), `envelope` (`mail_icon.svg`), ou une classe Bootstrap Icons.
 --- Omis si le libellé est vide. Sans URL, rend un `span`.
 --- @param label string|nil
 --- @param url string|nil
@@ -175,7 +197,7 @@ function components.cta_button(label, url, variant, icon)
     if text == "" then return "" end
 
     local variant_key = VARIANTS[utils.to_str(variant):lower()] or "solid"
-    local icon_html = bi_icon(icon)
+    local icon_html = cta_icon(icon)
     local inner = text
     if icon_html ~= "" then
         inner = icon_html .. "<span>" .. text .. "</span>"
@@ -193,6 +215,27 @@ function components.cta_button(label, url, variant, icon)
         utils.link_attrs(href),
         inner
     )
+end
+
+--- Ligne d'auteurs. Chaque nom porte `ife-author`. Omis si vide.
+--- @param raw string|nil Chaîne unique, noms séparés par des virgules
+--- @param class_name string Classe du paragraphe (`alaune__authors`, …)
+--- @return string
+function components.authors_html(raw, class_name)
+    local text = utils.to_str(raw)
+    if text == "" then return "" end
+    local spans = {}
+    for name in string.gmatch(text, "[^,]+") do
+        local trimmed = name:match("^%s*(.-)%s*$")
+        if trimmed ~= "" then
+            table.insert(spans, string.format(
+                '<span class="ife-author">%s</span>',
+                utils.html_escape(trimmed)
+            ))
+        end
+    end
+    if #spans == 0 then return "" end
+    return utils.el("p", class_name, table.concat(spans, ", "))
 end
 
 --- Titre de section, serif, sans filet. Omis si vide.
@@ -219,8 +262,7 @@ function components.meta_line(type_label, date, location)
     local date_text = utils.html_escape(utils.format_date_fr(date))
     if date_text ~= "" then
         table.insert(parts, string.format(
-            '<span class="ife-meta__date">%s%s</span>',
-            bi_icon("calendar"),
+            '<span class="ife-meta__date"><img src="/www/calendar_icon.svg" alt="" aria-hidden="true" />%s</span>',
             date_text
         ))
     end
@@ -228,8 +270,7 @@ function components.meta_line(type_label, date, location)
     local loc_text = utils.html_escape(utils.to_str(location))
     if loc_text ~= "" then
         table.insert(parts, string.format(
-            '<span class="ife-meta__location">%s%s</span>',
-            bi_icon("pin"),
+            '<span class="ife-meta__location"><img src="/www/localisation_icon.svg" alt="" aria-hidden="true" />%s</span>',
             loc_text
         ))
     end

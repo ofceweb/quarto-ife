@@ -1,4 +1,4 @@
--- Notre actualité : trois cartes avec image, puis trois lignes.
+-- Notre actualité : trois cartes avec image, puis lignes et bouton.
 -- 0 item => section omise.
 -- Les items `featured` forment les cartes (3 max). Les autres forment les
 -- lignes (3 max), y compris le surplus de featured. Sans aucun `featured`,
@@ -159,15 +159,17 @@ return {
         local body = string.format([[
                 <div class="actualite">
                     %s
-                    %s
-                    <div class="actualite__more">
+                    <div class="actualite__row">
                         %s
+                        <div class="actualite__more">
+                            %s
+                        </div>
                     </div>
                 </div>
         ]],
             list_html(cards, create_card, "actualite__cards"),
             list_html(lines, create_line, "actualite__lines"),
-            components.cta_button(more_label, cfg.more_url, "outline-dark")
+            components.cta_button(more_label, cfg.more_url, "outline-dark", "arrow")
         )
 
         local html = utils.section_html(

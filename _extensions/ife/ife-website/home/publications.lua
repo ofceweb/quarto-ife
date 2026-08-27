@@ -81,10 +81,9 @@ local function create_item(item)
             utils.html_escape(utils.format_date_fr(utils.raw_pick(item, "date", "published")))
         ),
         title_html(title, url),
-        utils.el(
-            "p",
-            "publications__authors",
-            utils.html_escape(utils.pick(item, "authors", "author"))
+        components.authors_html(
+            utils.pick(item, "authors", "author"),
+            "publications__authors"
         ),
         components.source_badge(
             utils.pick(item, "source"),

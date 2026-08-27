@@ -113,10 +113,9 @@ local function create_item(item, opts)
         ),
         title_html(title, url),
         excerpt_html,
-        utils.el(
-            "p",
-            "alaune__authors",
-            utils.html_escape(utils.pick(item, "authors", "author"))
+        components.authors_html(
+            utils.pick(item, "authors", "author"),
+            "alaune__authors"
         ),
         chart_html,
         components.keywords_row(item.keywords),

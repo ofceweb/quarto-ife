@@ -63,10 +63,9 @@ local function create_banner(item)
             "ecograph__excerpt",
             utils.html_escape(utils.pick(item, "excerpt"))
         ),
-        utils.el(
-            "p",
-            "ecograph__author",
-            utils.html_escape(utils.pick(item, "author"))
+        components.authors_html(
+            utils.pick(item, "author"),
+            "ecograph__author"
         ),
         components.cta_button(
             utils.pick(item, "cta_label"),

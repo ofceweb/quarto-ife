@@ -70,12 +70,12 @@
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    padding: 0.4rem 0.7rem;
+    padding: 10px 16px;
     border-radius: 2px;
     background-color: var(--ife-blanc);
     font-family: var(--ife-font-body);
     font-size: var(--ife-fs-category);
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.04em;
     line-height: 1;
     text-decoration: none;
@@ -129,6 +129,9 @@
         gap: 1.5rem;
     }
     &__about {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
         font-family: var(--ife-font-body);
         font-size: var(--ife-fs-sm);
         font-weight: 400;

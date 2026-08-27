@@ -3,12 +3,12 @@
 .ife-badge {
     display: inline-flex;
     align-items: center;
-    padding: 0.15rem 0.4rem;
+    padding: 0.25rem 0.5rem;
     background-color: var(--ife-gris);
     color: var(--ife-anthracite);
     font-family: var(--ife-font-body);
     font-size: var(--ife-fs-tag);
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.06em;
     line-height: 1.2;
     text-transform: uppercase;
@@ -25,7 +25,7 @@
     color: var(--ife-anthracite);
     font-family: var(--ife-font-body);
     font-size: var(--ife-fs-tag);
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.04em;
     line-height: 1.2;
     text-transform: uppercase;
@@ -40,9 +40,6 @@
     line-height: 1;
     text-decoration: none;
     opacity: 0.7;
-    i {
-        font-size: 0.875rem;
-    }
     &:hover,
     &:focus {
         color: var(--ife-anthracite);
@@ -63,7 +60,7 @@
     color: var(--ife-anthracite);
     font-family: var(--ife-font-body);
     font-size: var(--ife-fs-category);
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.04em;
     line-height: 1;
     text-transform: uppercase;
@@ -74,48 +71,13 @@
     &--cepii {
         color: var(--ife-turquoise);
     }
-    &__flag {
-        display: inline-block;
-        width: 1rem;
-        height: 0.7rem;
-        flex-shrink: 0;
-        background-repeat: no-repeat;
-        background-size: cover;
-        // Exception assumée hors charte : couleurs officielles des drapeaux
-        // français (#002395, #fff, #ed2939) et européen (#003399, #ffcc00).
-        &--fr {
-            background: linear-gradient(
-                to right,
-                #002395 0%,
-                #002395 33.33%,
-                #fff 33.33%,
-                #fff 66.66%,
-                #ed2939 66.66%,
-                #ed2939 100%
-            );
-        }
-        &--eu {
-            background-color: #003399;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 24'%3E%3Crect width='36' height='24' fill='%23003399'/%3E%3Cg fill='%23ffcc00' transform='translate(18 12)'%3E%3Ccircle cx='0' cy='-8' r='1.1'/%3E%3Ccircle cx='4' cy='-6.9' r='1.1'/%3E%3Ccircle cx='6.9' cy='-4' r='1.1'/%3E%3Ccircle cx='8' cy='0' r='1.1'/%3E%3Ccircle cx='6.9' cy='4' r='1.1'/%3E%3Ccircle cx='4' cy='6.9' r='1.1'/%3E%3Ccircle cx='0' cy='8' r='1.1'/%3E%3Ccircle cx='-4' cy='6.9' r='1.1'/%3E%3Ccircle cx='-6.9' cy='4' r='1.1'/%3E%3Ccircle cx='-8' cy='0' r='1.1'/%3E%3Ccircle cx='-6.9' cy='-4' r='1.1'/%3E%3Ccircle cx='-4' cy='-6.9' r='1.1'/%3E%3C/g%3E%3C/svg%3E");
-            background-size: cover;
-        }
-        &--world {
-            width: 0.875rem;
-            height: 0.875rem;
-            border: 1.5px solid currentColor;
-            border-radius: 50%;
-            background:
-                linear-gradient(currentColor, currentColor) center / 100% 1px no-repeat,
-                linear-gradient(currentColor, currentColor) center / 1px 100% no-repeat;
-        }
-    }
 }
 
 .ife-meta {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.75rem 1rem;
+    gap: 1rem;
     font-family: var(--ife-font-body);
     font-size: var(--ife-fs-date);
     color: var(--ife-anthracite);
@@ -124,15 +86,11 @@
         display: inline-flex;
         align-items: center;
         gap: 0.35rem;
-        i {
-            font-size: 0.875rem;
-            line-height: 1;
-        }
     }
 }
 
 @media (max-width: #{$ife-bp-sm - 0.02px}) {
     .ife-meta {
-        gap: 0.5rem 0.75rem;
+        gap: 0.75rem;
     }
 }
