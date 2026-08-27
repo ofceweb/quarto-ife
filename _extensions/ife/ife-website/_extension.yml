@@ -17,7 +17,8 @@ contributes:
         style: simple
         palette: light
         language: fr
-        policy-url: https://PLACEHOLDER-DOMAINE-IFE/legal/cookies.html
+        # Seule valeur PLACEHOLDER-DOMAINE-IFE à changer lorsqu'on aura le domaine OVH.
+        policy-url: https://ife.ofce.fr/legal/cookies.html
       navbar: false
 
   shortcodes:
