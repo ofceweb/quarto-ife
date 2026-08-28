@@ -71,6 +71,7 @@
     align-items: center;
     gap: 0.35rem;
     padding: 10px 16px;
+    border: 2px solid transparent;
     border-radius: 2px;
     background-color: var(--ife-blanc);
     font-family: var(--ife-font-body);
@@ -98,19 +99,27 @@
     &--ofce {
         color: var(--ife-bordeaux);
         &:link,
-        &:visited,
+        &:visited {
+            color: var(--ife-bordeaux);
+        }
         &:hover,
         &:focus {
-            color: var(--ife-bordeaux);
+            border-color: var(--ife-blanc);
+            background-color: rgba($ife-anthracite, 0.85);
+            color: var(--ife-blanc);
         }
     }
     &--cepii {
         color: var(--ife-turquoise);
         &:link,
-        &:visited,
+        &:visited {
+            color: var(--ife-turquoise);
+        }
         &:hover,
         &:focus {
-            color: var(--ife-turquoise);
+            border-color: var(--ife-blanc);
+            background-color: rgba($ife-anthracite, 0.85);
+            color: var(--ife-blanc);
         }
     }
 }

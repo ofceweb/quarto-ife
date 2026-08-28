@@ -13,6 +13,12 @@ body.fullcontent {
     }
 }
 
+body:not(.fullcontent) {
+    #quarto-content {
+        padding-block: 2.5rem;
+    }
+}
+
 @media (max-width: #{$ife-bp-nav - 0.02px}) {
     :root {
         --ife-page-pad: #{$ife-page-pad-sm};

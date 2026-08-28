@@ -62,6 +62,12 @@
     }
     .ife-btn {
         margin-top: 1.5rem;
+        &:hover,
+        &:focus {
+            border-color: var(--ife-blanc);
+            background-color: rgba($ife-anthracite, 0.85);
+            color: var(--ife-blanc);
+        }
     }
 }
 

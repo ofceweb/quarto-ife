@@ -8,7 +8,7 @@
 --
 -- JSON: { "items": [ { "url", "image", "image_alt", "kicker", "title",
 --                     "date", "authors", "excerpt", "type", "lang",
---                     "pdf_url", "keywords", "source", "region" } ] }
+--                     "keywords", "source", "region" } ] }
 
 local utils = require(
     quarto.utils.resolve_path("_modules/utils.lua"):gsub("%.lua$", "")
@@ -38,7 +38,7 @@ local function head_html(item)
     local parts = {
         components.badge_type(utils.pick(item, "type", "kicker")),
         components.lang_chip(utils.pick(item, "lang")),
-        components.pdf_icon(utils.pick(item, "pdf_url")),
+        components.pdf_icon(utils.pick(item, "url", 1)),
     }
     local nonempty = {}
     for _, part in ipairs(parts) do

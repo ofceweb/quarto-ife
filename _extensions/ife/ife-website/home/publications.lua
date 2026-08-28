@@ -12,8 +12,7 @@
 --         "sites": [ { "url", "title", "description", "cta_label",
 --                      "theme", "image", "image_alt" } ],
 --         "items": [ { "url", "kicker", "title", "authors", "date",
---                      "type", "lang", "pdf_url", "keywords",
---                      "source", "region" } ] }
+--                      "type", "lang", "keywords", "source", "region" } ] }
 
 local utils = require(
     quarto.utils.resolve_path("_modules/utils.lua"):gsub("%.lua$", "")
@@ -41,7 +40,7 @@ local function head_html(item)
     local parts = {
         components.badge_type(utils.pick(item, "type", "kicker")),
         components.lang_chip(utils.pick(item, "lang")),
-        components.pdf_icon(utils.pick(item, "pdf_url")),
+        components.pdf_icon(utils.pick(item, "url", 1)),
     }
     local nonempty = {}
     for _, part in ipairs(parts) do

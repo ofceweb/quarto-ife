@@ -117,17 +117,13 @@ function components.lang_chip(lang)
     return string.format('<span class="ife-lang-chip">%s</span>', text)
 end
 
---- Lien icône PDF. Omis si l'URL est vide.
---- @param url string|nil
+--- Marqueur PDF non cliquable. Affiché quand l'URL pointe un fichier .pdf,
+--- pour signaler une publication disponible uniquement en PDF.
+--- @param url string|nil URL principale de la publication
 --- @return string
 function components.pdf_icon(url)
-    local href = utils.to_str(url)
-    if href == "" then return "" end
-    return string.format(
-        '<a class="ife-pdf" href="%s"%s aria-label="Télécharger le PDF"><img src="/www/pdf_icon.svg" alt="" /></a>',
-        utils.html_escape(href),
-        utils.link_attrs(href)
-    )
+    if not utils.to_str(url):lower():match("%.pdf$") then return "" end
+    return '<span class="ife-pdf" aria-label="Disponible en PDF uniquement"><img src="/www/pdf_icon.svg" alt="" aria-hidden="true" /></span>'
 end
 
 --- Badge de source OFCE / CEPII, drapeau optionnel (`fr`, `eu`/`ue`, `world`).

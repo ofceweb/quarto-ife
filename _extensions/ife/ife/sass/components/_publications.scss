@@ -153,6 +153,12 @@
             position: relative;
             z-index: 1;
             align-self: center;
+            &:hover,
+            &:focus {
+                border-color: var(--ife-blanc);
+                background-color: rgba($ife-anthracite, 0.85);
+                color: var(--ife-blanc);
+            }
         }
         &--ofce {
             --ife-site-color: var(--ife-bordeaux);
