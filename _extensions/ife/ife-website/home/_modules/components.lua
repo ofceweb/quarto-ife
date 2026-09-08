@@ -18,8 +18,8 @@ local SVG_ICONS = {
 }
 
 local SOURCE_LABELS = {
-    ofce = "OFCE",
-    cepii = "CEPII",
+    ofce = "IFE-OFCE",
+    cepii = "IFE-CEPII",
 }
 
 local REGION_ICONS = {
