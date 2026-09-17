@@ -12,7 +12,7 @@
     }
     .ife-band__media {
         &::after {
-            content: none;
+            background: var(--ife-band-gradient);
         }
         img {
             object-position: center;

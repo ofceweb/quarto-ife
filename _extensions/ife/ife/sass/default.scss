@@ -17,7 +17,8 @@ $ife-font-body: "Arimo", sans-serif;
 $ife-font-mono: "Fira Code", monospace;
 
 // Palette
-$ife-anthracite: #110000;
+$ife-anthracite: #29242F;
+$ife-bg-primary: #29242F;
 $ife-blanc: #FFFFFF;
 $ife-gris: #DDDBDB;
 $ife-bordeaux: #7D0000;
@@ -25,6 +26,13 @@ $ife-turquoise: #21606E;
 
 // Voile : anthracite à 72 %, lisibilité du texte blanc sur les photos des bandeaux.
 $ife-voile: rgba($ife-anthracite, 0.72);
+
+// Dégradé bandeau : anthracite opaque → transparent, de gauche à droite.
+$ife-band-gradient: linear-gradient(90deg, $ife-bg-primary 50%, rgba($ife-bg-primary, 0) 100%);
+
+// Dégradé « Qui sommes-nous » : turquoise → anthracite → bordeaux, de gauche à droite.
+$ife-qsn-gradient: linear-gradient(90deg, $ife-turquoise 10%, $ife-bg-primary 30%, $ife-bg-primary 35%, $ife-bordeaux 50%, rgba($ife-bordeaux, 0.35) 100%);
+
 
 // Layout — desktop 1280px / mobile 393px (conteneur 361px, pad 16px)
 $ife-page-max: 1280px;
@@ -66,6 +74,8 @@ $callout-color-tip: $ife-gris;
     --ife-bordeaux: #{$ife-bordeaux};
     --ife-turquoise: #{$ife-turquoise};
     --ife-voile: #{$ife-voile};
+    --ife-band-gradient: #{$ife-band-gradient};
+    --ife-qsn-gradient: #{$ife-qsn-gradient};
     --ife-font-title: #{$ife-font-title};
     --ife-font-body: #{$ife-font-body};
     --ife-font-mono: #{$ife-font-mono};
