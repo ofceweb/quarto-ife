@@ -8,17 +8,18 @@
 }
 
 .ife-chrome {
-    background-color: var(--ife-anthracite);
+    background-color: var(--ife-gris);
     color: var(--ife-blanc);
     width: 100%;
+    border-bottom: 1px solid var(--ife-anthracite);
     a {
-        color: var(--ife-blanc);
+        color: var(--ife-anthracite);
         &:hover,
         &:focus {
-            color: var(--ife-blanc);
+            color: var(--ife-anthracite);
         }
         &:focus-visible {
-            outline: 2px solid var(--ife-blanc);
+            outline: 2px solid var(--ife-anthracite);
             outline-offset: 2px;
         }
         &.external::after,
@@ -54,73 +55,9 @@
     }
     &__logo {
         display: block;
-        height: $ife-header-height - 2 * $ife-page-pad-sm;
-        width: auto;
+        height: 60px;
+        max-width: auto;
         object-fit: contain;
-    }
-}
-
-.ife-brand-btns {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.ife-brand-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    padding: 10px 16px;
-    border: 2px solid transparent;
-    border-radius: 2px;
-    background-color: var(--ife-blanc);
-    font-family: var(--ife-font-body);
-    font-size: var(--ife-fs-category);
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    line-height: 1;
-    text-decoration: none;
-    text-transform: uppercase;
-    white-space: nowrap;
-    i {
-        font-size: 0.7rem;
-        line-height: 1;
-    }
-    &:hover,
-    &:focus {
-        background-color: var(--ife-gris);
-        text-decoration: none;
-    }
-    &.external::after,
-    &.external > *:last-child::after {
-        content: none !important;
-        display: none !important;
-    }
-    &--ofce {
-        color: var(--ife-bordeaux);
-        &:link,
-        &:visited {
-            color: var(--ife-bordeaux);
-        }
-        &:hover,
-        &:focus {
-            border-color: var(--ife-blanc);
-            background-color: rgba($ife-anthracite, 0.85);
-            color: var(--ife-blanc);
-        }
-    }
-    &--cepii {
-        color: var(--ife-turquoise);
-        &:link,
-        &:visited {
-            color: var(--ife-turquoise);
-        }
-        &:hover,
-        &:focus {
-            border-color: var(--ife-blanc);
-            background-color: rgba($ife-anthracite, 0.85);
-            color: var(--ife-blanc);
-        }
     }
 }
 
@@ -157,7 +94,7 @@
     font-family: var(--ife-font-body);
     font-size: var(--ife-fs-sm);
     font-weight: 400;
-    color: var(--ife-blanc);
+    color: var(--ife-anthracite);
     white-space: nowrap;
     a {
         color: inherit;
@@ -184,17 +121,17 @@
     height: 2.75rem;
     margin-left: auto;
     padding: 0;
-    border: 1px solid var(--ife-blanc);
+    border: 1px solid var(--ife-anthracite);
     border-radius: 2px;
     background: transparent;
-    color: var(--ife-blanc);
+    color: var(--ife-anthracite);
     cursor: pointer;
     i {
         font-size: 1.5rem;
         line-height: 1;
     }
     &:focus-visible {
-        outline: 2px solid var(--ife-blanc);
+        outline: 2px solid var(--ife-anthracite);
         outline-offset: 2px;
     }
 }
@@ -240,6 +177,9 @@ main > .ife-header {
     }
     .ife-brand-btns {
         flex-wrap: wrap;
+    }
+    .ife-lockup__logo {
+        height: 40px;
     }
 }
 

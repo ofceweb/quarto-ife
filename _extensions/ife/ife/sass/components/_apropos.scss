@@ -21,7 +21,7 @@
     }
     .ife-band__media {
         &::after {
-            content: none;
+        background: var(--ife-band-gradient);
         }
         img {
             object-position: center;
@@ -60,6 +60,11 @@
         line-height: 1.2;
         color: var(--ife-blanc);
         opacity: 1;
+    }
+    &__title,
+    &__text,
+    &__contact-title {
+        text-shadow: var(--ife-text-shadow-dark);
     }
 }
 

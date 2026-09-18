@@ -12,7 +12,7 @@
     }
     .ife-band__media {
         &::after {
-            content: none;
+            background: var(--ife-band-gradient);
         }
         img {
             object-position: center;
@@ -57,6 +57,13 @@
         font-weight: 400;
         line-height: 1.4;
         color: var(--ife-blanc);
+    }
+    &__title,
+    &__date,
+    &__subtitle,
+    &__excerpt,
+    &__author {
+        text-shadow: var(--ife-text-shadow-dark);
     }
     .ife-btn {
         margin-top: 1.5rem;

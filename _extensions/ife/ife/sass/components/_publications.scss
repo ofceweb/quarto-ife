@@ -79,7 +79,7 @@
                 order: 1;
             }
             .ife-source__label {
-                padding: 4px 8px;
+                padding: 8px 8px;
                 color: var(--ife-blanc);
             }
             &--ofce .ife-source__label {
@@ -162,9 +162,23 @@
         }
         &--ofce {
             --ife-site-color: var(--ife-bordeaux);
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(180deg, var(--ife-bordeaux, #7D0000) 50%, rgba(125, 0, 0, 0.50) 99.88%);
+                pointer-events: none;
+            }
         }
         &--cepii {
             --ife-site-color: var(--ife-turquoise);
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(180deg, var(--ife-turquoise, #21606E) 50%, rgba(33, 96, 110, 0.50) 99.88%);
+                pointer-events: none;
+            }
         }
     }
     &__site-media {

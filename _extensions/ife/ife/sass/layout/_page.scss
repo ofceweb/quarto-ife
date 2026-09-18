@@ -14,8 +14,13 @@ body.fullcontent {
 }
 
 body:not(.fullcontent) {
-    #quarto-content {
-        padding-block: 2.5rem;
+    #quarto-sidebar,
+    #quarto-sidebar-glass {
+        display: none;
+    }
+
+    main {
+        margin: 0;
     }
 }
 
