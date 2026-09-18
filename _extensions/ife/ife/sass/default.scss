@@ -27,8 +27,13 @@ $ife-turquoise: #21606E;
 // Voile : anthracite à 72 %, lisibilité du texte blanc sur les photos des bandeaux.
 $ife-voile: rgba($ife-anthracite, 0.72);
 
+// Text-shadow : halo sombre pour lisibilité du texte blanc sur photo.
+$ife-text-shadow-dark: 0 0 2px $ife-anthracite, 0 0 5px $ife-anthracite, 0 0 5px $ife-anthracite, 0 0 10px $ife-anthracite, 0 0 20px $ife-anthracite;
+
 // Dégradé bandeau : anthracite opaque → transparent, de gauche à droite.
 $ife-band-gradient: linear-gradient(90deg, $ife-bg-primary 50%, rgba($ife-bg-primary, 0) 100%);
+
+$ife-band-gradient-mobile: linear-gradient(90deg, $ife-bg-primary 50%, rgba($ife-bg-primary,0.4) 100%);
 
 // Dégradé « Qui sommes-nous » : turquoise → anthracite → bordeaux, de gauche à droite.
 $ife-qsn-gradient: linear-gradient(90deg, $ife-turquoise 10%, $ife-bg-primary 30%, $ife-bg-primary 35%, $ife-bordeaux 50%, rgba($ife-bordeaux, 0.35) 100%);
@@ -76,6 +81,7 @@ $callout-color-tip: $ife-gris;
     --ife-voile: #{$ife-voile};
     --ife-band-gradient: #{$ife-band-gradient};
     --ife-qsn-gradient: #{$ife-qsn-gradient};
+    --ife-text-shadow-dark: #{$ife-text-shadow-dark};
     --ife-font-title: #{$ife-font-title};
     --ife-font-body: #{$ife-font-body};
     --ife-font-mono: #{$ife-font-mono};
@@ -105,6 +111,7 @@ $callout-color-tip: $ife-gris;
 
 @media (max-width: #{$ife-bp-nav - 0.02px}) {
     :root {
+        --ife-band-gradient: #{$ife-band-gradient-mobile};
         --ife-fs-sm: 0.75rem;
         --ife-fs-lg: 1.125rem;
         --ife-fs-base: 0.875rem;

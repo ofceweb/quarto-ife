@@ -58,7 +58,7 @@
     &__date,
     &__subtitle,
     &__excerpt {
-        text-shadow: 0 0 5px var(--ife-anthracite), 0 0 10px var(--ife-anthracite), 0 0 20px var(--ife-anthracite);
+        text-shadow: var(--ife-text-shadow-dark);
     }
     .ife-btn {
         margin-top: 1.5rem;

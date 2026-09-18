@@ -58,6 +58,13 @@
         line-height: 1.4;
         color: var(--ife-blanc);
     }
+    &__title,
+    &__date,
+    &__subtitle,
+    &__excerpt,
+    &__author {
+        text-shadow: var(--ife-text-shadow-dark);
+    }
     .ife-btn {
         margin-top: 1.5rem;
     }

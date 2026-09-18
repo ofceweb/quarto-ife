@@ -61,6 +61,11 @@
         color: var(--ife-blanc);
         opacity: 1;
     }
+    &__title,
+    &__text,
+    &__contact-title {
+        text-shadow: var(--ife-text-shadow-dark);
+    }
 }
 
 @media (max-width: #{$ife-bp-nav - 0.02px}) {
