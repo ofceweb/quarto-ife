@@ -27,4 +27,14 @@ html.page-qui-sommes-nous {
         padding: 0 !important;
         border-left: none !important;
     }
+
+    #nous-trouver {
+        padding: 24px;
+        background-color: $ife-anthracite;
+        color: $ife-blanc;
+        h2,
+        a {
+            color: $ife-blanc;
+        }
+    }
 }
