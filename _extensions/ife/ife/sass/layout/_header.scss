@@ -55,8 +55,8 @@
     }
     &__logo {
         display: block;
-        height: $ife-header-height - 2 * $ife-page-pad-sm;
-        width: auto;
+        height: 60px;
+        max-width: auto;
         object-fit: contain;
     }
 }
@@ -177,6 +177,9 @@ main > .ife-header {
     }
     .ife-brand-btns {
         flex-wrap: wrap;
+    }
+    .ife-lockup__logo {
+        height: 40px;
     }
 }
 
