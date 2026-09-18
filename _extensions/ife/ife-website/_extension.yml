@@ -11,13 +11,14 @@ contributes:
       type: website
     website:
       title: "IFE"
-      favicon: "img/favicon.ico"
+      favicon: "img/IFE_logo_noir.ico"
       cookie-consent:
         type: implied
         style: simple
         palette: light
         language: fr
         policy-url: https://ife.eco/legal/cookies.html
+      google-analytics: G-BRFB7DYR42
       navbar: false
 
   shortcodes:
