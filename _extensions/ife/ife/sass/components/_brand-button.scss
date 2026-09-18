@@ -43,10 +43,11 @@
         &:link{
             color: var(--ife-blanc);
         }
-        &:hover{
-            background-color: rgba($ife-blanc, 0.85);
-            color: var(--ife-bordeaux);
-            border: 4px solid var(--ife-bordeaux);
+        &:hover,
+        &:focus-visible{
+            background-color: var(--ife-anthracite);
+            color: var(--ife-blanc);
+            border-color: var(--ife-anthracite);
         }
     }
     &--cepii {
@@ -57,10 +58,11 @@
         &:link{
             color: var(--ife-blanc);
         }
-        &:hover{
-            background-color: rgba($ife-blanc, 0.85);
-            color: var(--ife-turquoise);
-            border: 4px solid var(--ife-turquoise);
+        &:hover,
+        &:focus-visible{
+            background-color: var(--ife-anthracite);
+            color: var(--ife-blanc);
+            border-color: var(--ife-anthracite);
         }
     }
 }
