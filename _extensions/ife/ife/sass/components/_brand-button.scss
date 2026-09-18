@@ -1,0 +1,66 @@
+// Boutons de marque du chrome header (IFE-OFCE, IFE-CEPII).
+// Variantes : --ofce (bordeaux), --cepii (turquoise).
+.ife-brand-btns {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.ife-brand-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 10px 16px;
+    border-radius: 2px;
+    background-color: var(--ife-blanc);
+    font-family: var(--ife-font-body);
+    font-size: var(--ife-fs-category);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    i {
+        font-size: 0.7rem;
+        line-height: 1;
+    }
+    &:hover,
+    &:focus {
+        background-color: var(--ife-gris);
+        text-decoration: none;
+    }
+    &.external::after,
+    &.external > *:last-child::after {
+        content: none !important;
+        display: none !important;
+    }
+    &--ofce {
+        background-color: var(--ife-bordeaux);
+        color: var(--ife-blanc);
+        border: 4px solid var(--ife-blanc);
+
+        &:link{
+            color: var(--ife-blanc);
+        }
+        &:hover{
+            background-color: rgba($ife-blanc, 0.85);
+            color: var(--ife-bordeaux);
+            border: 4px solid var(--ife-bordeaux);
+        }
+    }
+    &--cepii {
+        background-color: var(--ife-turquoise);
+        color: var(--ife-blanc);
+        border: 4px solid var(--ife-blanc);
+
+        &:link{
+            color: var(--ife-blanc);
+        }
+        &:hover{
+            background-color: rgba($ife-blanc, 0.85);
+            color: var(--ife-turquoise);
+            border: 4px solid var(--ife-turquoise);
+        }
+    }
+}
