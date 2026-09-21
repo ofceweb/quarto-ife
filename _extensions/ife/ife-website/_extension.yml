@@ -11,7 +11,7 @@ contributes:
       type: website
     website:
       title: "IFE"
-      favicon: "img/IFE_logo_noir.ico"
+      favicon: "img/IFE_logo_anthracite.ico"
       cookie-consent:
         type: implied
         style: simple
