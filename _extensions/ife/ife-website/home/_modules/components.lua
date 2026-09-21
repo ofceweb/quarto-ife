@@ -23,9 +23,11 @@ local SOURCE_LABELS = {
 }
 
 local REGION_ICONS = {
-    fr = "/www/fr_icon.svg",
-    eu = "/www/eu_icon.svg",
-    world = "/www/world_icon.svg",
+    fr = "/www/flags/fr.svg",
+    us = "/www/flags/us.svg",
+    de = "/www/flags/de.svg",
+    eu = "/www/flags/eu_icon.svg",
+    world = "/www/flags/world_icon.svg",
 }
 
 local VARIANTS = {

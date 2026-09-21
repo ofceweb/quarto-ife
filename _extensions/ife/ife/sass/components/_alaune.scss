@@ -45,6 +45,10 @@
                 padding: 8px 8px;
                 color: var(--ife-blanc);
             }
+           .ife-source__flag {
+                height: 15px;
+                width: auto;
+            }
             &--ofce .ife-source__label {
                 background-color: var(--ife-bordeaux);
             }
