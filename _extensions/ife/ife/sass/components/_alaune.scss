@@ -42,11 +42,12 @@
         .ife-source {
             flex-direction: row-reverse;
             .ife-source__label {
-                padding: 8px 8px;
+                padding: 4px 4px;
                 color: var(--ife-blanc);
+                background-color: var(--ife-anthracite);
             }
            .ife-source__flag {
-                height: 15px;
+                height: 16px;
                 width: auto;
             }
             &--ofce .ife-source__label {
