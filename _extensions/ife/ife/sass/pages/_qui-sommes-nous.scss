@@ -37,4 +37,38 @@ html.page-qui-sommes-nous {
             color: $ife-blanc;
         }
     }
+
+    #quarto-content:has(.qui-sommes-nous-body) {
+        max-width: none;
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+        > * {
+            max-width: none;
+            margin: 0;
+        }
+    }
+
+    .qui-sommes-nous-body {
+        padding-block: 2.5rem;
+        padding-inline: var(--ife-page-pad);
+        background-color: $ife-blanc;
+        max-width: 80%;
+        margin-block: 48px;
+        margin-inline: auto;
+        > * {
+            max-width: 800px;
+            margin-inline: auto;
+        }
+        > .apropos {
+            max-width: none;
+            width: calc(100% + 2 * var(--ife-page-pad));
+            margin-top: -2.5rem;
+            margin-inline: calc(var(--ife-page-pad) * -1);
+        }
+    }
+
+    .apropos__title {
+        font-size: var(--ife-fs-h2);
+    }
 }
