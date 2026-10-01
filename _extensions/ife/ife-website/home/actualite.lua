@@ -14,6 +14,8 @@
 --
 -- JSON: { "items": [ { "type", "title", "date", "location", "url",
 --                     "image", "image_alt", "featured" } ] }
+-- `date` accepte `YYYY-MM-DD` ou `YYYY-MM-DDTHH:MM`.
+-- `location` est une adresse, affichée en lien vers Google Maps.
 
 local utils = require(
     quarto.utils.resolve_path("_modules/utils.lua"):gsub("%.lua$", "")

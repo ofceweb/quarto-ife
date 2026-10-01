@@ -247,6 +247,7 @@ end
 
 --- Ligne de méta : badge de type, date (calendrier), lieu (épingle).
 --- Omis si les trois champs sont vides. La date ISO est formatée en français.
+--- Le lieu ouvre Google Maps.
 --- @param type_label string|nil
 --- @param date any
 --- @param location string|nil
@@ -265,11 +266,14 @@ function components.meta_line(type_label, date, location)
         ))
     end
 
-    local loc_text = utils.html_escape(utils.to_str(location))
-    if loc_text ~= "" then
+    local loc = utils.to_str(location)
+    if loc ~= "" then
+        local href = "https://www.google.com/maps/search/?api=1&query=" .. utils.url_encode(loc)
         table.insert(parts, string.format(
-            '<span class="ife-meta__location"><img src="/www/localisation_icon.svg" alt="" aria-hidden="true" />%s</span>',
-            loc_text
+            '<a class="ife-meta__location" href="%s"%s><img src="/www/localisation_icon.svg" alt="" aria-hidden="true" />%s</a>',
+            utils.html_escape(href),
+            utils.link_attrs(href),
+            utils.html_escape(loc)
         ))
     end
 

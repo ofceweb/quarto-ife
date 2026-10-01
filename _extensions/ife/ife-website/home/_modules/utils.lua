@@ -211,11 +211,21 @@ local MONTHS_FR = {
 function utils.format_date_fr(value)
     local iso = utils.to_str(value)
     if iso == "" then return "" end
-    local y, m, d = iso:match("^(%d%d%d%d)%-(%d%d)%-(%d%d)")
+    local y, m, d, hh, mm = iso:match("^(%d%d%d%d)%-(%d%d)%-(%d%d)[T ](%d%d):(%d%d)")
+    if not y then
+        y, m, d = iso:match("^(%d%d%d%d)%-(%d%d)%-(%d%d)")
+    end
     if not y then return iso end
     local month = MONTHS_FR[tonumber(m)]
     if not month then return iso end
-    return string.format("%d %s %s", tonumber(d), month, y)
+    local date_text = string.format("%d %s %s", tonumber(d), month, y)
+    if not hh then return date_text end
+    local h = tonumber(hh)
+    local min = tonumber(mm)
+    if min == 0 then
+        return string.format("%s, %dh", date_text, h)
+    end
+    return string.format("%s, %dh%02d", date_text, h, min)
 end
 
 --- Élément HTML omis si le contenu est vide
@@ -229,6 +239,18 @@ function utils.el(tag, class_name, content)
         return string.format('<%s class="%s">%s</%s>', tag, class_name, content, tag)
     end
     return string.format("<%s>%s</%s>", tag, content, tag)
+end
+
+--- Encodage pourcent d'une chaîne destinée à une query d'URL.
+--- La classe est ASCII : `%w` suit la locale et laisse passer l'octet C3 de « é ».
+--- @param text string|nil
+--- @return string
+function utils.url_encode(text)
+    local s = utils.to_str(text)
+    if s == "" then return "" end
+    return (s:gsub("([^A-Za-z0-9%-_%.~])", function(c)
+        return string.format("%%%02X", string.byte(c))
+    end))
 end
 
 --- Attributs `target`/`rel` pour une URL http(s)
