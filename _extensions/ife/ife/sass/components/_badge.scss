@@ -53,6 +53,11 @@
     line-height: 1;
     text-transform: uppercase;
     white-space: nowrap;
+    &__flags {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
     &--ofce {
         color: var(--ife-bordeaux);
     }

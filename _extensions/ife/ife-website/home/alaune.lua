@@ -9,6 +9,7 @@
 -- JSON: { "items": [ { "url", "image", "image_alt", "kicker", "title",
 --                     "date", "authors", "excerpt", "type", "lang",
 --                     "keywords", "source", "region" } ] }
+-- `region` : un code (`"fr"`) ou une liste (`["fr", "de", "eu"]`).
 
 local utils = require(
     quarto.utils.resolve_path("_modules/utils.lua"):gsub("%.lua$", "")
@@ -83,7 +84,7 @@ local function create_item(item, opts)
 
     local source_html = components.source_badge(
         utils.pick(item, "source"),
-        utils.pick(item, "region")
+        item.region
     )
     if source_html ~= "" then
         source_html = string.format(

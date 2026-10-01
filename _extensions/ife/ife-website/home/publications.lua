@@ -13,6 +13,7 @@
 --                      "theme", "image", "image_alt" } ],
 --         "items": [ { "url", "kicker", "title", "authors", "date",
 --                      "type", "lang", "keywords", "source", "region" } ] }
+-- `region` : un code (`"fr"`) ou une liste (`["fr", "de", "eu"]`).
 
 local utils = require(
     quarto.utils.resolve_path("_modules/utils.lua"):gsub("%.lua$", "")
@@ -86,7 +87,7 @@ local function create_item(item)
         ),
         components.source_badge(
             utils.pick(item, "source"),
-            utils.pick(item, "region")
+            item.region
         ),
         components.keywords_row(item.keywords)
     )
