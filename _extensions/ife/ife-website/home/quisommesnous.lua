@@ -47,12 +47,12 @@ local function create_banner(item)
         utils.el(
             "h3",
             "quisommesnous__subtitle",
-            utils.html_escape(utils.pick(item, "subtitle"))
+            utils.rich_inline(utils.pick(item, "subtitle"))
         ),
         utils.el(
             "p",
             "quisommesnous__excerpt",
-            utils.html_escape(utils.pick(item, "excerpt"))
+            utils.rich_inline(utils.pick(item, "excerpt"))
         ),
         components.cta_button(
             utils.pick(item, "cta_label"),

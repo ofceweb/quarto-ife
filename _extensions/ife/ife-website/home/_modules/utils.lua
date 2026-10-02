@@ -17,6 +17,19 @@ function utils.html_escape(text)
     return text
 end
 
+--- Rend un champ texte (Markdown + HTML inline) en HTML inline, sans
+--- enveloppe <p>, pour tenir dans un <p> ou un <h3> existant.
+--- @param value any Texte Markdown, HTML inline, ou valeur Pandoc
+--- @return string HTML inline (chaîne vide si l'entrée est vide)
+function utils.rich_inline(value)
+    local text = utils.to_str(value)
+    if text == "" then return "" end
+    local doc = pandoc.read(text, "markdown")
+    local inlines = pandoc.utils.blocks_to_inlines(doc.blocks)
+    local html = pandoc.write(pandoc.Pandoc({ pandoc.Plain(inlines) }), "html")
+    return (html:gsub("%s+$", ""))
+end
+
 --- Convertit une valeur Pandoc (MetaInlines, etc.) ou un string Lua natif (JSON)
 --- @param val any
 --- @return string

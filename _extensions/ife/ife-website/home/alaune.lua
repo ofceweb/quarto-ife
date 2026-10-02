@@ -77,7 +77,7 @@ local function create_item(item, opts)
         excerpt_html = utils.el(
             "p",
             "alaune__excerpt",
-            utils.html_escape(utils.pick(item, "excerpt", "subtitle", "description"))
+            utils.rich_inline(utils.pick(item, "excerpt", "subtitle", "description"))
         )
         chart_html = utils.image_html(image, alt, "alaune__chart")
     end
