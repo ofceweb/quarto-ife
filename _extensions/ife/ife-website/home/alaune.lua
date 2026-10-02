@@ -35,6 +35,26 @@ local function title_html(title, url)
     )
 end
 
+local function chart_html(image, alt, url)
+    local src = utils.to_str(image)
+    if src == "" then return "" end
+    local img = string.format(
+        '<img src="%s" alt="%s" />',
+        utils.html_escape(src),
+        utils.html_escape(utils.to_str(alt))
+    )
+    local href = utils.to_str(url)
+    if href ~= "" then
+        img = string.format(
+            '<a href="%s"%s>%s</a>',
+            utils.html_escape(href),
+            utils.link_attrs(href),
+            img
+        )
+    end
+    return string.format('<div class="alaune__chart">%s</div>', img)
+end
+
 local function head_html(item)
     local parts = {
         components.badge_type(utils.pick(item, "type", "kicker")),
@@ -72,14 +92,14 @@ local function create_item(item, opts)
     end
 
     local excerpt_html = ""
-    local chart_html = ""
+    local chart = ""
     if featured then
         excerpt_html = utils.el(
             "p",
             "alaune__excerpt",
             utils.rich_inline(utils.pick(item, "excerpt", "subtitle", "description"))
         )
-        chart_html = utils.image_html(image, alt, "alaune__chart")
+        chart = chart_html(image, alt, url)
     end
 
     local source_html = components.source_badge(
@@ -118,7 +138,7 @@ local function create_item(item, opts)
             utils.pick(item, "authors", "author"),
             "alaune__authors"
         ),
-        chart_html,
+        chart,
         components.keywords_row(item.keywords),
         source_html
     )
