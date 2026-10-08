@@ -6,6 +6,7 @@
 // Cinq couleurs : anthracite, blanc, gris, bordeaux, turquoise.
 // Titres : Merriweather 600, 700. Corps : Arimo 400, 700, italic.
 // Tailles : --ife-fs-* (échelle IFE). Mobile sous $ife-bp-nav.
+// Espacements : --ife-spacer-* (collection IFE/spacer du design system).
 // Les composants lisent les custom properties CSS, pas ces variables Sass.
 // =============================================================================
 
@@ -102,6 +103,12 @@ $callout-color-tip: $ife-gris;
     --ife-fs-autor: var(--ife-fs-sm);
     --ife-fs-tag: 0.625rem;
     --ife-fs-category: 0.75rem;
+    --ife-spacer-0: 0;
+    --ife-spacer-1: 4px;
+    --ife-spacer-2: 8px;
+    --ife-spacer-3: 16px;
+    --ife-spacer-4: 24px;
+    --ife-spacer-5: 48px;
     --ife-page-max: #{$ife-page-max};
     --ife-page-pad: #{$ife-page-pad};
     --ife-gutter: #{$ife-gutter};
@@ -125,6 +132,8 @@ $callout-color-tip: $ife-gris;
         --ife-fs-h6: 1.125rem;
         --ife-fs-tag: 0.625rem;
         --ife-fs-category: 0.625rem;
+        --ife-spacer-4: 20px;
+        --ife-spacer-5: 36px;
     }
 }
 

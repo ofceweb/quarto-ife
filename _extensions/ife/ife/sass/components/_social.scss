@@ -1,0 +1,13 @@
+// Liens de contact et réseaux sociaux du chrome header.
+// Icônes SVG de 16px de haut, dans `www/*_icon.svg`.
+.ife-social {
+    display: flex;
+    align-items: center;
+    gap: var(--ife-spacer-2);
+    a {
+        display: inline-flex;
+        &:hover {
+            opacity: 0.85;
+        }
+    }
+}
