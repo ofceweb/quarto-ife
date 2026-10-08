@@ -15,11 +15,12 @@ h1, .h1 {
 }
 
 h2, .h2 {
-    font-size: var(--ife-fs-h2);
+    font-size: var(--ife-fs-h2-small);
+    font-weight: 700;
 }
 
 h3, .h3 {
-    font-size: var(--ife-fs-h3);
+    font-size: var(--ife-fs-h3-article);
 }
 
 h4, .h4 {
