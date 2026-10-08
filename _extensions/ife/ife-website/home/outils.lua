@@ -64,7 +64,32 @@ local function create_band(items, title)
     )
 end
 
+-- Première entrée, puis deux entrées tirées au sort parmi les suivantes.
+local function draw_cards(items)
+    local cards = { items[1] }
+    local pool = {}
+    for i = 2, #items do
+        table.insert(pool, items[i])
+    end
+    for _ = 1, math.min(2, #pool) do
+        table.insert(cards, table.remove(pool, math.random(#pool)))
+    end
+    return cards
+end
+
 return {
+    ["basesdedonnees"] = function(args, kwargs, meta)
+        local cfg = utils.block_config(meta, "basesdedonnees")
+        if not cfg then
+            return pandoc.Str("")
+        end
+        if #cfg.items == 0 then
+            return pandoc.Str("")
+        end
+        local title = cfg.title
+        if title == "" then title = "Nos bases de données" end
+        return pandoc.RawBlock("html", create_band(draw_cards(cfg.items), title))
+    end,
     ["outils"] = function(args, kwargs, meta)
         local cfg = utils.block_config(meta, "outils")
         if not cfg then
