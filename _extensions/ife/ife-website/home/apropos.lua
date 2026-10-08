@@ -62,7 +62,7 @@ local function create_banner(item)
         utils.el(
             "p",
             "apropos__text",
-            utils.html_escape(utils.pick(item, "text"))
+            utils.rich_inline(utils.pick(item, "text"))
         ),
         utils.el(
             "h3",

@@ -91,6 +91,7 @@ end
 --- @return string `fr`, `eu`, `world`, ou jeton normalisé
 local function region_key(region)
     local s = utils.to_str(region):lower()
+    s = s:match("^%s*(.-)%s*$") or ""
     if s == "" then return "" end
     if s == "fr" or s == "france" or s:match("^fr%-") then return "fr" end
     if s == "ue" or s == "eu" or s:find("europe", 1, true) then return "eu" end
@@ -99,6 +100,80 @@ local function region_key(region)
         return "world"
     end
     return css_token(s)
+end
+
+--- Liste JSON, MetaList YAML, ou valeur scalaire.
+--- @param region any
+--- @return boolean
+local function is_region_list(region)
+    if type(region) ~= "table" then return false end
+    if region.t and region.t ~= "MetaList" then return false end
+    return #region > 0
+end
+
+--- Codes normalisés, sans doublon, dans l'ordre d'écriture.
+--- Accepte `"fr"`, `"fr, de, eu"` ou `{ "fr", "de", "eu" }`.
+--- @param region any
+--- @return table
+local function region_keys(region)
+    local raw = {}
+    if is_region_list(region) then
+        for _, item in ipairs(region) do
+            table.insert(raw, item)
+        end
+    else
+        local s = utils.to_str(region)
+        for part in string.gmatch(s, "[^,]+") do
+            table.insert(raw, part)
+        end
+    end
+
+    local keys = {}
+    local seen = {}
+    for _, item in ipairs(raw) do
+        local key = region_key(item)
+        if key ~= "" and not seen[key] then
+            seen[key] = true
+            table.insert(keys, key)
+        end
+    end
+    return keys
+end
+
+--- Chemin du drapeau. Les codes connus ont une icône dédiée.
+--- Les autres codes ISO utilisent `www/flags/<code>.svg` s'il existe.
+--- @param key string
+--- @return string|nil
+local function flag_src(key)
+    if key == "" then return nil end
+    local mapped = REGION_ICONS[key]
+    if mapped then return mapped end
+    if not key:match("^[a-z]{2}$") and not key:match("^[a-z]{2}%-[a-z0-9]+$") then
+        return nil
+    end
+
+    local rel = "www/flags/" .. key .. ".svg"
+    local cwd = "."
+    if pandoc.system and pandoc.system.get_working_directory then
+        cwd = pandoc.system.get_working_directory()
+    end
+    local project_dir = cwd
+    if quarto.project and quarto.project.directory then
+        project_dir = quarto.project.directory
+    end
+    local candidates = {
+        project_dir .. "/" .. rel,
+        cwd .. "/" .. rel,
+        rel,
+    }
+    for _, path in ipairs(candidates) do
+        local file = io.open(path, "r")
+        if file then
+            file:close()
+            return "/" .. rel
+        end
+    end
+    return nil
 end
 
 --- Badge de type de contenu (Policy Brief, Séminaire, …). Omis si vide.
@@ -128,21 +203,29 @@ function components.pdf_icon(url)
     return '<span class="ife-pdf" aria-label="Disponible en PDF uniquement"><img src="/www/pdf_icon.svg" alt="" aria-hidden="true" /></span>'
 end
 
---- Badge de source OFCE / CEPII, drapeau optionnel (`fr`, `eu`/`ue`, `world`).
+--- Badge de source OFCE / CEPII, un drapeau par région.
+--- `region` accepte un code (`fr`, `de`, `eu`, `us`, `world`),
+--- une liste (`{ "fr", "de" }`) ou une chaîne `fr, de, eu`.
 --- @param source string|nil
---- @param region string|nil
+--- @param region string|table|nil
 --- @return string
 function components.source_badge(source, region)
     local key = source_key(source)
     if key == "" then return "" end
     local label = SOURCE_LABELS[key] or utils.html_escape(utils.to_str(source))
+    local flags = {}
+    for _, region_code in ipairs(region_keys(region)) do
+        local src = flag_src(region_code)
+        if src then
+            table.insert(flags, string.format(
+                '<img class="ife-source__flag" src="%s" alt="" aria-hidden="true" />',
+                src
+            ))
+        end
+    end
     local flag = ""
-    local icon_src = REGION_ICONS[region_key(region)]
-    if icon_src then
-        flag = string.format(
-            '<img class="ife-source__flag" src="%s" alt="" aria-hidden="true" />',
-            icon_src
-        )
+    if #flags > 0 then
+        flag = '<span class="ife-source__flags">' .. table.concat(flags) .. '</span>'
     end
     return string.format(
         '<span class="ife-source ife-source--%s">%s<span class="ife-source__label">%s</span></span>',
@@ -247,6 +330,7 @@ end
 
 --- Ligne de méta : badge de type, date (calendrier), lieu (épingle).
 --- Omis si les trois champs sont vides. La date ISO est formatée en français.
+--- Le lieu ouvre Google Maps.
 --- @param type_label string|nil
 --- @param date any
 --- @param location string|nil
@@ -265,11 +349,14 @@ function components.meta_line(type_label, date, location)
         ))
     end
 
-    local loc_text = utils.html_escape(utils.to_str(location))
-    if loc_text ~= "" then
+    local loc = utils.to_str(location)
+    if loc ~= "" then
+        local href = "https://www.google.com/maps/search/?api=1&query=" .. utils.url_encode(loc)
         table.insert(parts, string.format(
-            '<span class="ife-meta__location"><img src="/www/localisation_icon.svg" alt="" aria-hidden="true" />%s</span>',
-            loc_text
+            '<a class="ife-meta__location" href="%s"%s><img src="/www/localisation_icon.svg" alt="" aria-hidden="true" />%s</a>',
+            utils.html_escape(href),
+            utils.link_attrs(href),
+            utils.html_escape(loc)
         ))
     end
 

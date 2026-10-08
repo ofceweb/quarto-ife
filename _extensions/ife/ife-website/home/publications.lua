@@ -13,6 +13,7 @@
 --                      "theme", "image", "image_alt" } ],
 --         "items": [ { "url", "kicker", "title", "authors", "date",
 --                      "type", "lang", "keywords", "source", "region" } ] }
+-- `region` : un code (`"fr"`) ou une liste (`["fr", "de", "eu"]`).
 
 local utils = require(
     quarto.utils.resolve_path("_modules/utils.lua"):gsub("%.lua$", "")
@@ -86,7 +87,7 @@ local function create_item(item)
         ),
         components.source_badge(
             utils.pick(item, "source"),
-            utils.pick(item, "region")
+            item.region
         ),
         components.keywords_row(item.keywords)
     )
@@ -132,7 +133,7 @@ local function create_card(item)
         utils.el(
             "p",
             "publications__site-description",
-            utils.html_escape(utils.pick(item, "description", "excerpt"))
+            utils.rich_inline(utils.pick(item, "description", "excerpt"))
         ),
         components.cta_button(
             cta,
@@ -163,7 +164,7 @@ local function create_panel(sites, intro_title, intro_text)
         </div>
     ]],
         utils.el("h3", "publications__panel-heading", utils.html_escape(intro_title)),
-        utils.el("p", "publications__panel-text", utils.html_escape(intro_text)),
+        utils.el("p", "publications__panel-text", utils.rich_inline(intro_text)),
         table.concat(cards_html)
     )
 end

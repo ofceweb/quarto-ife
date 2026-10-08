@@ -56,12 +56,12 @@ local function create_banner(item)
         utils.el(
             "h3",
             "ecograph__subtitle",
-            utils.html_escape(utils.pick(item, "subtitle"))
+            utils.rich_inline(utils.pick(item, "subtitle"))
         ),
         utils.el(
             "p",
             "ecograph__excerpt",
-            utils.html_escape(utils.pick(item, "excerpt"))
+            utils.rich_inline(utils.pick(item, "excerpt"))
         ),
         components.authors_html(
             utils.pick(item, "author"),

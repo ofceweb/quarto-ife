@@ -32,7 +32,7 @@ local function create_card(item)
         utils.el(
             "p",
             "outils__description",
-            utils.html_escape(utils.pick(item, "description"))
+            utils.rich_inline(utils.pick(item, "description"))
         ),
         components.cta_button(
             cta,

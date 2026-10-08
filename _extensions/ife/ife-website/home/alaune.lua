@@ -9,6 +9,7 @@
 -- JSON: { "items": [ { "url", "image", "image_alt", "kicker", "title",
 --                     "date", "authors", "excerpt", "type", "lang",
 --                     "keywords", "source", "region" } ] }
+-- `region` : un code (`"fr"`) ou une liste (`["fr", "de", "eu"]`).
 
 local utils = require(
     quarto.utils.resolve_path("_modules/utils.lua"):gsub("%.lua$", "")
@@ -32,6 +33,26 @@ local function title_html(title, url)
         utils.link_attrs(href),
         text
     )
+end
+
+local function chart_html(image, alt, url)
+    local src = utils.to_str(image)
+    if src == "" then return "" end
+    local img = string.format(
+        '<img src="%s" alt="%s" />',
+        utils.html_escape(src),
+        utils.html_escape(utils.to_str(alt))
+    )
+    local href = utils.to_str(url)
+    if href ~= "" then
+        img = string.format(
+            '<a href="%s"%s>%s</a>',
+            utils.html_escape(href),
+            utils.link_attrs(href),
+            img
+        )
+    end
+    return string.format('<div class="alaune__chart">%s</div>', img)
 end
 
 local function head_html(item)
@@ -71,19 +92,19 @@ local function create_item(item, opts)
     end
 
     local excerpt_html = ""
-    local chart_html = ""
+    local chart = ""
     if featured then
         excerpt_html = utils.el(
             "p",
             "alaune__excerpt",
-            utils.html_escape(utils.pick(item, "excerpt", "subtitle", "description"))
+            utils.rich_inline(utils.pick(item, "excerpt", "subtitle", "description"))
         )
-        chart_html = utils.image_html(image, alt, "alaune__chart")
+        chart = chart_html(image, alt, url)
     end
 
     local source_html = components.source_badge(
         utils.pick(item, "source"),
-        utils.pick(item, "region")
+        item.region
     )
     if source_html ~= "" then
         source_html = string.format(
@@ -117,7 +138,7 @@ local function create_item(item, opts)
             utils.pick(item, "authors", "author"),
             "alaune__authors"
         ),
-        chart_html,
+        chart,
         components.keywords_row(item.keywords),
         source_html
     )
