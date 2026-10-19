@@ -20,6 +20,8 @@ html.page-qui-sommes-nous {
             color: var(--ife-blanc);
         }
     }
+    // Les pages légales partagent cette page-class sans le bloc `.qui-sommes-nous-body` : la carte se pose sur `#quarto-content`.
+    #quarto-content:not(:has(.qui-sommes-nous-body)),
     .qui-sommes-nous-body {
         padding-block: var(--ife-spacer-5);
         padding-inline: var(--ife-page-pad);
