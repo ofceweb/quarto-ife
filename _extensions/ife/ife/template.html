@@ -69,7 +69,7 @@ $endfor$
     <button type="button" class="ife-nav-toggle" aria-controls="ife-header-menu" aria-expanded="false" aria-label="Ouvrir le menu">
       <i class="bi bi-list" aria-hidden="true"></i>
     </button>
-    <div class="ife-header__end" id="ife-header-menu">
+    <nav class="ife-header__end" id="ife-header-menu" aria-label="Menu principal">
       <a class="ife-header__about" href="/ife/qui_sommes_nous.html">À propos &amp; contact</a>
       <div class="ife-brand-btns">
         <a class="ife-brand-btn ife-brand-btn--ofce" href="https://www.ofce.fr/" target="_blank" rel="noopener noreferrer">
@@ -83,40 +83,40 @@ $endfor$
           <span class="visually-hidden"> (nouvelle fenêtre)</span>
         </a>
       </div>
-      <nav class="ife-social" aria-label="Contact et réseaux sociaux">
-        <a href="https://bsky.app/profile/ife-eco.bsky.social" target="_blank" rel="noopener noreferrer">
+      <ul class="ife-social" aria-label="Contact et réseaux sociaux">
+        <li><a href="https://bsky.app/profile/ife-eco.bsky.social" target="_blank" rel="noopener noreferrer">
           <img src="/www/bluesky_icon.svg" alt="Bluesky" />
           <span class="visually-hidden"> (nouvelle fenêtre)</span>
-        </a>
-        <a href="https://www.linkedin.com/company/ife-eco/" target="_blank" rel="noopener noreferrer">
+        </a></li>
+        <li><a href="https://www.linkedin.com/company/ife-eco/" target="_blank" rel="noopener noreferrer">
           <img src="/www/linkedin_icon.svg" alt="LinkedIn" />
           <span class="visually-hidden"> (nouvelle fenêtre)</span>
-        </a>
+        </a></li>
 <!-- Facebook : icône de la maquette. Renseigner href, puis retirer ce commentaire.
-        <a href="URL_DE_LA_PAGE_FACEBOOK" target="_blank" rel="noopener noreferrer">
+        <li><a href="URL_DE_LA_PAGE_FACEBOOK" target="_blank" rel="noopener noreferrer">
           <img src="/www/facebook_icon.svg" alt="Facebook" />
           <span class="visually-hidden"> (nouvelle fenêtre)</span>
-        </a>
+        </a></li>
 -->
-        <a href="https://www.youtube.com/@IFE-eco" target="_blank" rel="noopener noreferrer">
+        <li><a href="https://www.youtube.com/@IFE-eco" target="_blank" rel="noopener noreferrer">
           <img src="/www/youtube_icon.svg" alt="YouTube" />
           <span class="visually-hidden"> (nouvelle fenêtre)</span>
-        </a>
+        </a></li>
 <!-- Flux RSS : icône de la maquette. Renseigner href, puis retirer ce commentaire.
-        <a href="URL_DU_FLUX_RSS">
+        <li><a href="URL_DU_FLUX_RSS">
           <img src="/www/rss_icon.svg" alt="Flux RSS" />
-        </a>
+        </a></li>
 -->
-        <a href="mailto:contact@ife.eco">
+        <li><a href="mailto:contact@ife.eco">
           <img src="/www/envelope_icon.svg" alt="Courriel" />
-        </a>
-      </nav>
+        </a></li>
+      </ul>
       <nav class="ife-lang" aria-label="Choix de la langue">
         <a class="ife-lang__current" href="/" lang="fr" hreflang="fr" aria-current="page">FR</a>
         <span class="ife-lang__sep" aria-hidden="true"> / </span>
         <a class="ife-lang__other" href="#" lang="en" hreflang="en" aria-disabled="true" tabindex="-1" title="Version anglaise à venir">EN</a>
       </nav>
-    </div>
+    </nav>
   </div>
 </header>
 <script>
