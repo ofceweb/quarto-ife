@@ -7,11 +7,14 @@
 }
 
 .ife-brand-btn {
+    --ife-brand-color: var(--ife-primary);
     display: inline-flex;
     align-items: center;
     gap: var(--ife-spacer-2);
     padding: var(--ife-spacer-2) var(--ife-spacer-3);
-    background-color: var(--ife-blanc);
+    background-color: var(--ife-brand-color);
+    border: 4px solid var(--ife-blanc);
+    color: var(--ife-blanc);
     font-family: var(--ife-font-body);
     font-size: var(--ife-fs-category);
     font-weight: 600;
@@ -24,10 +27,18 @@
         font-size: var(--ife-icon-size);
         line-height: 1;
     }
+    &:link {
+        color: var(--ife-blanc);
+    }
     &:hover,
     &:focus {
-        background-color: var(--ife-grey-light);
         text-decoration: none;
+    }
+    &:hover,
+    &:focus-visible {
+        background-color: var(--ife-primary);
+        color: var(--ife-blanc);
+        border-color: var(--ife-primary);
     }
     &.external::after,
     &.external > *:last-child::after {
@@ -35,31 +46,9 @@
         display: none !important;
     }
     &--ofce {
-        background-color: var(--ife-ofce);
-        color: var(--ife-blanc);
-        border: 4px solid var(--ife-blanc);
-        &:link {
-            color: var(--ife-blanc);
-        }
-        &:hover,
-        &:focus-visible {
-            background-color: var(--ife-primary);
-            color: var(--ife-blanc);
-            border-color: var(--ife-primary);
-        }
+        --ife-brand-color: var(--ife-ofce);
     }
     &--cepii {
-        background-color: var(--ife-cepii);
-        color: var(--ife-blanc);
-        border: 4px solid var(--ife-blanc);
-        &:link {
-            color: var(--ife-blanc);
-        }
-        &:hover,
-        &:focus-visible {
-            background-color: var(--ife-primary);
-            color: var(--ife-blanc);
-            border-color: var(--ife-primary);
-        }
+        --ife-brand-color: var(--ife-cepii);
     }
 }
