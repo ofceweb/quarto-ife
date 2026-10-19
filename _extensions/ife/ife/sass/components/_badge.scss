@@ -36,24 +36,35 @@
 }
 
 .ife-source {
+    --ife-source-color: var(--ife-primary);
     display: inline-flex;
+    flex-direction: row-reverse;
     align-items: center;
     gap: var(--ife-spacer-1);
-    color: var(--ife-primary);
+    color: var(--ife-source-color);
     @include ife-category;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     white-space: nowrap;
+    &__label {
+        padding: var(--ife-spacer-1);
+        color: var(--ife-blanc);
+        background-color: var(--ife-source-color);
+    }
     &__flags {
         display: inline-flex;
         align-items: center;
         gap: var(--ife-spacer-1);
     }
+    &__flag {
+        height: 16px;
+        width: auto;
+    }
     &--ofce {
-        color: var(--ife-ofce);
+        --ife-source-color: var(--ife-ofce);
     }
     &--cepii {
-        color: var(--ife-cepii);
+        --ife-source-color: var(--ife-cepii);
     }
 }
 

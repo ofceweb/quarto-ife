@@ -39,24 +39,6 @@
     }
     &__foot {
         padding-top: var(--ife-spacer-2);
-        .ife-source {
-            flex-direction: row-reverse;
-            .ife-source__label {
-                padding: var(--ife-spacer-1);
-                color: var(--ife-blanc);
-                background-color: var(--ife-primary);
-            }
-            .ife-source__flag {
-                height: 16px;
-                width: auto;
-            }
-            &--ofce .ife-source__label {
-                background-color: var(--ife-ofce);
-            }
-            &--cepii .ife-source__label {
-                background-color: var(--ife-cepii);
-            }
-        }
     }
     &__head {
         display: flex;

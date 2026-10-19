@@ -65,24 +65,6 @@
         flex-direction: column;
         gap: var(--ife-spacer-3);
         min-width: 0;
-        .ife-source {
-            flex-direction: row-reverse;
-            .ife-source__label {
-                padding: var(--ife-spacer-1);
-                color: var(--ife-blanc);
-                background-color: var(--ife-primary);
-            }
-            .ife-source__flag {
-                height: 16px;
-                width: auto;
-            }
-            &--ofce .ife-source__label {
-                background-color: var(--ife-ofce);
-            }
-            &--cepii .ife-source__label {
-                background-color: var(--ife-cepii);
-            }
-        }
     }
     &__panel {
         box-sizing: border-box;
