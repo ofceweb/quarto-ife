@@ -39,6 +39,7 @@
         flex: 1;
         @include ife-text-base;
         color: var(--ife-blanc);
+        text-align: left;
     }
     .ife-btn {
         margin-top: var(--ife-spacer-4);

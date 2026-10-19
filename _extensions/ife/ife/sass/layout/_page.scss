@@ -31,9 +31,3 @@ main.content > section:first-of-type > .h2:nth-child(1) {
 .body {
     text-align: left !important;
 }
-
-@media (max-width: 600px) {
-    .page-columns .content p {
-        text-align: start !important;
-    }
-}
