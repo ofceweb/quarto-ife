@@ -21,7 +21,7 @@
     text-transform: uppercase;
     white-space: nowrap;
     i {
-        font-size: 0.7rem;
+        font-size: var(--ife-icon-size);
         line-height: 1;
     }
     &:hover,

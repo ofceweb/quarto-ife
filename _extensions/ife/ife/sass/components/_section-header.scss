@@ -38,7 +38,7 @@ a.section-header:hover {
     transition: opacity 0.2s ease;
     &-arrow {
         display: inline-block;
-        font-size: 1.25rem;
+        font-size: var(--ife-fs-lg);
         opacity: 0;
         transition: transform 0.2s ease, opacity 0.2s ease;
     }
