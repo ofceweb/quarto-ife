@@ -10,10 +10,7 @@
     &__heading {
         min-width: 0;
         margin: 0;
-        font-family: var(--ife-font-title);
-        font-size: var(--ife-fs-h2);
-        font-weight: 600;
-        line-height: 1.1;
+        @include ife-h2-lg;
         color: var(--ife-blanc);
     }
     &__grid {
@@ -32,10 +29,7 @@
     }
     &__title {
         margin: 0;
-        font-family: var(--ife-font-title);
-        font-size: var(--ife-fs-h3-article);
-        font-weight: 600;
-        line-height: 1.2;
+        @include ife-h3-lg;
         color: var(--ife-blanc);
         text-align: center;
         opacity: 1;
@@ -43,10 +37,7 @@
     &__description {
         margin: var(--ife-spacer-3) 0 0;
         flex: 1;
-        font-family: var(--ife-font-body);
-        font-size: var(--ife-fs-base);
-        font-weight: 400;
-        line-height: 1.5;
+        @include ife-text-base;
         color: var(--ife-blanc);
     }
     .ife-btn {

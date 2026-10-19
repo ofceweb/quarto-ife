@@ -6,11 +6,8 @@
     padding: var(--ife-spacer-2);
     background-color: var(--ife-grey-light);
     color: var(--ife-primary);
-    font-family: var(--ife-font-body);
-    font-size: var(--ife-fs-tag);
-    font-weight: 600;
+    @include ife-tag;
     letter-spacing: 0.06em;
-    line-height: 1.2;
     text-transform: uppercase;
     white-space: nowrap;
 }
@@ -23,11 +20,8 @@
     padding: var(--ife-spacer-1);
     border: 1px solid var(--ife-grey-light);
     color: var(--ife-primary);
-    font-family: var(--ife-font-body);
-    font-size: var(--ife-fs-tag);
-    font-weight: 600;
+    @include ife-tag;
     letter-spacing: 0.04em;
-    line-height: 1.2;
     text-transform: uppercase;
     white-space: nowrap;
 }
@@ -46,11 +40,8 @@
     align-items: center;
     gap: var(--ife-spacer-1);
     color: var(--ife-primary);
-    font-family: var(--ife-font-body);
-    font-size: var(--ife-fs-category);
-    font-weight: 600;
+    @include ife-category;
     letter-spacing: 0.04em;
-    line-height: 1;
     text-transform: uppercase;
     white-space: nowrap;
     &__flags {
@@ -71,8 +62,7 @@
     flex-wrap: wrap;
     align-items: center;
     gap: var(--ife-spacer-3);
-    font-family: var(--ife-font-body);
-    font-size: var(--ife-fs-date);
+    @include ife-date;
     color: var(--ife-primary);
     &__date,
     &__location {

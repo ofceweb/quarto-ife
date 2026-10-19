@@ -4,13 +4,14 @@
 // Charte IFE — tokens
 //
 // Cinq couleurs : primary, blanc, grey-light, ofce, cepii.
-// Titres : Merriweather 600, 700. Corps : Arimo 400, 700, italic.
+// Titres : Merriweather 600. Corps : Arimo 400, 600, italic.
 // Tailles : --ife-fs-* (échelle IFE). Mobile sous $ife-bp-nav.
+// Styles de texte : un mixin `ife-*` par style Figma (couche scss:mixins).
 // Espacements : --ife-spacer-* (collection IFE/spacer du design system).
 // Les composants lisent les custom properties CSS, pas ces variables Sass.
 // =============================================================================
 
-@import url("https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400;1,700&family=Fira+Code:wght@400&family=Merriweather:wght@600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,600;1,400;1,600&family=Fira+Code:wght@400&family=Merriweather:wght@600&display=swap");
 
 // Typography
 $ife-font-title: "Merriweather", "Georgia", serif;
@@ -70,3 +71,95 @@ $navbar-fg: $ife-blanc;
 $navbar-hl: $ife-blanc;
 $sidebar-hl: $ife-primary;
 $callout-color-tip: $ife-grey-light;
+
+/*-- scss:mixins --*/
+
+// Styles de texte du design system IFE, un par style Figma.
+// Les tailles lisent --ife-fs-*, qui changent sous $ife-bp-nav.
+// Grand titre de section, réservé aux blocs de la page d'accueil.
+@mixin ife-h2-lg {
+    font-family: var(--ife-font-title);
+    font-size: var(--ife-fs-h2-lg);
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+// Titre h2 par défaut du site.
+@mixin ife-h2-sm {
+    font-family: var(--ife-font-title);
+    font-size: var(--ife-fs-h2-sm);
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+// Grand titre h3 : titres d'articles et de cartes des blocs.
+@mixin ife-h3-lg {
+    font-family: var(--ife-font-title);
+    font-size: var(--ife-fs-h3-lg);
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+// Titre h3 par défaut du site.
+@mixin ife-h3-sm {
+    font-family: var(--ife-font-title);
+    font-size: var(--ife-fs-h3-sm);
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+@mixin ife-text-base {
+    font-family: var(--ife-font-body);
+    font-size: var(--ife-fs-base);
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+@mixin ife-text-base-bold {
+    font-family: var(--ife-font-body);
+    font-size: var(--ife-fs-base);
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+@mixin ife-text-small {
+    font-family: var(--ife-font-body);
+    font-size: var(--ife-fs-sm);
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+@mixin ife-text-small-bold {
+    font-family: var(--ife-font-body);
+    font-size: var(--ife-fs-sm);
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+@mixin ife-date {
+    font-family: var(--ife-font-body);
+    font-size: var(--ife-fs-date);
+    font-weight: 400;
+    line-height: 1.3;
+}
+
+@mixin ife-author {
+    font-family: var(--ife-font-body);
+    font-size: var(--ife-fs-autor);
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+@mixin ife-category {
+    font-family: var(--ife-font-body);
+    font-size: var(--ife-fs-category);
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+@mixin ife-tag {
+    font-family: var(--ife-font-body);
+    font-size: var(--ife-fs-tag);
+    font-weight: 600;
+    line-height: 1.2;
+}

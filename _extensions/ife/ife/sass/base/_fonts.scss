@@ -25,14 +25,13 @@ h1, .h1 {
 h2, .h2 {
     margin-top: var(--ife-spacer-3);
     margin-bottom: var(--ife-spacer-2);
-    font-size: var(--ife-fs-h2-small);
-    font-weight: 700;
+    @include ife-h2-sm;
 }
 
 h3, .h3 {
     opacity: .9;
     margin-top: var(--ife-spacer-2);
-    font-size: var(--ife-fs-h3-article);
+    @include ife-h3-sm;
 }
 
 h4, .h4 {

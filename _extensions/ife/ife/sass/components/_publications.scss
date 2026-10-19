@@ -31,10 +31,7 @@
     }
     &__date {
         margin: 0;
-        font-family: var(--ife-font-body);
-        font-size: var(--ife-fs-date);
-        font-weight: 400;
-        line-height: 1.4;
+        @include ife-date;
         color: var(--ife-primary);
     }
     &__body {
@@ -43,10 +40,7 @@
     }
     &__title {
         margin: 0;
-        font-family: var(--ife-font-title);
-        font-size: var(--ife-fs-h3-article);
-        font-weight: 600;
-        line-height: 1.3;
+        @include ife-h3-lg;
         color: var(--ife-primary);
         opacity: 1;
         a {
@@ -62,10 +56,7 @@
     }
     &__authors {
         margin: var(--ife-spacer-3) 0 0;
-        font-family: var(--ife-font-body);
-        font-size: var(--ife-fs-autor);
-        font-weight: 400;
-        line-height: 1.4;
+        @include ife-author;
         color: var(--ife-primary);
     }
     &__aside {
@@ -118,19 +109,13 @@
     }
     &__panel-heading {
         margin: 0;
-        font-family: var(--ife-font-title);
-        font-size: var(--ife-fs-h3-article);
-        font-weight: 600;
-        line-height: 1.3;
+        @include ife-h3-lg;
         color: var(--ife-blanc);
         opacity: 1;
     }
     &__panel-text {
         margin: var(--ife-spacer-3) 0 0;
-        font-family: var(--ife-font-body);
-        font-size: var(--ife-fs-base);
-        font-weight: 400;
-        line-height: 1.5;
+        @include ife-text-base;
         color: var(--ife-text-color-light);
     }
     &__sites {
@@ -209,20 +194,14 @@
     }
     &__site-title {
         margin: 0;
-        font-family: var(--ife-font-title);
-        font-size: var(--ife-fs-h3-article);
-        font-weight: 600;
-        line-height: 1.3;
+        @include ife-h3-lg;
         color: var(--ife-blanc);
         text-align: center;
         opacity: 1;
     }
     &__site-description {
         margin: 0;
-        font-family: var(--ife-font-body);
-        font-size: var(--ife-fs-base);
-        font-weight: 400;
-        line-height: 1.5;
+        @include ife-text-base;
         color: var(--ife-blanc);
         text-align: left;
     }

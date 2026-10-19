@@ -3,10 +3,7 @@
 // `.section-header` : enveloppe de `utils.section_header_html()`.
 .ife-section-title {
     margin: 0 0 var(--ife-spacer-4);
-    font-family: var(--ife-font-title);
-    font-size: var(--ife-fs-h2);
-    font-weight: 600;
-    line-height: 1.15;
+    @include ife-h2-lg;
     color: inherit;
 }
 
@@ -32,8 +29,7 @@ a.section-header:hover {
     align-items: center;
     gap: var(--ife-spacer-2);
     color: var(--ife-primary);
-    font-family: var(--ife-font-body);
-    font-weight: 600;
+    @include ife-text-base-bold;
     text-decoration: none;
     transition: opacity 0.2s ease;
     &-arrow {

@@ -29,17 +29,12 @@
     }
     &__title {
         margin: 0;
-        font-family: var(--ife-font-title);
-        font-size: var(--ife-fs-h2);
-        font-weight: 600;
-        line-height: 1.1;
+        @include ife-h2-lg;
         color: var(--ife-blanc);
     }
     &__text {
         margin: var(--ife-spacer-3) 0 0;
-        font-family: var(--ife-font-body);
-        font-size: var(--ife-fs-base);
-        line-height: 1.5;
+        @include ife-text-base;
         color: var(--ife-blanc);
     }
     &__contact {
@@ -48,16 +43,12 @@
         align-items: flex-start;
         gap: var(--ife-spacer-3);
         .ife-btn {
-            font-size: var(--ife-fs-base);
-            font-weight: 400;
+            @include ife-text-base;
         }
     }
     &__contact-title {
         margin: 0;
-        font-family: var(--ife-font-title);
-        font-size: var(--ife-fs-h3-article);
-        font-weight: 600;
-        line-height: 1.2;
+        @include ife-h3-lg;
         color: var(--ife-blanc);
         opacity: 1;
     }

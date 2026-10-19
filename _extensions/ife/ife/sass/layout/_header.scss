@@ -80,9 +80,7 @@
         display: inline-flex;
         align-items: center;
         gap: var(--ife-spacer-1);
-        font-family: var(--ife-font-body);
-        font-size: var(--ife-fs-sm);
-        font-weight: 400;
+        @include ife-text-small;
         text-decoration: none;
         white-space: nowrap;
         &:hover {
@@ -93,9 +91,7 @@
 }
 
 .ife-lang {
-    font-family: var(--ife-font-body);
-    font-size: var(--ife-fs-sm);
-    font-weight: 400;
+    @include ife-text-small;
     color: var(--ife-primary);
     white-space: nowrap;
     a {

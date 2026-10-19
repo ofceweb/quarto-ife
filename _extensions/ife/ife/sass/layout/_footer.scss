@@ -20,9 +20,7 @@ body > footer.footer {
             list-style: none;
         }
         a {
-            font-family: var(--ife-font-body);
-            font-size: var(--ife-fs-sm);
-            font-weight: 400;
+            @include ife-text-small;
             color: var(--ife-primary);
             text-decoration: underline;
             text-underline-offset: 0.2em;
