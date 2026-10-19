@@ -16,22 +16,22 @@
         border-bottom: 1px solid var(--ife-grey-light);
         color: inherit;
         .ife-meta {
-            margin-top: 1rem;
+            margin-top: var(--ife-spacer-3);
         }
     }
     &__card {
         height: 100%;
-        padding-bottom: 1.25rem;
+        padding-bottom: var(--ife-spacer-3);
         .ife-meta {
-            margin-bottom: 1rem;
+            margin-bottom: var(--ife-spacer-3);
         }
     }
     &__row {
         display: grid;
         grid-template-columns: minmax(0, 1fr) auto;
-        gap: 2.5rem;
+        gap: var(--ife-spacer-5);
         align-items: end;
-        margin-top: 2.5rem;
+        margin-top: var(--ife-spacer-5);
     }
     &__lines {
         display: flex;
@@ -39,7 +39,7 @@
         min-width: 0;
     }
     &__line {
-        padding: 1.25rem 0;
+        padding: var(--ife-spacer-3) 0;
     }
     &__title {
         margin: 0;

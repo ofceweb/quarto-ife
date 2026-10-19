@@ -32,14 +32,14 @@
     --ife-fs-tag: 0.625rem;
     --ife-fs-category: 0.75rem;
     --ife-spacer-0: 0;
-    --ife-spacer-1: 4px;
-    --ife-spacer-2: 8px;
-    --ife-spacer-3: 16px;
-    --ife-spacer-4: 24px;
-    --ife-spacer-5: 48px;
+    --ife-spacer-1: 0.25rem;
+    --ife-spacer-2: 0.5rem;
+    --ife-spacer-3: 1rem;
+    --ife-spacer-4: 1.5rem;
+    --ife-spacer-5: 3rem;
     --ife-page-max: #{$ife-page-max};
-    --ife-page-pad: #{$ife-page-pad};
-    --ife-gutter: #{$ife-gutter};
+    --ife-page-pad: var(--ife-spacer-5);
+    --ife-gutter: var(--ife-spacer-4);
     --ife-header-height: #{$ife-header-height};
     --ife-band-height: #{$ife-band-height};
     --ife-ecograph-height: #{$ife-ecograph-height};
@@ -61,7 +61,10 @@
         --ife-fs-h6: 1.125rem;
         --ife-fs-tag: 0.625rem;
         --ife-fs-category: 0.625rem;
-        --ife-spacer-4: 20px;
-        --ife-spacer-5: 36px;
+        --ife-spacer-4: 1.25rem;
+        --ife-spacer-5: 2.25rem;
+        --ife-page-pad: var(--ife-spacer-3);
+        --ife-gutter: var(--ife-spacer-3);
+        --ife-header-height: auto;
     }
 }

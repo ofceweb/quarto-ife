@@ -3,7 +3,7 @@
 .ife-badge {
     display: inline-flex;
     align-items: center;
-    padding: 0.5rem 0.5rem;
+    padding: var(--ife-spacer-2);
     background-color: var(--ife-grey-light);
     color: var(--ife-primary);
     font-family: var(--ife-font-body);
@@ -20,7 +20,7 @@
     align-items: center;
     justify-content: center;
     min-width: 1.5rem;
-    padding: 0.35rem 0.35rem;
+    padding: var(--ife-spacer-1);
     border: 1px solid var(--ife-grey-light);
     color: var(--ife-primary);
     font-family: var(--ife-font-body);
@@ -44,7 +44,7 @@
 .ife-source {
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: var(--ife-spacer-1);
     color: var(--ife-primary);
     font-family: var(--ife-font-body);
     font-size: var(--ife-fs-category);
@@ -56,7 +56,7 @@
     &__flags {
         display: inline-flex;
         align-items: center;
-        gap: 0.25rem;
+        gap: var(--ife-spacer-1);
     }
     &--ofce {
         color: var(--ife-ofce);
@@ -70,7 +70,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 1rem;
+    gap: var(--ife-spacer-3);
     font-family: var(--ife-font-body);
     font-size: var(--ife-fs-date);
     color: var(--ife-primary);
@@ -78,7 +78,7 @@
     &__location {
         display: inline-flex;
         align-items: center;
-        gap: 0.35rem;
+        gap: var(--ife-spacer-2);
     }
     &__location {
         color: inherit;
@@ -94,6 +94,6 @@
 
 @media (max-width: #{$ife-bp-sm - 0.02px}) {
     .ife-meta {
-        gap: 0.75rem;
+        gap: var(--ife-spacer-2);
     }
 }

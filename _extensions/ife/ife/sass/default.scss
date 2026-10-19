@@ -44,10 +44,6 @@ $ife-qsn-gradient: linear-gradient(90deg, $ife-cepii 10%, $ife-bg-primary 30%, $
 
 // Layout — desktop 1280px / mobile 393px (conteneur 361px, pad 16px)
 $ife-page-max: 1280px;
-$ife-page-pad: 48px;
-$ife-page-pad-sm: 16px;
-$ife-gutter: 24px;
-$ife-gutter-sm: 16px;
 $ife-header-height: 119px;
 $ife-band-height: 410px;
 $ife-ecograph-height: 460px;
@@ -55,7 +51,7 @@ $ife-bp-nav: 900px;
 $ife-bp-sm: 600px;
 
 // Bootstrap / Quarto mapping
-$font-size-root: 16px;
+$font-size-root: 100%;
 $font-family-sans-serif: $ife-font-body;
 $font-family-monospace: $ife-font-mono;
 $headings-font-family: $ife-font-title;

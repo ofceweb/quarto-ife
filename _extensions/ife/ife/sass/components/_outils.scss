@@ -25,7 +25,7 @@
         align-items: center;
         box-sizing: border-box;
         height: 100%;
-        padding: 2rem 1.5rem;
+        padding: var(--ife-spacer-5);
         border: 1px solid var(--ife-blanc);
         background-color: transparent;
         text-align: center;
@@ -41,7 +41,7 @@
         opacity: 1;
     }
     &__description {
-        margin: 1rem 0 0;
+        margin: var(--ife-spacer-3) 0 0;
         flex: 1;
         font-family: var(--ife-font-body);
         font-size: var(--ife-fs-base);
@@ -50,7 +50,7 @@
         color: var(--ife-blanc);
     }
     .ife-btn {
-        margin-top: 1.5rem;
+        margin-top: var(--ife-spacer-4);
     }
 }
 
@@ -70,6 +70,6 @@
 
 @media (max-width: #{$ife-bp-sm - 0.02px}) {
     .outils__card {
-        padding: 1.5rem 1rem;
+        padding: var(--ife-spacer-4) var(--ife-spacer-3);
     }
 }

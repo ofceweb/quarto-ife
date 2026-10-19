@@ -28,21 +28,21 @@
         flex-direction: column;
         box-sizing: border-box;
         height: 100%;
-        padding: 1.25rem;
+        padding: var(--ife-spacer-3);
         background-color: var(--ife-blanc);
         border: 1px solid var(--ife-grey-light);
         color: inherit;
         .ife-keywords {
             margin-top: auto;
-            padding-top: 2rem;
+            padding-top: var(--ife-spacer-4);
         }
     }
     &__foot {
-        padding-top: 0.5rem;
+        padding-top: var(--ife-spacer-2);
         .ife-source {
             flex-direction: row-reverse;
             .ife-source__label {
-                padding: 4px 4px;
+                padding: var(--ife-spacer-1);
                 color: var(--ife-blanc);
                 background-color: var(--ife-primary);
             }
@@ -62,10 +62,10 @@
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        gap: 0.35rem 0.5rem;
+        gap: var(--ife-spacer-2);
     }
     &__date {
-        margin: 0.5rem 0 0;
+        margin: var(--ife-spacer-2) 0 0;
         font-family: var(--ife-font-body);
         font-size: var(--ife-fs-date);
         font-weight: 400;
@@ -73,7 +73,7 @@
         color: var(--ife-primary);
     }
     &__title {
-        margin: 1.5rem 0 0;
+        margin: var(--ife-spacer-4) 0 0;
         font-family: var(--ife-font-title);
         font-size: var(--ife-fs-h3-article);
         font-weight: 600;
@@ -91,7 +91,7 @@
         }
     }
     &__excerpt {
-        margin: 1rem 0 0;
+        margin: var(--ife-spacer-3) 0 0;
         font-family: var(--ife-font-body);
         font-size: var(--ife-fs-sm);
         font-weight: 400;
@@ -99,7 +99,7 @@
         color: var(--ife-primary);
     }
     &__authors {
-        margin: 1rem 0 0;
+        margin: var(--ife-spacer-3) 0 0;
         font-family: var(--ife-font-body);
         font-size: var(--ife-fs-autor);
         font-weight: 400;
@@ -108,7 +108,7 @@
     }
     &__chart {
         width: 100%;
-        margin-top: 1.5rem;
+        margin-top: var(--ife-spacer-4);
         overflow: hidden;
         a {
             display: block;
@@ -147,8 +147,5 @@
     }
     .alaune__row--featured .alaune__item--lead {
         grid-column: auto;
-    }
-    .alaune__item {
-        padding: 1rem;
     }
 }

@@ -9,8 +9,8 @@
 
 .quarto-title-block:not(:empty) {
     background-color: var(--ife-blanc);
-    margin: 6px -1px 1em 0 !important;
-    padding: 0 12px 0 12px !important;
+    margin: var(--ife-spacer-1) -1px 1em 0 !important;
+    padding: 0 var(--ife-spacer-3) !important;
     border-left: 1px solid var(--ife-primary) !important;
 }
 
@@ -67,19 +67,19 @@
 .ife-header {
     width: 100%;
     .ife-chrome__inner {
-        padding: #{$ife-page-pad-sm} var(--ife-page-pad);
+        padding: var(--ife-spacer-3) var(--ife-page-pad);
     }
     &__end {
         display: flex;
         align-items: center;
         align-self: flex-end;
         margin-left: auto;
-        gap: 1.5rem;
+        gap: var(--ife-spacer-4);
     }
     &__about {
         display: inline-flex;
         align-items: center;
-        gap: 0.35rem;
+        gap: var(--ife-spacer-1);
         font-family: var(--ife-font-body);
         font-size: var(--ife-fs-sm);
         font-weight: 400;
@@ -152,7 +152,7 @@ main > .ife-header {
     .ife-header .ife-chrome__inner {
         height: auto;
         min-height: 4.5rem;
-        padding-block: 0.75rem;
+        padding-block: var(--ife-spacer-3);
         flex-wrap: wrap;
         row-gap: 0;
     }
@@ -165,9 +165,9 @@ main > .ife-header {
         flex-direction: column;
         align-items: stretch;
         align-self: stretch;
-        gap: 1rem;
-        padding: 1rem 0 0.5rem;
-        margin-top: 0.75rem;
+        gap: var(--ife-spacer-3);
+        padding: var(--ife-spacer-3) 0 var(--ife-spacer-2);
+        margin-top: var(--ife-spacer-2);
     }
     .ife-header.is-open .ife-header__end {
         display: flex;

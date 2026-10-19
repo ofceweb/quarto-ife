@@ -30,7 +30,7 @@
         max-width: var(--ife-page-max);
         min-height: 25.625rem;
         margin-inline: auto;
-        padding: 3rem var(--ife-page-pad);
+        padding: var(--ife-spacer-5) var(--ife-page-pad);
         gap: var(--ife-gutter);
     }
     &__content {
@@ -85,7 +85,6 @@
     }
     .ife-band__inner {
         min-height: 0;
-        padding-block: 2rem;
     }
     .ife-band__content {
         max-width: none;

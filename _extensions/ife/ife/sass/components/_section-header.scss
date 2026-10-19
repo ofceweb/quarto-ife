@@ -2,7 +2,7 @@
 // `.ife-section-title` : primitive `components.section_title()`.
 // `.section-header` : enveloppe de `utils.section_header_html()`.
 .ife-section-title {
-    margin: 0 0 1.5rem;
+    margin: 0 0 var(--ife-spacer-4);
     font-family: var(--ife-font-title);
     font-size: var(--ife-fs-h2);
     font-weight: 600;
@@ -12,7 +12,7 @@
 
 .section-header {
     display: block;
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--ife-spacer-4);
     color: inherit;
     text-decoration: none;
     .ife-section-title {
@@ -30,7 +30,7 @@ a.section-header:hover {
 .section-header-link {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--ife-spacer-2);
     color: var(--ife-primary);
     font-family: var(--ife-font-body);
     font-weight: 600;

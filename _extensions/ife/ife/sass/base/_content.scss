@@ -18,7 +18,7 @@ figcaption.quarto-float-caption {
     text-align: start !important;
     font-size: var(--ife-fs-base) !important;
     font-weight: 700 !important;
-    margin-bottom: 6px;
+    margin-bottom: var(--ife-spacer-2);
 }
 
 .blockquote {

@@ -12,7 +12,7 @@ html.page-qui-sommes-nous {
         border-left: none !important;
     }
     #nous-trouver {
-        padding: 24px;
+        padding: var(--ife-spacer-4);
         background-color: var(--ife-primary);
         color: var(--ife-blanc);
         h2,
@@ -21,11 +21,11 @@ html.page-qui-sommes-nous {
         }
     }
     .qui-sommes-nous-body {
-        padding-block: 2.5rem;
+        padding-block: var(--ife-spacer-5);
         padding-inline: var(--ife-page-pad);
         background-color: var(--ife-blanc);
         max-width: 80%;
-        margin-block: 48px;
+        margin-block: var(--ife-spacer-5);
         margin-inline: auto;
         > * {
             max-width: 800px;
@@ -34,7 +34,7 @@ html.page-qui-sommes-nous {
         > .apropos {
             max-width: none;
             width: calc(100% + 2 * var(--ife-page-pad));
-            margin-top: -2.5rem;
+            margin-top: calc(var(--ife-spacer-5) * -1);
             margin-inline: calc(var(--ife-page-pad) * -1);
         }
     }

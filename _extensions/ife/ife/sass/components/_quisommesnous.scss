@@ -11,7 +11,6 @@
         min-height: 0;
         height: 100%;
         padding: 0 var(--ife-page-pad);
-        gap: 10px;
     }
     .ife-band__media {
         &::after {
@@ -30,7 +29,7 @@
         color: var(--ife-blanc);
     }
     &__date {
-        margin: 0.75rem 0 0;
+        margin: var(--ife-spacer-4) 0 0;
         font-family: var(--ife-font-body);
         font-size: var(--ife-fs-date);
         font-weight: 400;
@@ -38,7 +37,7 @@
         color: var(--ife-text-color-light);
     }
     &__subtitle {
-        margin: 1rem 0 0;
+        margin: var(--ife-spacer-3) 0 0;
         font-family: var(--ife-font-title);
         font-size: var(--ife-fs-h3-article);
         font-weight: 600;
@@ -46,7 +45,7 @@
         color: var(--ife-blanc);
     }
     &__excerpt {
-        margin: 1rem 0 0;
+        margin: var(--ife-spacer-3) 0 0;
         max-width: 31.25rem;
         font-family: var(--ife-font-body);
         font-size: var(--ife-fs-base);
@@ -60,7 +59,7 @@
         text-shadow: var(--ife-text-shadow-dark);
     }
     .ife-btn {
-        margin-top: 1.5rem;
+        margin-top: var(--ife-spacer-4);
         &:hover,
         &:focus {
             border-color: var(--ife-blanc);
@@ -76,7 +75,7 @@
         .ife-band__inner {
             min-height: 0;
             height: auto;
-            padding-block: 2rem;
+            padding-block: var(--ife-spacer-5);
         }
     }
 }

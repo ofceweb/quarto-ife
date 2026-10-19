@@ -4,7 +4,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.35rem 0.5rem;
+    gap: var(--ife-spacer-1) var(--ife-spacer-2);
     margin: 0;
     padding: 0;
     list-style: none;

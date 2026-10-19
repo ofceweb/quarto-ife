@@ -3,14 +3,14 @@
 .ife-brand-btns {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--ife-spacer-4);
 }
 
 .ife-brand-btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
-    padding: 10px 16px;
+    gap: var(--ife-spacer-2);
+    padding: var(--ife-spacer-2) var(--ife-spacer-3);
     background-color: var(--ife-blanc);
     font-family: var(--ife-font-body);
     font-size: var(--ife-fs-category);

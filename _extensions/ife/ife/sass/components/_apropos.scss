@@ -12,12 +12,12 @@
         align-items: flex-start;
         justify-content: center;
         padding: 0 var(--ife-page-pad);
-        gap: 40px;
+        gap: var(--ife-spacer-5);
     }
     .ife-band__content {
         display: flex;
         flex-direction: column;
-        gap: 40px;
+        gap: var(--ife-spacer-5);
     }
     .ife-band__media {
         &::after {
@@ -36,7 +36,7 @@
         color: var(--ife-blanc);
     }
     &__text {
-        margin: 1rem 0 0;
+        margin: var(--ife-spacer-3) 0 0;
         font-family: var(--ife-font-body);
         font-size: var(--ife-fs-base);
         line-height: 1.5;
@@ -46,7 +46,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 1rem;
+        gap: var(--ife-spacer-3);
         .ife-btn {
             font-size: var(--ife-fs-base);
             font-weight: 400;
@@ -74,7 +74,7 @@
         .ife-band__inner {
             min-height: 0;
             height: auto;
-            padding-block: 2rem;
+            padding-block: var(--ife-spacer-5);
         }
     }
 }
