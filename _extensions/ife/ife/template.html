@@ -59,6 +59,8 @@ $for(include-before)$
 $include-before$
 $endfor$
 
+<a class="ife-skip-link" href="#quarto-document-content">Aller au contenu</a>
+
 <header class="ife-chrome ife-header">
   <div class="ife-chrome__inner">
     <a class="ife-lockup" href="/" aria-label="IFE, Institut Français d’Économie — Accueil">
@@ -120,8 +122,9 @@ $endfor$
 <script>
 (function () {
   var header = document.querySelector("header.ife-header");
-  if (header && header.parentElement !== document.body) {
-    document.body.insertBefore(header, document.body.firstChild);
+  var skipLink = document.querySelector(".ife-skip-link");
+  if (header && skipLink && header.parentElement !== document.body) {
+    document.body.prepend(skipLink, header);
   }
   var toggle = document.querySelector(".ife-nav-toggle");
   if (!header || !toggle) return;
