@@ -25,7 +25,7 @@ local function heading_text(item)
     return "L'Ecograph n°" .. number
 end
 
-local function create_banner(item)
+local function create_banner(item, level)
     local title = heading_text(item)
     local image = utils.pick(item, "image", "img", "cover")
     local alt = utils.pick(item, "image_alt", "alt")
@@ -47,14 +47,14 @@ local function create_banner(item)
         </section>
     ]],
         utils.image_html(image, alt, "ife-band__media"),
-        utils.el("h2", "ecograph__title", utils.html_escape(title)),
+        utils.el("h" .. level, "ecograph__title", utils.html_escape(title)),
         utils.el(
             "p",
             "ecograph__date",
             utils.html_escape(utils.format_date_fr(utils.pick(item, "date")))
         ),
         utils.el(
-            "h3",
+            "h" .. (level + 1),
             "ecograph__subtitle",
             utils.rich_inline(utils.pick(item, "subtitle"))
         ),
@@ -85,6 +85,9 @@ return {
         if #cfg.items == 0 then
             return pandoc.Str("")
         end
-        return pandoc.RawBlock("html", create_banner(cfg.items[1]))
+        return pandoc.RawBlock(
+            "html",
+            create_banner(cfg.items[1], utils.band_heading_level(meta))
+        )
     end
 }

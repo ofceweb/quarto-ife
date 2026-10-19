@@ -159,6 +159,9 @@ $elseif(abstract)$
 $title-block.html()$
 $elseif(keywords)$
 $title-block.html()$
+$else$
+<!-- Sans title-block, Quarto y déplace le premier h1 de la page (celui d'un bandeau). -->
+<header id="title-block-header" class="quarto-title-block"></header>
 $endif$
 
 

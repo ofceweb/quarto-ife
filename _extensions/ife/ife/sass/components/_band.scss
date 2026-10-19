@@ -21,6 +21,11 @@
             color: inherit;
         }
     }
+    // Le titre est un h1 ou un h2 selon la page (voir `utils.band_heading_level`).
+    :is(h1, h2, h3, h4, h5, h6) {
+        padding-bottom: 0;
+        border-bottom: none;
+    }
     &__inner {
         position: relative;
         z-index: 1;

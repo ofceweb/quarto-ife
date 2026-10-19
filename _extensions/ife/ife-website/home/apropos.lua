@@ -33,7 +33,7 @@ local function email_label(email)
     return email:gsub("^mailto:", "")
 end
 
-local function create_banner(item)
+local function create_banner(item, level)
     local title = utils.pick(item, "title")
     local image = utils.pick(item, "image", "img", "cover")
     local alt = utils.pick(item, "image_alt", "alt")
@@ -58,14 +58,14 @@ local function create_banner(item)
         </section>
     ]],
         utils.image_html(image, alt, "ife-band__media"),
-        utils.el("h2", "apropos__title", utils.html_escape(title)),
+        utils.el("h" .. level, "apropos__title", utils.html_escape(title)),
         utils.el(
             "p",
             "apropos__text",
             utils.rich_inline(utils.pick(item, "text"))
         ),
         utils.el(
-            "h3",
+            "h" .. (level + 1),
             "apropos__contact-title",
             contact_label(email)
         ),
@@ -87,6 +87,9 @@ return {
         if #cfg.items == 0 then
             return pandoc.Str("")
         end
-        return pandoc.RawBlock("html", create_banner(cfg.items[1]))
+        return pandoc.RawBlock(
+            "html",
+            create_banner(cfg.items[1], utils.band_heading_level(meta))
+        )
     end
 }

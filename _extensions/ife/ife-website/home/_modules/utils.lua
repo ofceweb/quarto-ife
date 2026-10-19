@@ -254,6 +254,21 @@ function utils.el(tag, class_name, content)
     return string.format("<%s>%s</%s>", tag, content, tag)
 end
 
+local page_has_h1 = false
+
+--- Niveau du titre d'un bandeau : 1 si la page n'a pas encore de h1, sinon 2.
+--- La page a un h1 quand `title` est renseigné ou qu'un bandeau précédent l'a pris.
+--- Un titre Markdown `#` dans le corps de la page n'est pas détecté.
+--- @param meta table Métadonnées du document
+--- @return number
+function utils.band_heading_level(meta)
+    if page_has_h1 or utils.to_str(meta and meta.title) ~= "" then
+        return 2
+    end
+    page_has_h1 = true
+    return 1
+end
+
 --- Encodage pourcent d'une chaîne destinée à une query d'URL.
 --- La classe est ASCII : `%w` suit la locale et laisse passer l'octet C3 de « é ».
 --- @param text string|nil

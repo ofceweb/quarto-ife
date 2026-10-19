@@ -17,7 +17,7 @@ local components = require(
     quarto.utils.resolve_path("_modules/components.lua"):gsub("%.lua$", "")
 )
 
-local function create_banner(item)
+local function create_banner(item, level)
     local title = utils.pick(item, "title")
     local image = utils.pick(item, "image", "img", "cover")
     local alt = utils.pick(item, "image_alt", "alt")
@@ -38,14 +38,14 @@ local function create_banner(item)
         </section>
     ]],
         utils.image_html(image, alt, "ife-band__media"),
-        utils.el("h2", "quisommesnous__title", utils.html_escape(title)),
+        utils.el("h" .. level, "quisommesnous__title", utils.html_escape(title)),
         utils.el(
             "p",
             "quisommesnous__date",
             utils.html_escape(utils.format_date_fr(utils.pick(item, "date")))
         ),
         utils.el(
-            "h3",
+            "h" .. (level + 1),
             "quisommesnous__subtitle",
             utils.rich_inline(utils.pick(item, "subtitle"))
         ),
@@ -72,6 +72,9 @@ return {
         if #cfg.items == 0 then
             return pandoc.Str("")
         end
-        return pandoc.RawBlock("html", create_banner(cfg.items[1]))
+        return pandoc.RawBlock(
+            "html",
+            create_banner(cfg.items[1], utils.band_heading_level(meta))
+        )
     end
 }
