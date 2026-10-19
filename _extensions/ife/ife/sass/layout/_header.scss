@@ -7,6 +7,13 @@
     display: none;
 }
 
+.quarto-title-block:not(:empty) {
+    background-color: var(--ife-blanc);
+    margin: 6px -1px 1em 0 !important;
+    padding: 0 12px 0 12px !important;
+    border-left: 1px solid var(--ife-anthracite) !important;
+}
+
 .ife-chrome {
     background-color: var(--ife-blanc);
     color: var(--ife-blanc);

@@ -1,8 +1,10 @@
 /*-- scss:rules --*/
 
 // Base
+@import "base/tokens";
 @import "base/reset";
 @import "base/fonts";
+@import "base/content";
 
 // Components
 @import "components/badge";

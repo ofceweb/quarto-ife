@@ -88,3 +88,9 @@
         white-space: normal;
     }
 }
+
+.btn-primary {
+    --bs-btn-color: #{$ife-blanc} !important;
+    --bs-btn-bg: #{$ife-anthracite};
+    --bs-btn-border-color: #{$ife-anthracite};
+}

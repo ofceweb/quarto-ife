@@ -50,7 +50,6 @@ contributes:
         - bootstrap
         - sass/default.scss
         - sass/rules.scss
-        - ife.scss
       lightbox: true
       link-external-icon: true
       toc-location: left
