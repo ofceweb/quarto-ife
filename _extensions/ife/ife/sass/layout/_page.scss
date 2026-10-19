@@ -3,22 +3,11 @@ html {
     overflow-x: hidden;
 }
 
-body.fullcontent {
+body {
     #quarto-sidebar,
     #quarto-sidebar-glass {
         display: none;
     }
-    main {
-        margin: 0;
-    }
-}
-
-body:not(.fullcontent) {
-    #quarto-sidebar,
-    #quarto-sidebar-glass {
-        display: none;
-    }
-
     main {
         margin: 0;
     }
@@ -30,10 +19,6 @@ body:not(.fullcontent) {
         --ife-gutter: #{$ife-gutter-sm};
         --ife-header-height: auto;
     }
-}
-
-main {
-    margin: .25em 0;
 }
 
 main.content > p:has(+section) {

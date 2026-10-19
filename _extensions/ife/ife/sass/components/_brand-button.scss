@@ -39,12 +39,11 @@
         background-color: var(--ife-bordeaux);
         color: var(--ife-blanc);
         border: 4px solid var(--ife-blanc);
-
-        &:link{
+        &:link {
             color: var(--ife-blanc);
         }
         &:hover,
-        &:focus-visible{
+        &:focus-visible {
             background-color: var(--ife-anthracite);
             color: var(--ife-blanc);
             border-color: var(--ife-anthracite);
@@ -54,12 +53,11 @@
         background-color: var(--ife-turquoise);
         color: var(--ife-blanc);
         border: 4px solid var(--ife-blanc);
-
-        &:link{
+        &:link {
             color: var(--ife-blanc);
         }
         &:hover,
-        &:focus-visible{
+        &:focus-visible {
             background-color: var(--ife-anthracite);
             color: var(--ife-blanc);
             border-color: var(--ife-anthracite);
