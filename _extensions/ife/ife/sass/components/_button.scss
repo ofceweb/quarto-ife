@@ -23,11 +23,6 @@
         outline: 2px solid currentColor;
         outline-offset: 2px;
     }
-    &.external::after,
-    &.external > *:last-child::after {
-        content: none !important;
-        display: none !important;
-    }
     &--solid {
         background-color: var(--ife-blanc);
         border-color: var(--ife-blanc);

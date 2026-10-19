@@ -3,6 +3,12 @@ a {
     text-decoration: none;
 }
 
+// Pas d'icône de lien externe Quarto sur les boutons ni dans le header et le footer.
+.ife-btn.external::after,
+.ife-chrome a.external::after {
+    content: none;
+}
+
 .table {
     font-size: var(--ife-fs-sm) !important;
     text-align: start;

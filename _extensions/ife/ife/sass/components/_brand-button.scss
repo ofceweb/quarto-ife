@@ -39,11 +39,6 @@
         color: var(--ife-blanc);
         border-color: var(--ife-primary);
     }
-    &.external::after,
-    &.external > *:last-child::after {
-        content: none !important;
-        display: none !important;
-    }
     &--ofce {
         --ife-brand-color: var(--ife-ofce);
     }

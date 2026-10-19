@@ -28,11 +28,6 @@
             outline: 2px solid var(--ife-primary);
             outline-offset: 2px;
         }
-        &.external::after,
-        &.external > *:last-child::after {
-            content: none !important;
-            display: none !important;
-        }
     }
     &__inner {
         display: flex;
