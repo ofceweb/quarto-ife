@@ -12,7 +12,7 @@
     position: relative;
     overflow: hidden;
     width: 100%;
-    background-color: var(--ife-anthracite);
+    background-color: var(--ife-primary);
     color: var(--ife-blanc);
     a:not(.ife-btn) {
         color: inherit;
@@ -51,7 +51,7 @@
             inset: 0;
             background: linear-gradient(
                 to right,
-                var(--ife-anthracite) 0%,
+                var(--ife-primary) 0%,
                 transparent 55%
             );
         }
@@ -97,7 +97,7 @@
         &::after {
             background: linear-gradient(
                 to bottom,
-                var(--ife-anthracite) 0%,
+                var(--ife-primary) 0%,
                 transparent 50%
             );
         }

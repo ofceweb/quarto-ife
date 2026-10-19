@@ -11,21 +11,21 @@
     background-color: var(--ife-blanc);
     margin: 6px -1px 1em 0 !important;
     padding: 0 12px 0 12px !important;
-    border-left: 1px solid var(--ife-anthracite) !important;
+    border-left: 1px solid var(--ife-primary) !important;
 }
 
 .ife-chrome {
     background-color: var(--ife-blanc);
     width: 100%;
-    border-bottom: 1px solid var(--ife-anthracite);
+    border-bottom: 1px solid var(--ife-primary);
     a {
-        color: var(--ife-anthracite);
+        color: var(--ife-primary);
         &:hover,
         &:focus {
-            color: var(--ife-anthracite);
+            color: var(--ife-primary);
         }
         &:focus-visible {
-            outline: 2px solid var(--ife-anthracite);
+            outline: 2px solid var(--ife-primary);
             outline-offset: 2px;
         }
         &.external::after,
@@ -96,7 +96,7 @@
     font-family: var(--ife-font-body);
     font-size: var(--ife-fs-sm);
     font-weight: 400;
-    color: var(--ife-anthracite);
+    color: var(--ife-primary);
     white-space: nowrap;
     a {
         color: inherit;
@@ -123,17 +123,17 @@
     height: 2.75rem;
     margin-left: auto;
     padding: 0;
-    border: 1px solid var(--ife-anthracite);
+    border: 1px solid var(--ife-primary);
     border-radius: 2px;
     background: transparent;
-    color: var(--ife-anthracite);
+    color: var(--ife-primary);
     cursor: pointer;
     i {
         font-size: 1.5rem;
         line-height: 1;
     }
     &:focus-visible {
-        outline: 2px solid var(--ife-anthracite);
+        outline: 2px solid var(--ife-primary);
         outline-offset: 2px;
     }
 }

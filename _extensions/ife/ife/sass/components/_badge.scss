@@ -4,8 +4,8 @@
     display: inline-flex;
     align-items: center;
     padding: 0.5rem 0.5rem;
-    background-color: var(--ife-gris);
-    color: var(--ife-anthracite);
+    background-color: var(--ife-grey-light);
+    color: var(--ife-primary);
     font-family: var(--ife-font-body);
     font-size: var(--ife-fs-tag);
     font-weight: 600;
@@ -21,8 +21,8 @@
     justify-content: center;
     min-width: 1.5rem;
     padding: 0.35rem 0.35rem;
-    border: 1px solid var(--ife-gris);
-    color: var(--ife-anthracite);
+    border: 1px solid var(--ife-grey-light);
+    color: var(--ife-primary);
     font-family: var(--ife-font-body);
     font-size: var(--ife-fs-tag);
     font-weight: 600;
@@ -36,7 +36,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: var(--ife-anthracite);
+    color: var(--ife-primary);
     line-height: 1;
     opacity: 0.7;
 }
@@ -45,7 +45,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    color: var(--ife-anthracite);
+    color: var(--ife-primary);
     font-family: var(--ife-font-body);
     font-size: var(--ife-fs-category);
     font-weight: 600;
@@ -59,10 +59,10 @@
         gap: 0.25rem;
     }
     &--ofce {
-        color: var(--ife-bordeaux);
+        color: var(--ife-ofce);
     }
     &--cepii {
-        color: var(--ife-turquoise);
+        color: var(--ife-cepii);
     }
 }
 
@@ -73,7 +73,7 @@
     gap: 1rem;
     font-family: var(--ife-font-body);
     font-size: var(--ife-fs-date);
-    color: var(--ife-anthracite);
+    color: var(--ife-primary);
     &__date,
     &__location {
         display: inline-flex;

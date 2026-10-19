@@ -14,7 +14,7 @@ caption,
 .panel-caption,
 .subfigure-caption,
 figcaption.quarto-float-caption {
-    color: var(--ife-anthracite) !important;
+    color: var(--ife-primary) !important;
     text-align: start !important;
     font-size: var(--ife-fs-base) !important;
     font-weight: 700 !important;
@@ -22,7 +22,7 @@ figcaption.quarto-float-caption {
 }
 
 .blockquote {
-    color: var(--ife-anthracite);
+    color: var(--ife-primary);
     border: none;
     font-size: var(--ife-fs-sm);
     line-height: 140%;

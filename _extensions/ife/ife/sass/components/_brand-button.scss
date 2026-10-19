@@ -27,7 +27,7 @@
     }
     &:hover,
     &:focus {
-        background-color: var(--ife-gris);
+        background-color: var(--ife-grey-light);
         text-decoration: none;
     }
     &.external::after,
@@ -36,7 +36,7 @@
         display: none !important;
     }
     &--ofce {
-        background-color: var(--ife-bordeaux);
+        background-color: var(--ife-ofce);
         color: var(--ife-blanc);
         border: 4px solid var(--ife-blanc);
         &:link {
@@ -44,13 +44,13 @@
         }
         &:hover,
         &:focus-visible {
-            background-color: var(--ife-anthracite);
+            background-color: var(--ife-primary);
             color: var(--ife-blanc);
-            border-color: var(--ife-anthracite);
+            border-color: var(--ife-primary);
         }
     }
     &--cepii {
-        background-color: var(--ife-turquoise);
+        background-color: var(--ife-cepii);
         color: var(--ife-blanc);
         border: 4px solid var(--ife-blanc);
         &:link {
@@ -58,9 +58,9 @@
         }
         &:hover,
         &:focus-visible {
-            background-color: var(--ife-anthracite);
+            background-color: var(--ife-primary);
             color: var(--ife-blanc);
-            border-color: var(--ife-anthracite);
+            border-color: var(--ife-primary);
         }
     }
 }

@@ -2,7 +2,7 @@
 // Ciblée par `page-class: page-qui-sommes-nous` dans le front matter du .qmd.
 html.page-qui-sommes-nous {
     body {
-        background-color: $ife-gris;
+        background-color: $ife-grey-light;
     }
     #quarto-content {
         display: block;
@@ -13,7 +13,7 @@ html.page-qui-sommes-nous {
     }
     #nous-trouver {
         padding: 24px;
-        background-color: $ife-anthracite;
+        background-color: $ife-primary;
         color: $ife-blanc;
         h2,
         a {

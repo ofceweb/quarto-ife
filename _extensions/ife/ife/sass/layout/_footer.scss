@@ -3,7 +3,7 @@ body > footer.footer {
 }
 
 .ife-footer {
-    //border-top: 1px solid var(--ife-anthracite);
+    //border-top: 1px solid var(--ife-primary);
     &__end {
         display: flex;
         align-items: center;
@@ -23,7 +23,7 @@ body > footer.footer {
             font-family: var(--ife-font-body);
             font-size: var(--ife-fs-sm);
             font-weight: 400;
-            color: var(--ife-anthracite);
+            color: var(--ife-primary);
             text-decoration: underline;
             text-underline-offset: 0.2em;
             white-space: nowrap;

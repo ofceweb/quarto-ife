@@ -2,11 +2,11 @@
 // Contrat de classes pour le shortcode `alaune` (ife-website).
 .column-screen-inset-shaded:has(.alaune),
 .section:has(.alaune) {
-    background-color: var(--ife-gris);
+    background-color: var(--ife-grey-light);
 }
 
 .alaune {
-    color: var(--ife-anthracite);
+    color: var(--ife-primary);
     &__grid {
         display: flex;
         flex-direction: column;
@@ -30,7 +30,7 @@
         height: 100%;
         padding: 1.25rem;
         background-color: var(--ife-blanc);
-        border: 1px solid var(--ife-gris);
+        border: 1px solid var(--ife-grey-light);
         color: inherit;
         .ife-keywords {
             margin-top: auto;
@@ -44,17 +44,17 @@
             .ife-source__label {
                 padding: 4px 4px;
                 color: var(--ife-blanc);
-                background-color: var(--ife-anthracite);
+                background-color: var(--ife-primary);
             }
             .ife-source__flag {
                 height: 16px;
                 width: auto;
             }
             &--ofce .ife-source__label {
-                background-color: var(--ife-bordeaux);
+                background-color: var(--ife-ofce);
             }
             &--cepii .ife-source__label {
-                background-color: var(--ife-turquoise);
+                background-color: var(--ife-cepii);
             }
         }
     }
@@ -70,7 +70,7 @@
         font-size: var(--ife-fs-date);
         font-weight: 400;
         line-height: 1.4;
-        color: var(--ife-anthracite);
+        color: var(--ife-primary);
     }
     &__title {
         margin: 1.5rem 0 0;
@@ -78,7 +78,7 @@
         font-size: var(--ife-fs-h3-article);
         font-weight: 600;
         line-height: 1.3;
-        color: var(--ife-anthracite);
+        color: var(--ife-primary);
         a {
             color: inherit;
             text-decoration: none;
@@ -96,7 +96,7 @@
         font-size: var(--ife-fs-sm);
         font-weight: 400;
         line-height: 1.5;
-        color: var(--ife-anthracite);
+        color: var(--ife-primary);
     }
     &__authors {
         margin: 1rem 0 0;
@@ -104,7 +104,7 @@
         font-size: var(--ife-fs-autor);
         font-weight: 400;
         line-height: 1.4;
-        color: var(--ife-anthracite);
+        color: var(--ife-primary);
     }
     &__chart {
         width: 100%;

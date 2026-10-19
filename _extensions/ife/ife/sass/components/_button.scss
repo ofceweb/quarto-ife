@@ -36,16 +36,16 @@
     &--solid {
         background-color: var(--ife-blanc);
         border-color: var(--ife-blanc);
-        color: var(--ife-anthracite);
+        color: var(--ife-primary);
         &:link,
         &:visited {
-            color: var(--ife-anthracite);
+            color: var(--ife-primary);
         }
         &:hover,
         &:focus {
-            background-color: var(--ife-gris);
-            border-color: var(--ife-gris);
-            color: var(--ife-anthracite);
+            background-color: var(--ife-grey-light);
+            border-color: var(--ife-grey-light);
+            color: var(--ife-primary);
         }
     }
     &--outline {
@@ -59,7 +59,7 @@
         &:hover,
         &:focus {
             background-color: var(--ife-blanc);
-            color: var(--ife-anthracite);
+            color: var(--ife-primary);
             img {
                 filter: brightness(0);
             }
@@ -67,16 +67,16 @@
     }
     &--outline-dark {
         background-color: transparent;
-        border-color: var(--ife-anthracite);
-        color: var(--ife-anthracite);
+        border-color: var(--ife-primary);
+        color: var(--ife-primary);
         &:link,
         &:visited {
-            color: var(--ife-anthracite);
+            color: var(--ife-primary);
         }
         &:hover,
         &:focus {
-            background-color: var(--ife-anthracite);
-            border-color: var(--ife-anthracite);
+            background-color: var(--ife-primary);
+            border-color: var(--ife-primary);
             color: var(--ife-blanc);
         }
     }
@@ -91,6 +91,6 @@
 
 .btn-primary {
     --bs-btn-color: #{$ife-blanc} !important;
-    --bs-btn-bg: #{$ife-anthracite};
-    --bs-btn-border-color: #{$ife-anthracite};
+    --bs-btn-bg: #{$ife-primary};
+    --bs-btn-border-color: #{$ife-primary};
 }
