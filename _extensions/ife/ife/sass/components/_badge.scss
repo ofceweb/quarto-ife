@@ -7,7 +7,6 @@
     background-color: var(--ife-grey-light);
     color: var(--ife-primary);
     @include ife-tag;
-    letter-spacing: 0.06em;
     text-transform: uppercase;
     white-space: nowrap;
 }
@@ -21,7 +20,6 @@
     border: 1px solid var(--ife-grey-light);
     color: var(--ife-primary);
     @include ife-tag;
-    letter-spacing: 0.04em;
     text-transform: uppercase;
     white-space: nowrap;
 }
@@ -43,7 +41,6 @@
     gap: var(--ife-spacer-1);
     color: var(--ife-source-color);
     @include ife-category;
-    letter-spacing: 0.04em;
     text-transform: uppercase;
     white-space: nowrap;
     &__label {
