@@ -35,8 +35,7 @@
         font-size: var(--ife-fs-date);
         font-weight: 400;
         line-height: 1.4;
-        color: var(--ife-blanc);
-        opacity: 0.85;
+        color: var(--ife-text-color-light);
     }
     &__subtitle {
         margin: 1rem 0 0;
@@ -65,7 +64,7 @@
         &:hover,
         &:focus {
             border-color: var(--ife-blanc);
-            background-color: rgba($ife-primary, 0.85);
+            background-color: var(--ife-primary-opacity-85);
             color: var(--ife-blanc);
         }
     }
