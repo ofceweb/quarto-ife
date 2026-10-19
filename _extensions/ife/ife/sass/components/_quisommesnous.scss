@@ -3,12 +3,12 @@
 // Structure : `.ife-band.ife-band--cover.quisommesnous`.
 .quisommesnous {
     box-sizing: border-box;
-    height: var(--ife-band-height);
+    min-height: var(--ife-band-height);
     border-style: solid;
     border-width: 0 0 1px 0;
     border-color: var(--ife-blanc);
     .ife-band__inner {
-        min-height: 0;
+        min-height: var(--ife-band-height);
         height: 100%;
         padding: 0 var(--ife-page-pad);
     }
@@ -60,7 +60,7 @@
 
 @media (max-width: #{$ife-bp-nav - 0.02px}) {
     .quisommesnous {
-        height: auto;
+        min-height: 0;
         .ife-band__inner {
             min-height: 0;
             height: auto;
