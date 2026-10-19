@@ -44,14 +44,7 @@
         color: var(--ife-primary);
         opacity: 1;
         a {
-            color: inherit;
-            text-decoration: none;
-            &:hover,
-            &:focus {
-                color: inherit;
-                text-decoration: underline;
-                text-underline-offset: 0.15em;
-            }
+            @include ife-underline-on-hover;
         }
     }
     &__authors {

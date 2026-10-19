@@ -81,12 +81,8 @@
         align-items: center;
         gap: var(--ife-spacer-1);
         @include ife-text-small;
-        text-decoration: none;
+        @include ife-underline-on-hover;
         white-space: nowrap;
-        &:hover {
-            text-decoration: underline;
-            text-underline-offset: 0.2em;
-        }
     }
 }
 
