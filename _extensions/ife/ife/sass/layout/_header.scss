@@ -143,7 +143,7 @@ main > .ife-header {
     margin-right: -50vw;
 }
 
-@media (max-width: #{$ife-bp-nav - 0.02px}) {
+@include ife-below($ife-bp-nav) {
     .ife-chrome__inner,
     .ife-header .ife-chrome__inner {
         height: auto;

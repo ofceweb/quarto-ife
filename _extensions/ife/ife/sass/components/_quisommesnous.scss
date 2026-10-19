@@ -58,7 +58,7 @@
     }
 }
 
-@media (max-width: #{$ife-bp-nav - 0.02px}) {
+@include ife-below($ife-bp-nav) {
     .quisommesnous {
         min-height: 0;
         .ife-band__inner {
@@ -69,7 +69,7 @@
     }
 }
 
-@media (max-width: #{$ife-bp-sm - 0.02px}) {
+@include ife-below($ife-bp-sm) {
     .quisommesnous__excerpt {
         max-width: none;
     }

@@ -189,7 +189,7 @@
     }
 }
 
-@media (max-width: #{$ife-bp-nav - 0.02px}) {
+@include ife-below($ife-bp-nav) {
     .publications__item {
         grid-template-columns: 1fr;
         gap: var(--ife-spacer-3);
@@ -216,7 +216,7 @@
     }
 }
 
-@media (max-width: #{$ife-bp-sm - 0.02px}) {
+@include ife-below($ife-bp-sm) {
     .publications__sites {
         grid-template-columns: 1fr;
     }

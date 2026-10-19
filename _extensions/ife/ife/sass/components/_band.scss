@@ -78,7 +78,7 @@
     }
 }
 
-@media (max-width: #{$ife-bp-nav - 0.02px}) {
+@include ife-below($ife-bp-nav) {
     .ife-band:not(.ife-band--cover) {
         display: flex;
         flex-direction: column-reverse;

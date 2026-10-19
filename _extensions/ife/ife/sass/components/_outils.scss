@@ -45,7 +45,7 @@
     }
 }
 
-@media (max-width: #{$ife-bp-nav - 0.02px}) {
+@include ife-below($ife-bp-nav) {
     .outils .ife-band__inner {
         display: flex;
         flex-direction: column;
@@ -59,7 +59,7 @@
     }
 }
 
-@media (max-width: #{$ife-bp-sm - 0.02px}) {
+@include ife-below($ife-bp-sm) {
     .outils__card {
         padding: var(--ife-spacer-4) var(--ife-spacer-3);
     }

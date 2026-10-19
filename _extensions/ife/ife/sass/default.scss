@@ -74,6 +74,13 @@ $callout-color-tip: $ife-grey-light;
 
 /*-- scss:mixins --*/
 
+// Styles appliqués sous un breakpoint : `@include ife-below($ife-bp-nav) { ... }`.
+@mixin ife-below($bp) {
+    @media (max-width: #{$bp - 0.02px}) {
+        @content;
+    }
+}
+
 // Styles de texte du design system IFE, un par style Figma.
 // Les tailles lisent --ife-fs-*, qui changent sous $ife-bp-nav.
 // Grand titre de section, réservé aux blocs de la page d'accueil.

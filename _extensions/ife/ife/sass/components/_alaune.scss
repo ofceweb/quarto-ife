@@ -98,7 +98,7 @@
     }
 }
 
-@media (max-width: #{$ife-bp-nav - 0.02px}) {
+@include ife-below($ife-bp-nav) {
     .alaune__row--featured {
         grid-template-columns: 1fr 1fr;
         .alaune__item--lead {
@@ -110,7 +110,7 @@
     }
 }
 
-@media (max-width: #{$ife-bp-sm - 0.02px}) {
+@include ife-below($ife-bp-sm) {
     .alaune__row--featured,
     .alaune__row--compact {
         grid-template-columns: 1fr;

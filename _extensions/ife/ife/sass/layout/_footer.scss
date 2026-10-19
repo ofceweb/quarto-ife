@@ -32,7 +32,7 @@ body > footer.footer {
     }
 }
 
-@media (max-width: #{$ife-bp-nav - 0.02px}) {
+@include ife-below($ife-bp-nav) {
     .ife-footer .ife-chrome__inner {
         flex-direction: column;
         align-items: flex-start;

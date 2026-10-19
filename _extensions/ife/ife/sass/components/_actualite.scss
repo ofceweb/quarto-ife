@@ -76,13 +76,13 @@
     }
 }
 
-@media (max-width: #{$ife-bp-nav - 0.02px}) {
+@include ife-below($ife-bp-nav) {
     .actualite__cards {
         grid-template-columns: 1fr;
     }
 }
 
-@media (max-width: #{$ife-bp-sm - 0.02px}) {
+@include ife-below($ife-bp-sm) {
     .actualite__row {
         grid-template-columns: 1fr;
     }

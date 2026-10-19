@@ -46,7 +46,7 @@
     --ife-ecograph-height: #{$ife-ecograph-height};
 }
 
-@media (max-width: #{$ife-bp-nav - 0.02px}) {
+@include ife-below($ife-bp-nav) {
     :root {
         --ife-band-gradient: #{$ife-band-gradient-mobile};
         --ife-fs-sm: 0.75rem;

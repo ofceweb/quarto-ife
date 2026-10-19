@@ -77,7 +77,7 @@
     }
 }
 
-@media (max-width: #{$ife-bp-sm - 0.02px}) {
+@include ife-below($ife-bp-sm) {
     .ife-btn {
         max-width: 100%;
         white-space: normal;

@@ -90,7 +90,7 @@
     }
 }
 
-@media (max-width: #{$ife-bp-sm - 0.02px}) {
+@include ife-below($ife-bp-sm) {
     .ife-meta {
         gap: var(--ife-spacer-2);
     }
