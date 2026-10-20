@@ -20,18 +20,21 @@ local components = require(
 
 local FEATURED_COUNT = 3
 
-local function title_html(title, url)
+local function title_html(title, url, lang)
     local text = utils.html_escape(title)
     if text == "" then return "" end
     local href = utils.to_str(url)
+    local lang_attr = utils.lang_attr(lang)
     if href == "" then
-        return string.format('<h3 class="alaune__title">%s</h3>', text)
+        return string.format('<h3 class="alaune__title"%s>%s</h3>', lang_attr, text)
     end
     return string.format(
-        '<h3 class="alaune__title"><a href="%s"%s>%s</a></h3>',
+        '<h3 class="alaune__title"%s><a href="%s"%s>%s%s</a></h3>',
+        lang_attr,
         utils.html_escape(href),
         utils.link_attrs(href),
-        text
+        text,
+        utils.new_window_hint(href)
     )
 end
 
@@ -132,7 +135,7 @@ local function create_item(item, opts)
             "alaune__date",
             utils.html_escape(utils.format_date_fr(utils.raw_pick(item, "date", "published")))
         ),
-        title_html(title, url),
+        title_html(title, url, utils.pick(item, "lang")),
         excerpt_html,
         components.authors_html(
             utils.pick(item, "authors", "author"),

@@ -245,13 +245,15 @@ end
 --- @param tag string
 --- @param class_name string|nil
 --- @param content string|nil Déjà échappé si besoin
+--- @param attrs string|nil Attributs HTML déjà formatés (ex. ` lang="en"`)
 --- @return string
-function utils.el(tag, class_name, content)
+function utils.el(tag, class_name, content, attrs)
     if not content or content == "" then return "" end
+    attrs = attrs or ""
     if class_name and class_name ~= "" then
-        return string.format('<%s class="%s">%s</%s>', tag, class_name, content, tag)
+        return string.format('<%s class="%s"%s>%s</%s>', tag, class_name, attrs, content, tag)
     end
-    return string.format("<%s>%s</%s>", tag, content, tag)
+    return string.format("<%s%s>%s</%s>", tag, attrs, content, tag)
 end
 
 local page_has_h1 = false
@@ -281,12 +283,32 @@ function utils.url_encode(text)
     end))
 end
 
+--- Attribut `lang="en"` si le champ langue vaut EN, sinon chaîne vide
+--- @param lang string|nil
+--- @return string
+function utils.lang_attr(lang)
+    if utils.to_str(lang):upper() == "EN" then
+        return ' lang="en"'
+    end
+    return ""
+end
+
 --- Attributs `target`/`rel` pour une URL http(s)
 --- @param url string
 --- @return string
 function utils.link_attrs(url)
     if utils.to_str(url):match("^https?://") then
         return ' target="_blank" rel="noopener noreferrer"'
+    end
+    return ""
+end
+
+--- Mention masquée « nouvelle fenêtre » pour une URL http(s)
+--- @param url string
+--- @return string
+function utils.new_window_hint(url)
+    if utils.to_str(url):match("^https?://") then
+        return '<span class="visually-hidden"> (nouvelle fenêtre)</span>'
     end
     return ""
 end
@@ -313,7 +335,7 @@ end
 --- @return string
 function utils.item_close(url)
     if utils.to_str(url) == "" then return "</div>" end
-    return "</a>"
+    return utils.new_window_hint(url) .. "</a>"
 end
 
 --- Bloc image BEM, omis si `src` est vide

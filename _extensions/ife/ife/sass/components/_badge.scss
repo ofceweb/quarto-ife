@@ -22,6 +22,10 @@
     @include ife-tag;
     text-transform: uppercase;
     white-space: nowrap;
+    abbr[title] {
+        text-decoration: none;
+        cursor: inherit;
+    }
 }
 
 .ife-pdf {

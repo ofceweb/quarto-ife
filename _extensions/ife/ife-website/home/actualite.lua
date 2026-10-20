@@ -78,10 +78,11 @@ local function title_html(title, url)
         return string.format('<h3 class="actualite__title">%s</h3>', text)
     end
     return string.format(
-        '<h3 class="actualite__title"><a href="%s"%s>%s</a></h3>',
+        '<h3 class="actualite__title"><a href="%s"%s>%s%s</a></h3>',
         utils.html_escape(href),
         utils.link_attrs(href),
-        text
+        text,
+        utils.new_window_hint(href)
     )
 end
 

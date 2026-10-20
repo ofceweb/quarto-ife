@@ -22,6 +22,11 @@ local SOURCE_LABELS = {
     cepii = "IFE|CEPII",
 }
 
+local LANG_TITLES = {
+    EN = "Publication en anglais",
+    FR = "Publication en français",
+}
+
 local REGION_ICONS = {
     fr = "/www/flags/fr.svg",
     us = "/www/flags/us.svg",
@@ -186,12 +191,28 @@ function components.badge_type(label)
 end
 
 --- Chip de langue (`FR`, `EN`). Omis si vide.
+--- L'`abbr` porte l'intitulé complet en français.
+--- `lang="en"` est sur le code `EN`, pas sur le titre.
 --- @param lang string|nil
 --- @return string
 function components.lang_chip(lang)
-    local text = utils.html_escape(utils.to_str(lang))
-    if text == "" then return "" end
-    return string.format('<span class="ife-lang-chip">%s</span>', text)
+    local raw = utils.to_str(lang)
+    if raw == "" then return "" end
+    local text = utils.html_escape(raw)
+    local title = LANG_TITLES[raw:upper()]
+    if not title then
+        return string.format('<span class="ife-lang-chip">%s</span>', text)
+    end
+    local code = text
+    local lang_attr = utils.lang_attr(raw)
+    if lang_attr ~= "" then
+        code = string.format("<span%s>%s</span>", lang_attr, text)
+    end
+    return string.format(
+        '<span class="ife-lang-chip"><abbr title="%s">%s</abbr></span>',
+        utils.html_escape(title),
+        code
+    )
 end
 
 --- Marqueur PDF non cliquable. Affiché quand l'URL pointe un fichier .pdf,
@@ -290,11 +311,12 @@ function components.cta_button(label, url, variant, icon)
         return string.format('<span class="%s">%s</span>', class_name, inner)
     end
     return string.format(
-        '<a class="%s" href="%s"%s>%s</a>',
+        '<a class="%s" href="%s"%s>%s%s</a>',
         class_name,
         utils.html_escape(href),
         utils.link_attrs(href),
-        inner
+        inner,
+        utils.new_window_hint(href)
     )
 end
 
@@ -353,10 +375,11 @@ function components.meta_line(type_label, date, location)
     if loc ~= "" then
         local href = "https://www.google.com/maps/search/?api=1&query=" .. utils.url_encode(loc)
         table.insert(parts, string.format(
-            '<a class="ife-meta__location" href="%s"%s><img src="/www/localisation_icon.svg" alt="" aria-hidden="true" />%s</a>',
+            '<a class="ife-meta__location" href="%s"%s><img src="/www/localisation_icon.svg" alt="" aria-hidden="true" /><span class="visually-hidden">Voir sur Google Maps : </span>%s%s</a>',
             utils.html_escape(href),
             utils.link_attrs(href),
-            utils.html_escape(loc)
+            utils.html_escape(loc),
+            utils.new_window_hint(href)
         ))
     end
 
