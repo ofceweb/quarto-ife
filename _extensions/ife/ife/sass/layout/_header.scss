@@ -24,10 +24,6 @@
         &:focus {
             color: var(--ife-primary);
         }
-        &:focus-visible {
-            outline: 2px solid var(--ife-primary);
-            outline-offset: 2px;
-        }
     }
     &__inner {
         display: flex;
@@ -117,10 +113,6 @@
     i {
         font-size: calc(var(--ife-icon-size) * 1.5);
         line-height: 1;
-    }
-    &:focus-visible {
-        outline: 2px solid var(--ife-primary);
-        outline-offset: 2px;
     }
 }
 

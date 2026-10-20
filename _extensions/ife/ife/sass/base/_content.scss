@@ -3,6 +3,14 @@ a {
     text-decoration: none;
 }
 
+// Focus à deux couleurs (WCAG C40) : anneau blanc collé à l'élément, anneau anthracite autour.
+// Une des deux couleurs contraste avec n'importe quel fond. Le forced-colors garde l'outline.
+:focus-visible {
+    outline: 2px solid var(--ife-primary);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px var(--ife-blanc);
+}
+
 // Pas d'icône de lien externe Quarto sur les boutons ni dans le header et le footer.
 .ife-btn.external::after,
 .ife-chrome a.external::after {

@@ -15,10 +15,6 @@
         color: var(--ife-blanc);
         text-decoration: none;
     }
-    &:focus-visible {
-        outline: 2px solid var(--ife-primary);
-        outline-offset: 2px;
-    }
     &:not(:focus) {
         width: 1px;
         height: 1px;
