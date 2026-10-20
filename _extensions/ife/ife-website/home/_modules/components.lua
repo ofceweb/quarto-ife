@@ -289,14 +289,25 @@ end
 --- Bouton d'action. Variantes : `solid`, `outline`, `outline-dark`.
 --- `icon` : `arrow` (Bootstrap), `envelope` (`mail_icon.svg`), ou une classe Bootstrap Icons.
 --- Omis si le libellé est vide. Sans URL, rend un `span`.
+--- `hidden_prefix` : texte masqué lu avant le libellé (ex. « Écrire à »).
 --- @param label string|nil
 --- @param url string|nil
 --- @param variant string|nil
 --- @param icon string|nil
+--- @param hidden_prefix string|nil
 --- @return string
-function components.cta_button(label, url, variant, icon)
+function components.cta_button(label, url, variant, icon, hidden_prefix)
     local text = utils.html_escape(utils.to_str(label))
     if text == "" then return "" end
+
+    local prefix = utils.to_str(hidden_prefix)
+    if prefix ~= "" then
+        text = string.format(
+            '<span class="visually-hidden">%s</span>%s',
+            utils.html_escape(prefix),
+            text
+        )
+    end
 
     local variant_key = VARIANTS[utils.to_str(variant):lower()] or "solid"
     local icon_html = cta_icon(icon)

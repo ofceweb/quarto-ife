@@ -73,7 +73,8 @@ local function create_banner(item, level)
             email_label(email),
             mailto_href(email),
             "outline",
-            "envelope"
+            "envelope",
+            "Écrire à "
         )
     )
 end

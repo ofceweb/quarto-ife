@@ -389,7 +389,7 @@ function utils.section_header_html(title, href, more_url, more_label)
             %s
             <a href="%s" class="section-header-link">
                 <span>%s</span>
-                <span class="section-header-link-arrow">→</span>
+                <span class="section-header-link-arrow" aria-hidden="true">→</span>
             </a>
         </div>
     ]], header, utils.html_escape(more_url), more_label)
