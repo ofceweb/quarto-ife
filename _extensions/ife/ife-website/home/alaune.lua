@@ -81,11 +81,7 @@ local function create_item(item, opts)
             utils.rich_inline(utils.pick(item, "excerpt", "subtitle", "description")),
             utils.lang_attr(utils.pick(item, "lang"))
         )
-        chart = utils.image_html(
-            image,
-            utils.pick(item, "image_alt"),
-            "alaune__chart"
-        )
+        chart = utils.image_html(image, "", "alaune__chart", true)
     end
 
     local source_html = components.source_badge(

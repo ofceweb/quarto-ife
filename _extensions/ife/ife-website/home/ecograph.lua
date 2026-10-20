@@ -44,11 +44,7 @@ local function create_banner(item, level)
             </div>
         </section>
     ]],
-        utils.image_html(
-            image,
-            utils.pick(item, "image_alt"),
-            "ife-band__media"
-        ),
+        utils.image_html(image, "", "ife-band__media", true),
         utils.el("h" .. level, "ecograph__title", utils.html_escape(title)),
         utils.el(
             "p",
