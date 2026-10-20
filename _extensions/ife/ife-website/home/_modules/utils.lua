@@ -338,19 +338,32 @@ function utils.item_close(url)
     return utils.new_window_hint(url) .. "</a>"
 end
 
---- Bloc image BEM, omis si `src` est vide
+--- Bloc image BEM, omis si `src` est vide.
+--- Si `decorative` est vrai, `alt` est une chaîne vide (RGAA 1.1 / 1.2).
+--- Sinon `alt` est obligatoire : son absence interrompt le rendu.
 --- @param src string|nil
 --- @param alt string|nil
 --- @param wrapper_class string
+--- @param decorative boolean|nil
 --- @return string
-function utils.image_html(src, alt, wrapper_class)
+function utils.image_html(src, alt, wrapper_class, decorative)
     local href = utils.html_escape(utils.to_str(src))
     if href == "" then return "" end
+    local alt_text = ""
+    if not decorative then
+        alt_text = utils.html_escape(utils.to_str(alt))
+        if alt_text == "" then
+            error(string.format(
+                "image_alt manquant pour l'image informative « %s ». Renseigne le champ image_alt dans le JSON.",
+                utils.to_str(src)
+            ))
+        end
+    end
     return string.format(
         '<div class="%s"><img src="%s" alt="%s" /></div>',
         wrapper_class,
         href,
-        utils.html_escape(utils.to_str(alt))
+        alt_text
     )
 end
 

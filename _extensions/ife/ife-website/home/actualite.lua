@@ -98,8 +98,6 @@ local function create_card(item)
     local url = utils.pick(item, "url")
     local title = utils.pick(item, "title")
     local image = utils.pick(item, "image", "img", "cover")
-    local alt = utils.pick(item, "image_alt", "alt")
-    if alt == "" then alt = title end
 
     return string.format([[
         <article class="actualite__card">
@@ -110,7 +108,7 @@ local function create_card(item)
     ]],
         title_html(title, url),
         meta_html(item),
-        utils.image_html(image, alt, "actualite__image")
+        utils.image_html(image, "", "actualite__image", true)
     )
 end
 

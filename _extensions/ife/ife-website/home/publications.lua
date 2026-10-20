@@ -115,8 +115,6 @@ end
 local function create_card(item)
     local title = utils.pick(item, "title")
     local image = utils.pick(item, "image", "img", "cover")
-    local alt = utils.pick(item, "image_alt", "alt")
-    if alt == "" then alt = title end
     local cta = utils.pick(item, "cta_label", "cta")
     if cta == "" then cta = "Visiter le site" end
 
@@ -131,7 +129,7 @@ local function create_card(item)
         </article>
     ]],
         card_class(item),
-        utils.image_html(image, alt, "publications__site-media"),
+        utils.image_html(image, "", "publications__site-media", true),
         utils.el("h3", "publications__site-title", utils.html_escape(title)),
         utils.el(
             "p",

@@ -28,8 +28,6 @@ end
 local function create_banner(item, level)
     local title = heading_text(item)
     local image = utils.pick(item, "image", "img", "cover")
-    local alt = utils.pick(item, "image_alt", "alt")
-    if alt == "" then alt = title end
 
     return string.format([[
         <section class="ife-band ife-band--cover ecograph">
@@ -46,7 +44,11 @@ local function create_banner(item, level)
             </div>
         </section>
     ]],
-        utils.image_html(image, alt, "ife-band__media"),
+        utils.image_html(
+            image,
+            utils.pick(item, "image_alt"),
+            "ife-band__media"
+        ),
         utils.el("h" .. level, "ecograph__title", utils.html_escape(title)),
         utils.el(
             "p",

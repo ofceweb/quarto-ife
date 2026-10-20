@@ -38,26 +38,6 @@ local function title_html(title, url, lang)
     )
 end
 
-local function chart_html(image, alt, url)
-    local src = utils.to_str(image)
-    if src == "" then return "" end
-    local img = string.format(
-        '<img src="%s" alt="%s" />',
-        utils.html_escape(src),
-        utils.html_escape(utils.to_str(alt))
-    )
-    local href = utils.to_str(url)
-    if href ~= "" then
-        img = string.format(
-            '<a href="%s"%s>%s</a>',
-            utils.html_escape(href),
-            utils.link_attrs(href),
-            img
-        )
-    end
-    return string.format('<div class="alaune__chart">%s</div>', img)
-end
-
 local function head_html(item)
     local parts = {
         components.badge_type(utils.pick(item, "type", "kicker")),
@@ -81,8 +61,6 @@ local function create_item(item, opts)
     local url = utils.pick(item, "url", 1)
     local title = utils.pick(item, "title", 3)
     local image = utils.pick(item, "image", "img", "cover", 2)
-    local alt = utils.pick(item, "image_alt", "alt")
-    if alt == "" then alt = title end
 
     local classes = { "alaune__item" }
     if featured then
@@ -100,9 +78,14 @@ local function create_item(item, opts)
         excerpt_html = utils.el(
             "p",
             "alaune__excerpt",
-            utils.rich_inline(utils.pick(item, "excerpt", "subtitle", "description"))
+            utils.rich_inline(utils.pick(item, "excerpt", "subtitle", "description")),
+            utils.lang_attr(utils.pick(item, "lang"))
         )
-        chart = chart_html(image, alt, url)
+        chart = utils.image_html(
+            image,
+            utils.pick(item, "image_alt"),
+            "alaune__chart"
+        )
     end
 
     local source_html = components.source_badge(

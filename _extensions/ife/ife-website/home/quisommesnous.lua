@@ -20,8 +20,6 @@ local components = require(
 local function create_banner(item, level)
     local title = utils.pick(item, "title")
     local image = utils.pick(item, "image", "img", "cover")
-    local alt = utils.pick(item, "image_alt", "alt")
-    if alt == "" then alt = title end
 
     return string.format([[
         <section class="ife-band ife-band--cover quisommesnous">
@@ -37,7 +35,7 @@ local function create_banner(item, level)
             </div>
         </section>
     ]],
-        utils.image_html(image, alt, "ife-band__media"),
+        utils.image_html(image, "", "ife-band__media", true),
         utils.el("h" .. level, "quisommesnous__title", utils.html_escape(title)),
         utils.el(
             "p",
