@@ -88,10 +88,10 @@
             text-underline-offset: 0.2em;
         }
     }
-    &__other[aria-disabled="true"] {
-        cursor: default;
-        opacity: 0.85;
-        pointer-events: none;
+    // EN pas encore disponible : grisé. À retirer à la mise en ligne de la version anglaise.
+    // 0.65 garde ~4,8:1 sur blanc (RGAA 3.2) ; ne pas descendre sous 0.65.
+    &__other {
+        opacity: 0.65;
     }
 }
 
