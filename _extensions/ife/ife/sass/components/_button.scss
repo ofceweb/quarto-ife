@@ -27,11 +27,16 @@
         &:visited {
             color: var(--ife-primary);
         }
-        &:hover,
-        &:focus {
+        &:hover {
             background-color: var(--ife-grey-light);
             border-color: var(--ife-grey-light);
             color: var(--ife-primary);
+        }
+        // Utilisé sur fond sombre uniquement : anneau blanc détaché, comme --outline.
+        &:focus-visible {
+            outline: 2px solid var(--ife-blanc);
+            outline-offset: 4px;
+            box-shadow: none;
         }
     }
     &--outline {
@@ -42,13 +47,18 @@
         &:visited {
             color: var(--ife-blanc);
         }
-        &:hover,
-        &:focus {
+        &:hover {
             background-color: var(--ife-blanc);
             color: var(--ife-primary);
             img {
                 filter: brightness(0);
             }
+        }
+        // Focus clavier distinct du survol : anneau blanc détaché du bouton (RGAA 10.7).
+        &:focus-visible {
+            outline: 2px solid var(--ife-blanc);
+            outline-offset: 4px;
+            box-shadow: none;
         }
     }
     &--outline-dark {
@@ -59,11 +69,16 @@
         &:visited {
             color: var(--ife-primary);
         }
-        &:hover,
-        &:focus {
+        &:hover {
             background-color: var(--ife-primary);
             border-color: var(--ife-primary);
             color: var(--ife-blanc);
+        }
+        // Même principe sur fond clair : anneau anthracite détaché.
+        &:focus-visible {
+            outline: 2px solid var(--ife-primary);
+            outline-offset: 4px;
+            box-shadow: none;
         }
     }
 }
