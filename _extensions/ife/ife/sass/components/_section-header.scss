@@ -47,3 +47,14 @@ a.section-header:hover {
         }
     }
 }
+
+@media (prefers-reduced-motion: reduce) {
+    .section-header-link,
+    .section-header-link-arrow {
+        transition: none;
+    }
+    .section-header-link:hover .section-header-link-arrow,
+    .section-header-link:focus-visible .section-header-link-arrow {
+        transform: none;
+    }
+}

@@ -129,14 +129,23 @@ $endfor$
   var toggle = document.querySelector(".ife-nav-toggle");
   if (!header || !toggle) return;
   var icon = toggle.querySelector("i");
-  toggle.addEventListener("click", function () {
-    var open = header.classList.toggle("is-open");
+  function setOpen(open) {
+    header.classList.toggle("is-open", open);
     toggle.setAttribute("aria-expanded", open ? "true" : "false");
     toggle.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
     if (icon) {
       icon.classList.toggle("bi-list", !open);
       icon.classList.toggle("bi-x-lg", open);
     }
+  }
+  toggle.addEventListener("click", function () {
+    setOpen(!header.classList.contains("is-open"));
+  });
+  // Échap ferme le menu et rend le focus au bouton.
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape" || !header.classList.contains("is-open")) return;
+    setOpen(false);
+    toggle.focus();
   });
 })();
 </script>
