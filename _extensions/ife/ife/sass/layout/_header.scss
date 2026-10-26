@@ -115,14 +115,10 @@
     }
 }
 
+// Le header est injecté dans main (grille Quarto) : on l'étale sur toute la
+// largeur via la grille, comme .column-screen, sans 100vw qui inclut la scrollbar.
 main > .ife-header {
-    position: relative;
-    left: 50%;
-    right: 50%;
-    width: 100vw;
-    max-width: 100vw;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    grid-column: screen-start / screen-end;
 }
 
 @include ife-below($ife-bp-nav) {
