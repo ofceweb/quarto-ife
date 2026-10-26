@@ -70,9 +70,15 @@
   }
 
   document.addEventListener("click", function (event) {
-    var button = event.target.closest(".cc-nb-changep, #open_preferences_center");
+    var button = event.target.closest(".cc-nb-changep, #open_preferences_center, .ife-cookie-prefs");
     if (button) opener = button;
   }, true); // capture : la bibliothèque arrête la propagation du clic
+
+  // Bouton de la page cookies. Une classe et non l'id #open_preferences_center,
+  // déjà porté par le lien masqué du pied Quarto (RGAA 8.2).
+  document.addEventListener("click", function (event) {
+    if (event.target.closest(".ife-cookie-prefs")) cookieconsent.openPreferencesCenter();
+  });
 
   document.addEventListener("focusout", function (event) {
     if (event.relatedTarget) return;
