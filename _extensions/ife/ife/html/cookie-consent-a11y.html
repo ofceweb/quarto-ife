@@ -1,0 +1,55 @@
+<!-- Bandeau cookies (TermsFeed, injecté par Quarto) : corrections d'accessibilité
+     que la bibliothèque ne permet pas de configurer. Le bandeau et le centre de
+     préférences sont créés en JavaScript, d'où l'observation du DOM. -->
+<script>
+(function () {
+  function fix() {
+    // Le bandeau ne bloque pas la page : ce n'est pas une modale (RGAA 7.1).
+    var banner = document.querySelector(".termsfeed-com---nb");
+    if (banner) banner.removeAttribute("aria-modal");
+
+    var pc = document.getElementById("termsfeed-com---preferences-center");
+    if (!pc) return;
+
+    // Le centre de préférences, lui, couvre la page et capture le focus :
+    // le reste de la page doit sortir de l'arbre d'accessibilité (RGAA 7.1).
+    pc.setAttribute("aria-modal", "true");
+
+    // Bouton « ✕ » sans intitulé (RGAA 7.1, 11.9).
+    var close = pc.querySelector(".cc-pc-head-close");
+    if (close) close.setAttribute("aria-label", "Fermer");
+
+    // Sélecteur de langue en anglais et sans étiquette (RGAA 8.7, 11.1).
+    // Le site n'existe qu'en français : on le retire.
+    var lang = pc.querySelector(".cc-pc-head-lang-select");
+    if (lang) lang.hidden = true;
+
+    // Les cases étaient nommées « Actif » / « Inactif » : on les nomme
+    // par leur catégorie, l'état est déjà porté par la case (RGAA 11.1, 11.2).
+    pc.querySelectorAll("input[cookie_consent_toggler]").forEach(function (input) {
+      if (document.getElementById("title_" + input.id)) {
+        input.setAttribute("aria-labelledby", "title_" + input.id);
+      }
+    });
+
+    // Mention de la bibliothèque en anglais (RGAA 8.7).
+    var byline = pc.querySelector(".cc-cp-foot-byline");
+    if (byline) byline.setAttribute("lang", "en");
+
+    // Liens ouverts dans une nouvelle fenêtre (RGAA 13.2).
+    pc.querySelectorAll('a[target="_blank"]').forEach(function (a) {
+      if (a.querySelector(".visually-hidden")) return;
+      var hint = document.createElement("span");
+      hint.className = "visually-hidden";
+      hint.setAttribute("lang", "fr");
+      hint.textContent = " (nouvelle fenêtre)";
+      a.appendChild(hint);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    fix();
+    new MutationObserver(fix).observe(document.body, { childList: true });
+  });
+})();
+</script>

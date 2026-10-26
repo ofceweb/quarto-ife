@@ -70,3 +70,4 @@ contributes:
         - html/title-block.html
       include-in-header:
         - html/analytics.html
+        - html/cookie-consent-a11y.html
