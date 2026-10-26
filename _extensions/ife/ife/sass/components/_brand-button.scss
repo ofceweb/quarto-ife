@@ -39,6 +39,10 @@
         color: var(--ife-blanc);
         border-color: var(--ife-primary);
     }
+    &:focus-visible {
+        outline: 2px solid var(--ife-primary);
+        outline-offset: 2px;
+    }
     &--ofce {
         --ife-brand-color: var(--ife-ofce);
     }

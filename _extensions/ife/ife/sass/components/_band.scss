@@ -20,6 +20,9 @@
         &:focus {
             color: inherit;
         }
+        &:focus-visible {
+            outline-color: var(--ife-blanc);
+        }
     }
     // Le titre est un h1 ou un h2 selon la page (voir `utils.band_heading_level`).
     :is(h1, h2, h3, h4, h5, h6) {

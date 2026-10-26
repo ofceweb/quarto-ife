@@ -3,6 +3,13 @@ a {
     text-decoration: none;
 }
 
+// Lien dans le texte : souligné, la couleur seule ne le distingue pas (RGAA 10.6).
+main p a,
+main li a {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
 // Focus à deux couleurs (WCAG C40) : anneau blanc collé à l'élément, anneau anthracite autour.
 // Une des deux couleurs contraste avec n'importe quel fond. Le forced-colors garde l'outline.
 :focus-visible {
