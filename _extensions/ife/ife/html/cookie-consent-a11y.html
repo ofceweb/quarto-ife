@@ -36,6 +36,17 @@
       }
     });
 
+    // Sélecteur de langue sans étiquette (RGAA 11.1), options en anglais
+    // (RGAA 8.7). lang sur les options et non sur le select, pour que
+    // l'étiquette reste lue en français.
+    var langSelect = pc.querySelector(".cc-pc-head-lang-select");
+    if (langSelect) {
+      langSelect.setAttribute("aria-label", "Langue du centre de préférences");
+      langSelect.querySelectorAll("option").forEach(function (option) {
+        option.setAttribute("lang", "en");
+      });
+    }
+
     // Mention de la bibliothèque en anglais (RGAA 8.7).
     var byline = pc.querySelector(".cc-cp-foot-byline");
     if (byline) byline.setAttribute("lang", "en");
