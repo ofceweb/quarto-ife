@@ -32,7 +32,7 @@ $ife-text-color-light: rgba($ife-blanc, 0.85);
 $ife-voile: rgba($ife-primary, 0.72);
 
 // Text-shadow : halo sombre pour lisibilité du texte blanc sur photo.
-$ife-text-shadow-dark: 0 0 20px $ife-primary, 0 0 10px $ife-primary, 0 0 5px $ife-primary;
+$ife-text-shadow-dark: 0 0 20px $ife-primary, 0 0 10px $ife-primary, 0 0 5px $ife-primary, 0 0 5px $ife-primary;
 
 // Dégradé bandeau : primary opaque → transparent, de gauche à droite.
 $ife-band-gradient: linear-gradient(90deg, $ife-bg-primary 50%, rgba($ife-bg-primary, 0) 100%);
