@@ -32,6 +32,8 @@
         background-color: var(--ife-blanc);
         border: 1px solid var(--ife-grey-light);
         color: inherit;
+        // Bordure de la couleur du fond de section : inutile de redessiner le trait diagonal.
+        @include ife-cut-corner(sm);
         .ife-keywords {
             margin-top: auto;
             padding-top: var(--ife-spacer-4);

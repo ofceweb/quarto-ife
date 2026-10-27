@@ -111,6 +111,7 @@
         background-color: var(--ife-site-color);
         color: var(--ife-blanc);
         text-align: center;
+        @include ife-cut-corner(sm);
         .ife-btn {
             position: relative;
             z-index: 1;

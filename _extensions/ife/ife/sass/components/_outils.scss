@@ -26,6 +26,7 @@
         border: 1px solid var(--ife-blanc);
         background-color: transparent;
         text-align: center;
+        @include ife-cut-corner(sm, var(--ife-blanc));
     }
     &__title {
         margin: 0;

@@ -42,6 +42,11 @@
     --ife-page-pad: var(--ife-spacer-5);
     --ife-gutter: var(--ife-spacer-4);
     --ife-header-height: #{$ife-header-height};
+    // Coin coupé en bas à droite (mixin ife-cut-corner) : même angle, deux tailles.
+    --ife-cut-sm-x: 1.9375rem;
+    --ife-cut-sm-y: 1rem;
+    --ife-cut-lg-x: 2.875rem;
+    --ife-cut-lg-y: 1.5rem;
 }
 
 @include ife-below($ife-bp-nav) {

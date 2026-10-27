@@ -91,6 +91,52 @@ $callout-color-tip: $ife-grey-light;
     }
 }
 
+// Coin coupé en diagonale en bas à droite : `@include ife-cut-corner(sm|lg, $border-color)`.
+// Biseau natif (corner-shape) quand il est supporté : la bordure et le focus suivent la diagonale.
+// Sinon clip-path, qui coupe aussi la bordure : si $border-color est fourni (bordure de 1px),
+// ::before redessine le trait diagonal (il pose alors position: relative sur l'élément).
+@mixin ife-cut-corner($size: sm, $border-color: null) {
+    --ife-cut-x: var(--ife-cut-#{$size}-x);
+    --ife-cut-y: var(--ife-cut-#{$size}-y);
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% calc(100% - var(--ife-cut-y)),
+        calc(100% - var(--ife-cut-x)) 100%,
+        0 100%
+    );
+    @if $border-color {
+        position: relative;
+        &::before {
+            content: "";
+            position: absolute;
+            // -1px : recouvre la bordure de 1px, comme le clip-path calculé sur la border-box.
+            right: -1px;
+            bottom: -1px;
+            width: var(--ife-cut-x);
+            height: var(--ife-cut-y);
+            background: linear-gradient(
+                to top left,
+                transparent 50%,
+                #{$border-color} 50%,
+                #{$border-color} calc(50% + 1px),
+                transparent calc(50% + 1px)
+            );
+            pointer-events: none;
+        }
+    }
+    @supports (corner-shape: bevel) {
+        clip-path: none;
+        border-bottom-right-radius: var(--ife-cut-x) var(--ife-cut-y);
+        corner-shape: bevel;
+        @if $border-color {
+            &::before {
+                content: none;
+            }
+        }
+    }
+}
+
 // Styles de texte du design system IFE, un par style Figma.
 // Les tailles lisent --ife-fs-*, qui changent sous $ife-bp-nav.
 // Grand titre de section, réservé aux blocs de la page d'accueil.
