@@ -23,6 +23,7 @@ contributes:
       navbar: false
 
   shortcodes:
+    - home/bandeauinformatif.lua
     - home/quisommesnous.lua
     - home/alaune.lua
     - home/ecograph.lua
