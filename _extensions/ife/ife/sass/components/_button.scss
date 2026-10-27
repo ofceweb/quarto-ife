@@ -1,4 +1,4 @@
-// Boutons d'action. Trois variantes : solid, outline, outline-dark.
+// Boutons d'action. Quatre variantes : solid, solid-dark, outline, outline-dark.
 // Contrat de classes pour `components.cta_button()` (`_modules/components.lua`).
 .ife-btn {
     display: inline-flex;
@@ -19,17 +19,14 @@
     &:focus {
         text-decoration: none;
     }
-    &--solid {
+    // --solid-dark : `button-special` du design system, blanc qui s'inverse en anthracite au survol.
+    &--solid,
+    &--solid-dark {
         background-color: var(--ife-blanc);
         border-color: var(--ife-blanc);
         color: var(--ife-primary);
         &:link,
         &:visited {
-            color: var(--ife-primary);
-        }
-        &:hover {
-            background-color: var(--ife-grey-light);
-            border-color: var(--ife-grey-light);
             color: var(--ife-primary);
         }
         // Utilisé sur fond sombre uniquement : anneau blanc détaché, comme --outline.
@@ -38,6 +35,16 @@
             outline-offset: 4px;
             box-shadow: none;
         }
+    }
+    &--solid:hover {
+        background-color: var(--ife-grey-light);
+        border-color: var(--ife-grey-light);
+        color: var(--ife-primary);
+    }
+    &--solid-dark:hover {
+        background-color: var(--ife-primary-opacity-85);
+        border-color: var(--ife-blanc);
+        color: var(--ife-blanc);
     }
     &--outline {
         background-color: transparent;

@@ -39,6 +39,7 @@ local VARIANTS = {
     solid = "solid",
     fill = "solid",
     primary = "solid",
+    ["solid-dark"] = "solid-dark",
     outline = "outline",
     ghost = "outline",
     light = "outline",
@@ -286,7 +287,7 @@ function components.keywords_row(keywords)
     )
 end
 
---- Bouton d'action. Variantes : `solid`, `outline`, `outline-dark`.
+--- Bouton d'action. Variantes : `solid`, `solid-dark`, `outline`, `outline-dark`.
 --- `icon` : `arrow` (Bootstrap), `envelope` (`mail_icon.svg`), ou une classe Bootstrap Icons.
 --- Omis si le libellé est vide. Sans URL, rend un `span`.
 --- `hidden_prefix` : texte masqué lu avant le libellé (ex. « Écrire à »).

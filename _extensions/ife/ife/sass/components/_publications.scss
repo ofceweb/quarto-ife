@@ -115,11 +115,6 @@
             position: relative;
             z-index: 1;
             align-self: center;
-            &:hover {
-                border-color: var(--ife-blanc);
-                background-color: var(--ife-primary-opacity-85);
-                color: var(--ife-blanc);
-            }
         }
         &--ofce {
             --ife-site-color: var(--ife-ofce);
