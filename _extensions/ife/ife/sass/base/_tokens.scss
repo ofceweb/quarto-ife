@@ -9,7 +9,7 @@
     --ife-text-color-light: #{$ife-text-color-light};
     --ife-voile: #{$ife-voile};
     --ife-band-gradient: #{$ife-band-gradient};
-    --ife-qsn-gradient: #{$ife-qsn-gradient};
+    --ife-special-gradient: #{$ife-special-gradient};
     --ife-text-shadow-dark: #{$ife-text-shadow-dark};
     --ife-font-title: #{$ife-font-title};
     --ife-font-body: #{$ife-font-body};
@@ -42,8 +42,6 @@
     --ife-page-pad: var(--ife-spacer-5);
     --ife-gutter: var(--ife-spacer-4);
     --ife-header-height: #{$ife-header-height};
-    --ife-band-height: #{$ife-band-height};
-    --ife-ecograph-height: #{$ife-ecograph-height};
 }
 
 @include ife-below($ife-bp-nav) {

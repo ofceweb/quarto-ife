@@ -291,13 +291,15 @@ end
 --- `icon` : `arrow` (Bootstrap), `envelope` (`mail_icon.svg`), ou une classe Bootstrap Icons.
 --- Omis si le libellé est vide. Sans URL, rend un `span`.
 --- `hidden_prefix` : texte masqué lu avant le libellé (ex. « Écrire à »).
+--- `hidden_suffix` : texte masqué lu après le libellé (ex. « sur Macroéconomie »).
 --- @param label string|nil
 --- @param url string|nil
 --- @param variant string|nil
 --- @param icon string|nil
 --- @param hidden_prefix string|nil
+--- @param hidden_suffix string|nil
 --- @return string
-function components.cta_button(label, url, variant, icon, hidden_prefix)
+function components.cta_button(label, url, variant, icon, hidden_prefix, hidden_suffix)
     local text = utils.html_escape(utils.to_str(label))
     if text == "" then return "" end
 
@@ -307,6 +309,14 @@ function components.cta_button(label, url, variant, icon, hidden_prefix)
             '<span class="visually-hidden">%s</span>%s',
             utils.html_escape(prefix),
             text
+        )
+    end
+    local suffix = utils.to_str(hidden_suffix)
+    if suffix ~= "" then
+        text = string.format(
+            '%s<span class="visually-hidden">%s</span>',
+            text,
+            utils.html_escape(suffix)
         )
     end
 
@@ -351,6 +361,72 @@ function components.authors_html(raw, class_name)
     end
     if #spans == 0 then return "" end
     return utils.el("p", class_name, table.concat(spans, ", "))
+end
+
+--- Bandeau de publication pleine largeur, image décorative en fond.
+--- Thème (titre du bandeau), date, titre de la publication, extrait, auteurs, bouton.
+--- Partagé par `bandeaupublication`, `bandeauspecial` et `ecograph`.
+--- Les classes suivent le bloc : `<block>__title`, `<block>__date`, …
+--- Le titre de la publication prend le niveau sous le thème. Bouton omis sans lien.
+--- @param block string Classe du bloc (`ecograph`, …)
+--- @param item table
+--- @param level number Niveau du thème (voir `utils.band_heading_level`)
+--- @param title string Texte du thème, non échappé
+--- @param cta_variant string Variante de `cta_button`
+--- @return string
+function components.publication_band(block, item, level, title, cta_variant)
+    local url = utils.pick(item, "cta_url", "url")
+    local cta = ""
+    if url ~= "" then
+        cta = components.cta_button(
+            utils.pick(item, "cta_label"),
+            url,
+            cta_variant,
+            "arrow"
+        )
+    end
+
+    return string.format([[
+        <section class="ife-band ife-band--cover %s">
+            %s
+            <div class="ife-band__inner">
+                <div class="ife-band__content">
+                    %s
+                    %s
+                    %s
+                    %s
+                    %s
+                    %s
+                </div>
+            </div>
+        </section>
+    ]],
+        block,
+        utils.image_html(
+            utils.pick(item, "image", "img", "cover"),
+            "",
+            "ife-band__media",
+            true
+        ),
+        utils.el("h" .. level, block .. "__title", utils.html_escape(title)),
+        utils.el(
+            "p",
+            block .. "__date",
+            utils.html_escape(utils.format_date_fr(utils.pick(item, "date")))
+        ),
+        utils.el(
+            "h" .. (level + 1),
+            block .. "__subtitle",
+            utils.rich_inline(utils.pick(item, "subtitle"))
+        ),
+        utils.el(
+            "p",
+            block .. "__excerpt",
+            utils.rich_inline(utils.pick(item, "excerpt"))
+        ),
+        components.authors_html(utils.pick(item, "author"), block .. "__author"),
+        cta
+    )
 end
 
 --- Titre de section, serif, sans filet. Omis si vide.

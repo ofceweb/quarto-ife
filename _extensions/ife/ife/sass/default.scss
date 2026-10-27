@@ -39,15 +39,13 @@ $ife-band-gradient: linear-gradient(90deg, $ife-bg-primary 50%, rgba($ife-bg-pri
 
 $ife-band-gradient-mobile: linear-gradient(90deg, $ife-bg-primary 50%, rgba($ife-bg-primary,0.4) 100%);
 
-// Dégradé « Qui sommes-nous » : cepii → primary → ofce, de gauche à droite.
-$ife-qsn-gradient: linear-gradient(90deg, $ife-cepii 10%, $ife-bg-primary 30%, $ife-bg-primary 35%, $ife-ofce 50%, rgba($ife-ofce, 0.35) 100%);
+// Dégradé « spécial » (bandeau spécial, bandeau informatif) : cepii → primary → ofce, de gauche à droite.
+$ife-special-gradient: linear-gradient(90deg, $ife-cepii 10%, $ife-bg-primary 30%, $ife-bg-primary 35%, $ife-ofce 50%, rgba($ife-ofce, 0.35) 100%);
 
 
 // Layout — desktop 1280px / mobile 393px (conteneur 361px, pad 16px)
 $ife-page-max: 1280px;
 $ife-header-height: 119px;
-$ife-band-height: 410px;
-$ife-ecograph-height: 460px;
 $ife-bp-nav: 900px;
 $ife-bp-sm: 600px;
 

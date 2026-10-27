@@ -138,7 +138,7 @@ end
 
 --- Lit la config d'un shortcode sous `extensions: ife-website: <key>:`
 --- @param meta table Métadonnées Pandoc du document
---- @param key string Clé du bloc (`quisommesnous`, `alaune`, ...)
+--- @param key string Clé du bloc (`bandeauspecial`, `alaune`, ...)
 --- @return table|nil `{ items, title, url, more_url, more_label,
 ---                     intro_title, intro_text, json, raw }`
 function utils.block_config(meta, key)

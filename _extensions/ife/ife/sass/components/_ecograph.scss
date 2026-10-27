@@ -1,66 +1,10 @@
 // L'Ecograph : bannière unique, image de fond, CTA contour.
 // Contrat de classes pour le shortcode `ecograph` (ife-website).
+// Contenu commun : `_band-publication.scss`.
 // Structure : `.ife-band.ife-band--cover.ecograph`.
 .ecograph {
-    box-sizing: border-box;
-    min-height: var(--ife-ecograph-height);
-    .ife-band__inner {
-        min-height: var(--ife-ecograph-height);
-        height: 100%;
-        padding: 0 var(--ife-page-pad);
-    }
-    .ife-band__media {
-        &::after {
-            background: var(--ife-band-gradient);
-        }
-        img {
-            object-position: center;
-        }
-    }
-    &__title {
-        margin: 0;
-        @include ife-h2-lg;
-        color: var(--ife-blanc);
-    }
-    &__date {
-        margin: var(--ife-spacer-4) 0 0;
-        @include ife-date;
-        color: var(--ife-text-color-light);
-    }
-    &__subtitle {
-        margin: var(--ife-spacer-3) 0 0;
-        @include ife-h3-lg;
-        color: var(--ife-blanc);
-    }
-    &__excerpt {
-        margin: var(--ife-spacer-3) 0 0;
-        @include ife-text-base;
-        color: var(--ife-blanc);
-    }
-    &__author {
-        margin: var(--ife-spacer-3) 0 0;
-        @include ife-author;
-        color: var(--ife-blanc);
-    }
-    &__title,
-    &__date,
-    &__subtitle,
-    &__excerpt,
-    &__author {
-        text-shadow: var(--ife-text-shadow-dark);
-    }
-    .ife-btn {
-        margin-top: var(--ife-spacer-4);
-    }
-}
-
-@include ife-below($ife-bp-nav) {
-    .ecograph {
-        min-height: 0;
-        .ife-band__inner {
-            min-height: 0;
-            height: auto;
-            padding-block: var(--ife-spacer-5);
-        }
+    @include ife-band-publication;
+    .ife-band__media::after {
+        background: var(--ife-band-gradient);
     }
 }

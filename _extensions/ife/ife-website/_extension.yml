@@ -24,10 +24,11 @@ contributes:
 
   shortcodes:
     - home/bandeauinformatif.lua
-    - home/quisommesnous.lua
+    - home/bandeauspecial.lua
     - home/alaune.lua
     - home/ecograph.lua
+    - home/bandeaupublication.lua
     - home/actualite.lua
     - home/publications.lua
     - home/outils.lua
-    - home/apropos.lua
+    - home/bandeaupresentation.lua

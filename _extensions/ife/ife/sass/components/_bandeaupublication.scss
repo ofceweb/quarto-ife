@@ -1,0 +1,71 @@
+// Bandeau publication : 1 item => bandeau complet, 2-3 items => cartes.
+// Contrat de classes pour le shortcode `bandeaupublication` (ife-website).
+// Contenu commun (titre, bouton, image de fond) : `_band-publication.scss` et `_band.scss`.
+// Structure : `.ife-band.ife-band--cover.bandeaupublication`,
+//          plus `.bandeaupublication--cards` pour les cartes.
+.bandeaupublication {
+    @include ife-band-publication;
+    .ife-band__media::after {
+        background: var(--ife-band-gradient);
+    }
+}
+
+// Cartes : chaque carte porte son `.ife-band__media`, filets blancs sur les côtés et en bas.
+.bandeaupublication--cards .ife-band__inner {
+    padding-block: 0;
+}
+
+.bandeaupublication {
+    &__cards {
+        display: flex;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    &__card {
+        position: relative;
+        flex: 1 1 0;
+        min-width: 0;
+        overflow: hidden;
+        border-style: solid;
+        border-width: 0 1px 1px;
+        border-color: var(--ife-blanc);
+    }
+    &__card-content {
+        position: relative;
+        z-index: 1;
+        padding: var(--ife-spacer-5);
+    }
+    // Un thème plus large que la carte passe à la ligne avec un tiret, sans être rogné.
+    &__card &__title {
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+}
+
+// Trois cartes : espacements et tailles de la maquette mobile, plus compacts.
+.bandeaupublication--cards-3 {
+    .bandeaupublication__card-content {
+        padding: 2.25rem;
+    }
+    .bandeaupublication__title {
+        font-size: 2.25rem;
+    }
+    .ife-btn {
+        font-size: var(--ife-fs-sm);
+    }
+}
+
+@include ife-below($ife-bp-nav) {
+    .bandeaupublication__cards {
+        flex-direction: column;
+    }
+    // En colonne, une base nulle avec `overflow: hidden` écraserait la carte.
+    .bandeaupublication__card {
+        flex: none;
+    }
+    .bandeaupublication--cards-3 .bandeaupublication__title {
+        font-size: var(--ife-fs-h2-lg);
+    }
+}

@@ -1,0 +1,51 @@
+// Contenu d'un bandeau de publication : thème, date, titre, extrait, auteurs, CTA.
+// Contrat de classes pour `components.publication_band()` (`_modules/components.lua`).
+// Inclus par `.bandeaupublication`, `.bandeauspecial` et `.ecograph`,
+// qui ne fixent que leur dégradé et leurs particularités.
+// Structure : `.ife-band.ife-band--cover.<bloc>`.
+// Pas de hauteur fixe : le bandeau suit son contenu, avec le padding vertical de la maquette.
+@mixin ife-band-publication {
+    box-sizing: border-box;
+    .ife-band__inner {
+        min-height: 0;
+        padding: var(--ife-spacer-5) var(--ife-page-pad);
+    }
+    .ife-band__media img {
+        object-position: center;
+    }
+    &__title {
+        margin: 0;
+        @include ife-h2-lg;
+        color: var(--ife-blanc);
+    }
+    &__date {
+        margin: var(--ife-spacer-4) 0 0;
+        @include ife-date;
+        color: var(--ife-text-color-light);
+    }
+    &__subtitle {
+        margin: var(--ife-spacer-3) 0 0;
+        @include ife-h3-lg;
+        color: var(--ife-blanc);
+    }
+    &__excerpt {
+        margin: var(--ife-spacer-3) 0 0;
+        @include ife-text-base;
+        color: var(--ife-blanc);
+    }
+    &__author {
+        margin: var(--ife-spacer-3) 0 0;
+        @include ife-author;
+        color: var(--ife-blanc);
+    }
+    &__title,
+    &__date,
+    &__subtitle,
+    &__excerpt,
+    &__author {
+        text-shadow: var(--ife-text-shadow-dark);
+    }
+    .ife-btn {
+        margin-top: var(--ife-spacer-4);
+    }
+}
