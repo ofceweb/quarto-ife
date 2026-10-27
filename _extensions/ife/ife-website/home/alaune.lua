@@ -6,10 +6,11 @@
 --       alaune:
 --         items: "_index_jsons/alaune.json"
 --
--- JSON: { "items": [ { "url", "image", "image_alt", "kicker", "title",
+-- JSON: { "items": [ { "url", "image", "kicker", "title",
 --                     "date", "authors", "excerpt", "type", "lang",
 --                     "keywords", "source", "region" } ] }
 -- `region` : un code (`"fr"`) ou une liste (`["fr", "de", "eu"]`).
+-- `image` est décorative (`alt=""`) : pas de champ `image_alt`.
 
 local utils = require(
     quarto.utils.resolve_path("_modules/utils.lua"):gsub("%.lua$", "")

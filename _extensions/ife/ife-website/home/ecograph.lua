@@ -8,7 +8,8 @@
 --         items: "_index_jsons/ecograph.json"
 --
 -- JSON: { "items": [ { "number", "title", "date", "subtitle", "excerpt",
---                     "author", "cta_label", "cta_url", "image", "image_alt" } ] }
+--                     "author", "cta_label", "cta_url", "image" } ] }
+-- `image` est décorative (`alt=""`) : pas de champ `image_alt`.
 
 local utils = require(
     quarto.utils.resolve_path("_modules/utils.lua"):gsub("%.lua$", "")

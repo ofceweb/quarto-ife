@@ -10,10 +10,11 @@
 --
 -- JSON: { "intro_title", "intro_text",
 --         "sites": [ { "url", "title", "description", "cta_label",
---                      "theme", "image", "image_alt" } ],
+--                      "theme", "image" } ],
 --         "items": [ { "url", "kicker", "title", "authors", "date",
 --                      "type", "lang", "keywords", "source", "region" } ] }
 -- `region` : un code (`"fr"`) ou une liste (`["fr", "de", "eu"]`).
+-- `image` est décorative (`alt=""`) : pas de champ `image_alt`.
 
 local utils = require(
     quarto.utils.resolve_path("_modules/utils.lua"):gsub("%.lua$", "")

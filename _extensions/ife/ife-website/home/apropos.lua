@@ -8,7 +8,8 @@
 --         items: "_index_jsons/apropos.json"
 --
 -- JSON: { "items": [ { "title", "text", "contact_email",
---                     "image", "image_alt" } ] }
+--                     "image" } ] }
+-- `image` est décorative (`alt=""`) : pas de champ `image_alt`.
 
 local utils = require(
     quarto.utils.resolve_path("_modules/utils.lua"):gsub("%.lua$", "")

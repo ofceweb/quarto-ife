@@ -8,7 +8,8 @@
 --         items: "_index_jsons/quisommesnous.json"
 --
 -- JSON: { "items": [ { "title", "date", "subtitle", "excerpt",
---                     "cta_label", "cta_url", "image", "image_alt" } ] }
+--                     "cta_label", "cta_url", "image" } ] }
+-- `image` est décorative (`alt=""`) : pas de champ `image_alt`.
 
 local utils = require(
     quarto.utils.resolve_path("_modules/utils.lua"):gsub("%.lua$", "")

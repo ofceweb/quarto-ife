@@ -13,8 +13,10 @@
 --         more_label: "Tous nos événements"
 --
 -- JSON: { "items": [ { "type", "title", "date", "location", "url",
---                     "image", "image_alt", "featured" } ] }
+--                     "image", "featured", "lang" } ] }
 -- `date` accepte `YYYY-MM-DD` ou `YYYY-MM-DDTHH:MM`.
+-- `lang` : langue du titre, `"FR"` ou `"EN"` (français si absent).
+-- `image` est décorative (`alt=""`) : pas de champ `image_alt`.
 -- `location` est une adresse, affichée en lien vers Google Maps.
 
 local utils = require(
@@ -70,15 +72,17 @@ local function split_items(items)
     return cards, take(line_pool, LINE_COUNT)
 end
 
-local function title_html(title, url)
+local function title_html(title, url, lang)
     local text = utils.html_escape(title)
     if text == "" then return "" end
     local href = utils.to_str(url)
+    local lang_attr = utils.lang_attr(lang)
     if href == "" then
-        return string.format('<h3 class="actualite__title">%s</h3>', text)
+        return string.format('<h3 class="actualite__title"%s>%s</h3>', lang_attr, text)
     end
     return string.format(
-        '<h3 class="actualite__title"><a href="%s"%s>%s%s</a></h3>',
+        '<h3 class="actualite__title"%s><a href="%s"%s>%s%s</a></h3>',
+        lang_attr,
         utils.html_escape(href),
         utils.link_attrs(href),
         text,
@@ -106,7 +110,7 @@ local function create_card(item)
             %s
         </article>
     ]],
-        title_html(title, url),
+        title_html(title, url, utils.pick(item, "lang")),
         meta_html(item),
         utils.image_html(image, "", "actualite__image", true)
     )
@@ -122,7 +126,7 @@ local function create_line(item)
             %s
         </article>
     ]],
-        title_html(title, url),
+        title_html(title, url, utils.pick(item, "lang")),
         meta_html(item)
     )
 end
