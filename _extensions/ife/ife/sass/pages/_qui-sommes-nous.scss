@@ -11,15 +11,6 @@ html.page-qui-sommes-nous {
         padding: 0 !important;
         border-left: none !important;
     }
-    #nous-trouver {
-        padding: var(--ife-spacer-4);
-        background-color: var(--ife-primary);
-        color: var(--ife-blanc);
-        h2,
-        a {
-            color: var(--ife-blanc);
-        }
-    }
     // Les pages légales partagent cette page-class sans le bloc `.qui-sommes-nous-body` : la carte se pose sur `#quarto-content`.
     #quarto-content:not(:has(.qui-sommes-nous-body)),
     .qui-sommes-nous-body {
@@ -33,11 +24,11 @@ html.page-qui-sommes-nous {
             max-width: 800px;
             margin-inline: auto;
         }
-        > .bandeaupresentation {
-            max-width: none;
-            width: calc(100% + 2 * var(--ife-page-pad));
-            margin-top: calc(var(--ife-spacer-5) * -1);
-            margin-inline: calc(var(--ife-page-pad) * -1);
-        }
+    }
+    // Les bandeaux `column-screen` passent `main` en grille : la carte reprend toute la largeur.
+    .qui-sommes-nous-body {
+        grid-column: screen-start / screen-end;
+        // Sans bordure : inutile de redessiner le trait diagonal.
+        @include ife-cut-corner(lg);
     }
 }

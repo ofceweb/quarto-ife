@@ -1,7 +1,8 @@
 -- Bandeau présentation : bandeau 410px, image en fond, texte empilé à gauche.
 -- Met en avant un contenu qui n'est pas une publication, en ouverture ou en
 -- fin de page. Bouton libre, précédé d'un intertitre optionnel.
--- 0 item => section omise. Au-delà de 1, seul le premier est rendu.
+-- 0 item => section omise. Sans argument, seul le premier est rendu ;
+-- `{{< bandeaupresentation id="..." >}}` rend l'item de même `id`.
 --
 -- YAML (_quarto.yml):
 --   extensions:
@@ -9,7 +10,7 @@
 --       bandeaupresentation:
 --         items: "_index_jsons/bandeaupresentation.json"
 --
--- JSON: { "items": [ { "title", "text", "cta_title", "cta_label",
+-- JSON: { "items": [ { "id", "title", "text", "cta_title", "cta_label",
 --                     "cta_url", "image" } ] }
 -- Sans `cta_url`, le bouton et son intertitre `cta_title` sont omis.
 -- Un `cta_url` en `mailto:` prend l'icône enveloppe et le texte masqué
@@ -50,8 +51,9 @@ local function create_cta(item, level)
 end
 
 local function create_banner(item, level)
+    local id = utils.pick(item, "id")
     return string.format([[
-        <section class="ife-band ife-band--cover bandeaupresentation">
+        <section%s class="ife-band ife-band--cover bandeaupresentation">
             %s
             <div class="ife-band__inner">
                 <div class="ife-band__content">
@@ -64,6 +66,7 @@ local function create_banner(item, level)
             </div>
         </section>
     ]],
+        id ~= "" and (' id="' .. utils.html_escape(id) .. '"') or "",
         utils.image_html(
             utils.pick(item, "image", "img", "cover"),
             "",
@@ -90,12 +93,23 @@ return {
         if not cfg then
             return pandoc.Str("")
         end
-        if #cfg.items == 0 then
+        local wanted = utils.to_str(kwargs and kwargs["id"])
+        local item = cfg.items[1]
+        if wanted ~= "" then
+            item = nil
+            for _, it in ipairs(cfg.items) do
+                if utils.pick(it, "id") == wanted then
+                    item = it
+                    break
+                end
+            end
+        end
+        if not item then
             return pandoc.Str("")
         end
         return pandoc.RawBlock(
             "html",
-            create_banner(cfg.items[1], utils.band_heading_level(meta))
+            create_banner(item, utils.band_heading_level(meta))
         )
     end
 }
