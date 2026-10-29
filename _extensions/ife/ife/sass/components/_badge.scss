@@ -11,7 +11,7 @@
     align-items: stretch;
     color: var(--ife-primary);
     @include ife-category;
-    line-height: 1.5rem;
+    line-height: var(--ife-label-line-height);
     text-transform: uppercase;
     white-space: nowrap;
     &::before {
@@ -22,7 +22,7 @@
         border-right: 1px solid var(--ife-blanc);
     }
     &__label {
-        padding: 0 var(--ife-spacer-2);
+        padding: var(--ife-label-padding);
         background-color: var(--ife-grey-light);
     }
     &--blog { --ife-category-color: var(--ife-category-blog); }
@@ -72,7 +72,8 @@
     text-transform: uppercase;
     white-space: nowrap;
     &__label {
-        padding: var(--ife-spacer-2);
+        padding: var(--ife-label-padding);
+        line-height: var(--ife-label-line-height);
         color: var(--ife-blanc);
         background-color: var(--ife-source-color);
     }

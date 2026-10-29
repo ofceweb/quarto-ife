@@ -47,6 +47,9 @@
     --ife-spacer-3: 1rem;
     --ife-spacer-4: 1.5rem;
     --ife-spacer-5: 3rem;
+    // Étiquettes (badge de catégorie, source OFCE/CEPII) : même hauteur.
+    --ife-label-line-height: 1.5rem;
+    --ife-label-padding: var(--ife-spacer-0) var(--ife-spacer-2);
     --ife-page-max: #{$ife-page-max};
     --ife-page-pad: var(--ife-spacer-5);
     --ife-gutter: var(--ife-spacer-4);
