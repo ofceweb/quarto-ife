@@ -86,6 +86,14 @@
     &__item--lead .alaune__chart img {
         max-height: 14rem;
     }
+    // Image cliquable (alaune.js) : même retour visuel que le titre.
+    &__item:has(.alaune__title a) .alaune__chart {
+        cursor: pointer;
+    }
+    &__item:has(.alaune__chart:hover) .alaune__title a {
+        text-decoration: underline;
+        text-underline-offset: 0.15em;
+    }
 }
 
 @include ife-below($ife-bp-nav) {

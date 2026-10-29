@@ -11,6 +11,7 @@
 --                     "keywords", "source", "region" } ] }
 -- `region` : un code (`"fr"`) ou une liste (`["fr", "de", "eu"]`).
 -- `image` est décorative (`alt=""`) : pas de champ `image_alt`.
+-- Elle est cliquable via alaune.js, sans second lien (voir le script).
 
 local utils = require(
     quarto.utils.resolve_path("_modules/utils.lua"):gsub("%.lua$", "")
@@ -150,6 +151,12 @@ return {
         if not cfg then
             return pandoc.Str("")
         end
+
+        quarto.doc.add_html_dependency({
+            name = "ife-alaune",
+            version = "0.1.0",
+            scripts = { "alaune.js" },
+        })
 
         local featured, compact = {}, {}
         for i, item in ipairs(cfg.items) do
