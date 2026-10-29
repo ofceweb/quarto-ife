@@ -23,7 +23,9 @@
         padding: 0;
         list-style: none;
     }
+    // Cartes compactes : tailles mobiles (thème, bouton, marges) sur tous les écrans.
     &__card {
+        @include ife-tokens-mobile;
         position: relative;
         flex: 1 1 0;
         min-width: 0;
@@ -36,6 +38,10 @@
         position: relative;
         z-index: 1;
         padding: var(--ife-spacer-5);
+    }
+    // Trois cartes, plus étroites : marges latérales réduites (page-pad mobile).
+    &--cards-3 &__card-content {
+        padding-inline: var(--ife-page-pad);
     }
     // Un thème plus large que la carte passe à la ligne avec un tiret, sans être rogné.
     &__card &__title {
