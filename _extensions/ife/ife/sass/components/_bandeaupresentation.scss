@@ -41,9 +41,6 @@
         flex-direction: column;
         align-items: flex-start;
         gap: var(--ife-spacer-3);
-        .ife-btn {
-            @include ife-text-base;
-        }
     }
     &__cta-title {
         margin: 0;

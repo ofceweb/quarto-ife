@@ -3,8 +3,8 @@
     border: 2px solid var(--ife-primary);
 }
 
-// Boutons d'action du bandeau et du centre de préférences : `.ife-btn` plein anthracite,
-// survol inversé comme `.ife-btn--outline-dark`.
+// Boutons d'action du bandeau et du centre de préférences : comme `.ife-btn--solid-dark`,
+// plein anthracite, évidé au survol.
 // Ciblés par identifiant pour passer devant les styles injectés après le thème.
 :is(#termsfeed-com---nb, #termsfeed-com---preferences-center) :is(.cc-nb-okagree, .cc-nb-reject, .cc-nb-changep, .cc-cp-foot-save) {
     padding: var(--ife-spacer-2) var(--ife-spacer-3);

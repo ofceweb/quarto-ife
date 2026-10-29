@@ -66,11 +66,6 @@
         text-underline-offset: 0.15em;
     }
     .ife-band__content:has(.ife-band__subtitle:hover) .ife-band__cta {
-        @include ife-btn-solid-dark-hover;
-    }
-    // Bouton contour de la maquette : fond anthracite translucide, lisible sur l'image.
-    // Le survol garde l'inversion blanche de `.ife-btn--outline`.
-    .ife-btn--outline:not(:hover) {
-        background-color: var(--ife-primary-opacity-85);
+        @include ife-btn-solid-light-hover;
     }
 }

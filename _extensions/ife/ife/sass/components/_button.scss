@@ -1,4 +1,5 @@
-// Boutons d'action. Quatre variantes : solid, solid-dark, outline, outline-dark.
+// Boutons d'action. Quatre variantes : solid-light, solid-dark, outline-light, outline-dark.
+// Mêmes noms que les variantes Figma (jeux `solid` et `outline`).
 // Contrat de classes pour `components.cta_button()` (`_modules/components.lua`).
 .ife-btn {
     display: inline-flex;
@@ -19,9 +20,8 @@
     &:focus {
         text-decoration: none;
     }
-    // --solid-dark : `button-special` du design system, blanc qui s'inverse en anthracite au survol.
-    &--solid,
-    &--solid-dark {
+    // Blanc qui s'inverse en anthracite au survol. Sur fond sombre.
+    &--solid-light {
         background-color: var(--ife-blanc);
         border-color: var(--ife-blanc);
         color: var(--ife-primary);
@@ -29,23 +29,38 @@
         &:visited {
             color: var(--ife-primary);
         }
-        // Utilisé sur fond sombre uniquement : anneau blanc détaché, comme --outline.
+        &:hover {
+            @include ife-btn-solid-light-hover;
+        }
+        // Anneau blanc détaché, comme --outline-light.
         &:focus-visible {
             outline: 2px solid var(--ife-blanc);
             outline-offset: 4px;
             box-shadow: none;
         }
     }
-    &--solid:hover {
-        background-color: var(--ife-grey-light);
-        border-color: var(--ife-grey-light);
-        color: var(--ife-primary);
+    // Anthracite qui s'évide au survol. Sur fond clair.
+    &--solid-dark {
+        background-color: var(--ife-primary);
+        border-color: var(--ife-primary);
+        color: var(--ife-blanc);
+        &:link,
+        &:visited {
+            color: var(--ife-blanc);
+        }
+        &:hover {
+            background-color: transparent;
+            color: var(--ife-primary);
+        }
+        &:focus-visible {
+            outline: 2px solid var(--ife-primary);
+            outline-offset: 4px;
+            box-shadow: none;
+        }
     }
-    &--solid-dark:hover {
-        @include ife-btn-solid-dark-hover;
-    }
-    &--outline {
-        background-color: transparent;
+    // Fond anthracite translucide : lisible sur image comme sur fond uni.
+    &--outline-light {
+        background-color: var(--ife-primary-opacity-85);
         border-color: var(--ife-blanc);
         color: var(--ife-blanc);
         &:link,

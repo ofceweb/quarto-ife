@@ -46,7 +46,7 @@ local function create_cta(item, level)
             "bandeaupresentation__cta-title",
             utils.html_escape(utils.pick(item, "cta_title"))
         ),
-        components.cta_button(label, url, "outline", icon, prefix)
+        components.cta_button(label, url, "outline-light", icon, prefix)
     )
 end
 

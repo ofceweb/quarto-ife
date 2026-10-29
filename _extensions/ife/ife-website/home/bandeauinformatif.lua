@@ -64,7 +64,7 @@ local function create_banner(item)
         components.cta_button(
             utils.pick(item, "cta_label"),
             utils.pick(item, "cta_url"),
-            "solid-dark",
+            "solid-light",
             "arrow"
         )
     )

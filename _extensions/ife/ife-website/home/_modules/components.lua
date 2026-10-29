@@ -52,15 +52,10 @@ local REGION_ICONS = {
 }
 
 local VARIANTS = {
-    solid = "solid",
-    fill = "solid",
-    primary = "solid",
+    ["solid-light"] = "solid-light",
     ["solid-dark"] = "solid-dark",
-    outline = "outline",
-    ghost = "outline",
-    light = "outline",
+    ["outline-light"] = "outline-light",
     ["outline-dark"] = "outline-dark",
-    dark = "outline-dark",
 }
 
 --- Classe Bootstrap Icons (`bi bi-…`), chaîne vide si name est vide
@@ -325,7 +320,7 @@ function components.keywords_row(keywords)
     )
 end
 
---- Bouton d'action. Variantes : `solid`, `solid-dark`, `outline`, `outline-dark`.
+--- Bouton d'action. Variantes : `solid-light`, `solid-dark`, `outline-light`, `outline-dark`.
 --- `icon` : `arrow` (Bootstrap), `envelope` (`mail_icon.svg`), ou une classe Bootstrap Icons.
 --- Omis si le libellé est vide. Sans URL, rend un `span`.
 --- `hidden_prefix` : texte masqué lu avant le libellé (ex. « Écrire à »).
@@ -360,7 +355,7 @@ function components.cta_button(label, url, variant, icon, hidden_prefix, hidden_
         )
     end
 
-    local variant_key = VARIANTS[utils.to_str(variant):lower()] or "solid"
+    local variant_key = VARIANTS[utils.to_str(variant):lower()] or "solid-light"
     local icon_html = cta_icon(icon)
     local inner = text
     if icon_html ~= "" then
@@ -428,7 +423,7 @@ function components.publication_actions(block, item)
         table.insert(buttons, components.cta_button(
             label,
             url,
-            "solid-dark",
+            "solid-light",
             "arrow",
             nil,
             subtitle ~= "" and (" : " .. subtitle) or nil,
@@ -443,7 +438,7 @@ function components.publication_actions(block, item)
         table.insert(buttons, components.cta_button(
             more_label,
             more_url,
-            "outline",
+            "outline-light",
             "arrow"
         ))
     end

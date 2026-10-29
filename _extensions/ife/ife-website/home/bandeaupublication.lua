@@ -43,7 +43,7 @@ local function create_card(item)
         cta = utils.el("div", "bandeaupublication__actions", components.cta_button(
             label,
             url,
-            "outline",
+            "outline-light",
             "arrow",
             nil,
             theme ~= "" and (" sur " .. theme) or nil

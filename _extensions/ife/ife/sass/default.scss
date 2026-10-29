@@ -104,9 +104,9 @@ $callout-color-tip: $ife-grey-light;
     }
 }
 
-// Survol du bouton `.ife-btn--solid-dark` : blanc qui s'inverse en anthracite.
+// Survol du bouton `.ife-btn--solid-light` : blanc qui s'inverse en anthracite.
 // Partagé avec les bandeaux de publication, où le survol du titre l'active aussi.
-@mixin ife-btn-solid-dark-hover {
+@mixin ife-btn-solid-light-hover {
     background-color: var(--ife-primary-opacity-85);
     border-color: var(--ife-blanc);
     color: var(--ife-blanc);
