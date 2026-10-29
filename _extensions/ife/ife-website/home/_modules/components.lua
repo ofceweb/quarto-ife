@@ -22,6 +22,22 @@ local SOURCE_LABELS = {
     cepii = "IFE|CEPII",
 }
 
+-- Catégorie de contenu → couleur décorative du badge (`ife-badge--<clé>`).
+-- Premier motif trouvé dans le libellé normalisé (minuscules, sans accent).
+-- Un libellé absent de la liste garde la couleur par défaut.
+-- Troisième champ : langue du libellé, si elle diffère de la page (RGAA 8.7).
+local CATEGORY_PATTERNS = {
+    { "blog", "blog" },
+    { "ecograph", "ecograph" },
+    { "prevision", "prevision" },
+    { "lettre", "lettre" },
+    { "policy brief", "policy", "EN" },
+    { "working paper", "working", "EN" },
+    { "revue", "revue" },
+    { "rapport", "rapport" },
+    { "etude", "rapport" },
+}
+
 local LANG_TITLES = {
     EN = "Publication en anglais",
     FR = "Publication en français",
@@ -91,6 +107,20 @@ local function source_key(source)
     if s:find("cepii", 1, true) then return "cepii" end
     if s:find("ofce", 1, true) then return "ofce" end
     return css_token(s)
+end
+
+--- @param label any
+--- @return string|nil Clé de `CATEGORY_PATTERNS`, nil pour la couleur par défaut
+--- @return string|nil Langue du libellé (`EN`), nil si celle de la page
+local function category_key(label)
+    local s = utils.to_str(label):lower()
+    for _, accent in ipairs({ "É", "é", "È", "è", "Ê", "ê" }) do
+        s = s:gsub(accent, "e")
+    end
+    for _, entry in ipairs(CATEGORY_PATTERNS) do
+        if s:find(entry[1], 1, true) then return entry[2], entry[3] end
+    end
+    return nil
 end
 
 --- @param region any
@@ -183,12 +213,20 @@ local function flag_src(key)
 end
 
 --- Badge de type de contenu (Policy Brief, Séminaire, …). Omis si vide.
+--- La barre de couleur est décorative : le libellé porte l'information.
 --- @param label string|nil
 --- @return string
 function components.badge_type(label)
     local text = utils.html_escape(utils.to_str(label))
     if text == "" then return "" end
-    return string.format('<span class="ife-badge">%s</span>', text)
+    local key, lang = category_key(label)
+    local class_name = key and ("ife-badge ife-badge--" .. key) or "ife-badge"
+    return string.format(
+        '<span class="%s"><span class="ife-badge__label"%s>%s</span></span>',
+        class_name,
+        utils.lang_attr(lang),
+        text
+    )
 end
 
 --- Chip de langue (`FR`, `EN`). Omis si vide.

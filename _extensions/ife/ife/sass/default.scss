@@ -4,6 +4,7 @@
 // Charte IFE — tokens
 //
 // Cinq couleurs : primary, blanc, grey-light, ofce, cepii.
+// Couleurs de catégorie (décoratives) : $ife-category-*.
 // Titres : Merriweather 600. Corps : Arimo 400, 600, italic.
 // Tailles : --ife-fs-* (échelle IFE). Mobile sous $ife-bp-nav.
 // Styles de texte : un mixin `ife-*` par style Figma (couche scss:mixins).
@@ -26,6 +27,18 @@ $ife-grey-light: #E3E2E4;
 $ife-ofce: #7D0000;
 $ife-cepii: #21606E;
 $ife-primary-opacity-85: rgba($ife-primary, 0.85);
+
+// Catégories de contenu : couleurs décoratives de la barre du badge.
+// `default` couvre toute catégorie absente de la liste.
+$ife-category-default: #8D4B9C;
+$ife-category-blog: #96DCF8;
+$ife-category-ecograph: #44C0C7;
+$ife-category-prevision: #AAC044;
+$ife-category-lettre: #21606E;
+$ife-category-policy: #7EA415;
+$ife-category-working: #EF4622;
+$ife-category-revue: #7D0000;
+$ife-category-rapport: #E39A14;
 $ife-text-color-light: rgba($ife-blanc, 0.85);
 
 // Voile : primary à 72 %, lisibilité du texte blanc sur les photos des bandeaux.
