@@ -91,6 +91,14 @@ $callout-color-tip: $ife-grey-light;
     }
 }
 
+// Survol du bouton `.ife-btn--solid-dark` : blanc qui s'inverse en anthracite.
+// Partagé avec les bandeaux de publication, où le survol du titre l'active aussi.
+@mixin ife-btn-solid-dark-hover {
+    background-color: var(--ife-primary-opacity-85);
+    border-color: var(--ife-blanc);
+    color: var(--ife-blanc);
+}
+
 // Coin coupé en diagonale en bas à droite : `@include ife-cut-corner(sm|lg, $border-color)`.
 // Biseau natif (corner-shape) quand il est supporté : la bordure et le focus suivent la diagonale.
 // Sinon clip-path, qui coupe aussi la bordure : si $border-color est fourni (bordure de 1px),

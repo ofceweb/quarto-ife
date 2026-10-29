@@ -53,6 +53,21 @@
         gap: var(--ife-spacer-4);
         margin-top: var(--ife-spacer-4);
     }
+    // Titre de la publication et bouton « Lire cet article » liés (band-publication.js) :
+    // le survol de l'un affiche aussi l'état de survol de l'autre, comme dans `alaune`.
+    // Le focus clavier du bouton souligne aussi le titre. Les auteurs ne sont pas concernés.
+    .ife-band__content:has(.ife-band__cta) .ife-band__subtitle {
+        cursor: pointer;
+    }
+    .ife-band__content:has(.ife-band__cta) .ife-band__subtitle:hover,
+    .ife-band__content:has(.ife-band__cta:hover) .ife-band__subtitle,
+    .ife-band__content:has(.ife-band__cta:focus-visible) .ife-band__subtitle {
+        text-decoration: underline;
+        text-underline-offset: 0.15em;
+    }
+    .ife-band__content:has(.ife-band__subtitle:hover) .ife-band__cta {
+        @include ife-btn-solid-dark-hover;
+    }
     // Bouton contour de la maquette : fond anthracite translucide, lisible sur l'image.
     // Le survol garde l'inversion blanche de `.ife-btn--outline`.
     .ife-btn--outline:not(:hover) {

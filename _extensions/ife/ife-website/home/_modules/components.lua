@@ -292,14 +292,16 @@ end
 --- Omis si le libellé est vide. Sans URL, rend un `span`.
 --- `hidden_prefix` : texte masqué lu avant le libellé (ex. « Écrire à »).
 --- `hidden_suffix` : texte masqué lu après le libellé (ex. « sur Macroéconomie »).
+--- `extra_class` : classe ajoutée au bouton, pour un script ou un bloc (ex. `ife-band__cta`).
 --- @param label string|nil
 --- @param url string|nil
 --- @param variant string|nil
 --- @param icon string|nil
 --- @param hidden_prefix string|nil
 --- @param hidden_suffix string|nil
+--- @param extra_class string|nil
 --- @return string
-function components.cta_button(label, url, variant, icon, hidden_prefix, hidden_suffix)
+function components.cta_button(label, url, variant, icon, hidden_prefix, hidden_suffix, extra_class)
     local text = utils.html_escape(utils.to_str(label))
     if text == "" then return "" end
 
@@ -328,6 +330,8 @@ function components.cta_button(label, url, variant, icon, hidden_prefix, hidden_
     end
 
     local class_name = "ife-btn ife-btn--" .. variant_key
+    local extra = utils.to_str(extra_class)
+    if extra ~= "" then class_name = class_name .. " " .. extra end
     local href = utils.to_str(url)
     if href == "" then
         return string.format('<span class="%s">%s</span>', class_name, inner)
@@ -369,6 +373,7 @@ end
 --- Chaque bouton est omis sans lien, le conteneur sans bouton.
 --- « Lire cet article » reçoit le titre de la publication en texte masqué :
 --- plusieurs bandeaux d'une page portent ce libellé (RGAA 6.1).
+--- Il porte `ife-band__cta`, que band-publication.js relie au titre de la publication.
 --- @param block string Classe du bloc (`ecograph`, …)
 --- @param item table
 --- @return string
@@ -388,7 +393,8 @@ function components.publication_actions(block, item)
             "solid-dark",
             "arrow",
             nil,
-            subtitle ~= "" and (" : " .. subtitle) or nil
+            subtitle ~= "" and (" : " .. subtitle) or nil,
+            "ife-band__cta"
         ))
     end
 
@@ -414,12 +420,20 @@ end
 --- Les classes suivent le bloc : `<block>__title`, `<block>__date`, …
 --- Le titre de la publication prend le niveau sous le thème.
 --- Boutons : voir `components.publication_actions`.
+--- Le titre de la publication (`ife-band__subtitle`) ouvre la publication au clic
+--- via band-publication.js, sans second lien (voir le script).
 --- @param block string Classe du bloc (`ecograph`, …)
 --- @param item table
 --- @param level number Niveau du thème (voir `utils.band_heading_level`)
 --- @param title string Texte du thème, non échappé
 --- @return string
 function components.publication_band(block, item, level, title)
+    quarto.doc.add_html_dependency({
+        name = "ife-band-publication",
+        version = "0.1.0",
+        scripts = { "band-publication.js" },
+    })
+
     return string.format([[
         <section class="ife-band ife-band--cover %s">
             %s
@@ -450,7 +464,7 @@ function components.publication_band(block, item, level, title)
         ),
         utils.el(
             "h" .. (level + 1),
-            block .. "__subtitle",
+            block .. "__subtitle ife-band__subtitle",
             utils.rich_inline(utils.pick(item, "subtitle"))
         ),
         utils.el(

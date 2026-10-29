@@ -42,9 +42,7 @@
         color: var(--ife-primary);
     }
     &--solid-dark:hover {
-        background-color: var(--ife-primary-opacity-85);
-        border-color: var(--ife-blanc);
-        color: var(--ife-blanc);
+        @include ife-btn-solid-dark-hover;
     }
     &--outline {
         background-color: transparent;
