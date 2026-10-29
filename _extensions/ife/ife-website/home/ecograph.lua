@@ -1,4 +1,4 @@
--- L'Ecograph : bannière unique, graphique en fond, CTA contour.
+-- L'Ecograph : bannière unique, graphique en fond.
 -- 0 item => section omise. Au-delà de 1, seul le premier est rendu.
 -- Rendu partagé avec `bandeaupublication` : `components.publication_band`.
 --
@@ -9,9 +9,10 @@
 --         items: "_index_jsons/ecograph.json"
 --
 -- JSON: { "items": [ { "number", "title", "date", "subtitle", "excerpt",
---                     "author", "cta_label", "cta_url", "image" } ] }
+--                     "author", "cta_label", "cta_url", "more_label",
+--                     "more_url", "image" } ] }
 -- `image` est décorative (`alt=""`) : pas de champ `image_alt`.
--- Sans `cta_url`, le bouton est omis.
+-- Boutons : `components.publication_actions`.
 
 local utils = require(
     quarto.utils.resolve_path("_modules/utils.lua"):gsub("%.lua$", "")
@@ -44,8 +45,7 @@ return {
                 "ecograph",
                 item,
                 utils.band_heading_level(meta),
-                heading_text(item),
-                "outline"
+                heading_text(item)
             )
         )
     end

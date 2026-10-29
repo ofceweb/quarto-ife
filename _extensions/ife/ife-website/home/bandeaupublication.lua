@@ -1,6 +1,6 @@
 -- Bandeau publication : la variante suit le nombre d'items.
---   1 item    => bandeau complet (thème, date, titre, extrait, auteurs, CTA).
---   2-3 items => cartes côte à côte (thème, CTA), une par item.
+--   1 item    => bandeau complet (thème, date, titre, extrait, auteurs, boutons).
+--   2-3 items => cartes côte à côte (thème, bouton), une par item.
 -- 0 item => section omise. Au-delà de 3, seuls les trois premiers sont rendus.
 --
 -- YAML (index.qmd):
@@ -9,12 +9,15 @@
 --       bandeaupublication:
 --         items: "_index_jsons/bandeaupublication.json"
 --
--- JSON: { "items": [ { "title", "date", "subtitle", "excerpt",
---                     "author", "cta_label", "cta_url", "image" } ] }
+-- JSON: { "items": [ { "title", "date", "subtitle", "excerpt", "author",
+--                     "cta_label", "cta_url", "more_label", "more_url",
+--                     "image" } ] }
 -- `title` est le thème, `subtitle` le titre de la publication.
--- Les cartes ne lisent que `title`, `cta_label`, `cta_url` et `image`.
+-- Bandeau complet : boutons de `components.publication_actions`.
+-- Les cartes ne lisent que `title`, `more_label`, `more_url` et `image` :
+-- leur seul bouton, « Nos publications », est celui du bandeau complet.
 -- `image` est décorative (`alt=""`) : pas de champ `image_alt`.
--- Sans `cta_url`, le bouton est omis.
+-- Sans `more_url`, le bouton d'une carte est omis.
 --
 -- Les cartes ont toutes un h2 : sans titre commun, aucune ne peut être le h1.
 -- La page qui les accueille porte donc son propre h1 (`title`).
@@ -32,17 +35,19 @@ local MAX_CARDS = 3
 -- masqué, distingue leurs destinations (RGAA 6.1).
 local function create_card(item)
     local theme = utils.pick(item, "title")
-    local url = utils.pick(item, "cta_url", "url")
+    local url = utils.pick(item, "more_url")
     local cta = ""
     if url ~= "" then
-        cta = components.cta_button(
-            utils.pick(item, "cta_label"),
+        local label = utils.pick(item, "more_label")
+        if label == "" then label = "Nos publications" end
+        cta = utils.el("div", "bandeaupublication__actions", components.cta_button(
+            label,
             url,
             "outline",
             "arrow",
             nil,
             theme ~= "" and (" sur " .. theme) or nil
-        )
+        ))
     end
 
     return string.format([[
@@ -100,8 +105,7 @@ return {
                 "bandeaupublication",
                 item,
                 utils.band_heading_level(meta),
-                utils.pick(item, "title"),
-                "outline"
+                utils.pick(item, "title")
             )
         )
     end

@@ -363,29 +363,63 @@ function components.authors_html(raw, class_name)
     return utils.el("p", class_name, table.concat(spans, ", "))
 end
 
+--- Boutons d'un bandeau de publication, empilés dans `<block>__actions`.
+--- « Lire cet article » (`cta_*`, blanc) mène à la publication du bandeau.
+--- « Nos publications » (`more_*`, contour) mène à la liste des publications.
+--- Chaque bouton est omis sans lien, le conteneur sans bouton.
+--- « Lire cet article » reçoit le titre de la publication en texte masqué :
+--- plusieurs bandeaux d'une page portent ce libellé (RGAA 6.1).
+--- @param block string Classe du bloc (`ecograph`, …)
+--- @param item table
+--- @return string
+function components.publication_actions(block, item)
+    local buttons = {}
+
+    local url = utils.pick(item, "cta_url", "url")
+    if url ~= "" then
+        local label = utils.pick(item, "cta_label")
+        if label == "" then label = "Lire cet article" end
+        local subtitle = pandoc.utils.stringify(
+            pandoc.read(utils.pick(item, "subtitle"), "markdown").blocks
+        )
+        table.insert(buttons, components.cta_button(
+            label,
+            url,
+            "solid-dark",
+            "arrow",
+            nil,
+            subtitle ~= "" and (" : " .. subtitle) or nil
+        ))
+    end
+
+    local more_url = utils.pick(item, "more_url")
+    if more_url ~= "" then
+        local more_label = utils.pick(item, "more_label")
+        if more_label == "" then more_label = "Nos publications" end
+        table.insert(buttons, components.cta_button(
+            more_label,
+            more_url,
+            "outline",
+            "arrow"
+        ))
+    end
+
+    if #buttons == 0 then return "" end
+    return utils.el("div", block .. "__actions", table.concat(buttons))
+end
+
 --- Bandeau de publication pleine largeur, image décorative en fond.
---- Thème (titre du bandeau), date, titre de la publication, extrait, auteurs, bouton.
+--- Thème (titre du bandeau), date, titre de la publication, extrait, auteurs, boutons.
 --- Partagé par `bandeaupublication`, `bandeauspecial` et `ecograph`.
 --- Les classes suivent le bloc : `<block>__title`, `<block>__date`, …
---- Le titre de la publication prend le niveau sous le thème. Bouton omis sans lien.
+--- Le titre de la publication prend le niveau sous le thème.
+--- Boutons : voir `components.publication_actions`.
 --- @param block string Classe du bloc (`ecograph`, …)
 --- @param item table
 --- @param level number Niveau du thème (voir `utils.band_heading_level`)
 --- @param title string Texte du thème, non échappé
---- @param cta_variant string Variante de `cta_button`
 --- @return string
-function components.publication_band(block, item, level, title, cta_variant)
-    local url = utils.pick(item, "cta_url", "url")
-    local cta = ""
-    if url ~= "" then
-        cta = components.cta_button(
-            utils.pick(item, "cta_label"),
-            url,
-            cta_variant,
-            "arrow"
-        )
-    end
-
+function components.publication_band(block, item, level, title)
     return string.format([[
         <section class="ife-band ife-band--cover %s">
             %s
@@ -425,7 +459,7 @@ function components.publication_band(block, item, level, title, cta_variant)
             utils.rich_inline(utils.pick(item, "excerpt"))
         ),
         components.authors_html(utils.pick(item, "author"), block .. "__author"),
-        cta
+        components.publication_actions(block, item)
     )
 end
 

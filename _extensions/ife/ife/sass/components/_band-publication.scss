@@ -1,4 +1,4 @@
-// Contenu d'un bandeau de publication : thème, date, titre, extrait, auteurs, CTA.
+// Contenu d'un bandeau de publication : thème, date, titre, extrait, auteurs, boutons.
 // Contrat de classes pour `components.publication_band()` (`_modules/components.lua`).
 // Inclus par `.bandeaupublication`, `.bandeauspecial` et `.ecograph`,
 // qui ne fixent que leur dégradé et leurs particularités.
@@ -45,7 +45,17 @@
     &__author {
         text-shadow: var(--ife-text-shadow-dark);
     }
-    .ife-btn {
+    // Boutons empilés : « Lire cet article » puis « Nos publications ».
+    &__actions {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--ife-spacer-4);
         margin-top: var(--ife-spacer-4);
+    }
+    // Bouton contour de la maquette : fond anthracite translucide, lisible sur l'image.
+    // Le survol garde l'inversion blanche de `.ife-btn--outline`.
+    .ife-btn--outline:not(:hover) {
+        background-color: var(--ife-primary-opacity-85);
     }
 }
