@@ -11,7 +11,8 @@
 --
 -- JSON: { "items": [ { "title", "date", "subtitle", "excerpt", "author",
 --                     "cta_label", "cta_url", "more_label", "more_url",
---                     "image" } ] }
+--                     "image", "updated" } ] }
+-- `updated` (facultatif) : date de mise à jour, affichée sous la date si renseignée.
 -- `title` est le thème, `subtitle` le titre de la publication.
 -- Bandeau complet : boutons de `components.publication_actions`.
 -- Les cartes ne lisent que `title`, `more_label`, `more_url` et `image` :

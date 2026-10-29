@@ -12,7 +12,9 @@
 --         "sites": [ { "url", "title", "description", "cta_label",
 --                      "theme", "image" } ],
 --         "items": [ { "url", "kicker", "title", "authors", "date",
---                      "type", "lang", "keywords", "source", "region" } ] }
+--                      "type", "lang", "keywords", "source", "region",
+--                      "updated" } ] }
+-- `updated` (facultatif) : date de mise à jour, affichée sous la date si renseignée.
 -- `region` : un code (`"fr"`) ou une liste (`["fr", "de", "eu"]`).
 -- `image` est décorative (`alt=""`) : pas de champ `image_alt`.
 
@@ -79,10 +81,10 @@ local function create_item(item)
         </article>
     ]],
         head_html(item),
-        utils.el(
-            "p",
+        components.pub_date(
             "publications__date",
-            utils.html_escape(utils.format_date_fr(utils.raw_pick(item, "date", "published")))
+            utils.raw_pick(item, "date", "published"),
+            utils.raw_pick(item, "updated")
         ),
         title_html(title, url, utils.pick(item, "lang")),
         components.authors_html(

@@ -8,7 +8,8 @@
 --
 -- JSON: { "items": [ { "url", "image", "kicker", "title",
 --                     "date", "authors", "excerpt", "type", "lang",
---                     "keywords", "source", "region" } ] }
+--                     "keywords", "source", "region", "updated" } ] }
+-- `updated` (facultatif) : date de mise à jour, affichée sous la date si renseignée.
 -- `region` : un code (`"fr"`) ou une liste (`["fr", "de", "eu"]`).
 -- `image` est décorative (`alt=""`) : pas de champ `image_alt`.
 -- Elle est cliquable via alaune.js, sans second lien (voir le script).
@@ -111,10 +112,10 @@ local function create_item(item, opts)
     ]],
         table.concat(classes, " "),
         head_html(item),
-        utils.el(
-            "p",
+        components.pub_date(
             "alaune__date",
-            utils.html_escape(utils.format_date_fr(utils.raw_pick(item, "date", "published")))
+            utils.raw_pick(item, "date", "published"),
+            utils.raw_pick(item, "updated")
         ),
         title_html(title, url, utils.pick(item, "lang")),
         excerpt_html,

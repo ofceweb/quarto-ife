@@ -447,6 +447,32 @@ function components.publication_actions(block, item)
     return utils.el("div", block .. "__actions", table.concat(buttons))
 end
 
+--- Date de publication précédée de l'icône stylo, puis la ligne « Mise à jour le : … »
+--- si `updated` est renseigné (publication republiée avec des modifications).
+--- « Publié le » est masqué à l'écran : l'icône seule ne porte pas le sens. Omise si la date est vide.
+--- @param class_name string Classe du bloc (`alaune__date`, …)
+--- @param date any Date ISO de publication
+--- @param updated any Date ISO de mise à jour, facultative
+--- @return string
+function components.pub_date(class_name, date, updated)
+    local published = utils.html_escape(utils.format_date_fr(date))
+    if published == "" then return "" end
+    local updated_html = ""
+    local updated_text = utils.html_escape(utils.format_date_fr(updated))
+    if updated_text ~= "" then
+        updated_html = string.format(
+            '<p class="ife-pubdate__updated"><span class="ife-pubdate__label">Mise à jour le :</span> %s</p>',
+            updated_text
+        )
+    end
+    return string.format(
+        '<div class="%s ife-pubdate"><p class="ife-pubdate__published"><span class="ife-pubdate__icon" aria-hidden="true"></span><span class="visually-hidden">Publié le </span>%s</p>%s</div>',
+        class_name,
+        published,
+        updated_html
+    )
+end
+
 --- Bandeau de publication pleine largeur, image décorative en fond.
 --- Thème (titre du bandeau), date, titre de la publication, extrait, auteurs, boutons.
 --- Partagé par `bandeaupublication`, `bandeauspecial` et `ecograph`.
@@ -490,10 +516,10 @@ function components.publication_band(block, item, level, title)
             true
         ),
         utils.el("h" .. level, block .. "__title", utils.html_escape(title)),
-        utils.el(
-            "p",
+        components.pub_date(
             block .. "__date",
-            utils.html_escape(utils.format_date_fr(utils.pick(item, "date")))
+            utils.pick(item, "date"),
+            utils.pick(item, "updated")
         ),
         utils.el(
             "h" .. (level + 1),

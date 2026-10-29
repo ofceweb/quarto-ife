@@ -10,7 +10,8 @@
 --
 -- JSON: { "items": [ { "number", "title", "date", "subtitle", "excerpt",
 --                     "author", "cta_label", "cta_url", "more_label",
---                     "more_url", "image" } ] }
+--                     "more_url", "image", "updated" } ] }
+-- `updated` (facultatif) : date de mise à jour, affichée sous la date si renseignée.
 -- `image` est décorative (`alt=""`) : pas de champ `image_alt`.
 -- Boutons : `components.publication_actions`.
 
