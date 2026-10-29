@@ -60,26 +60,32 @@
     --ife-cut-lg-y: 1.5rem;
 }
 
+// Valeurs mobiles des jetons. Appliquées sous $ife-bp-nav, et dans les cartes
+// du bandeau publication, compactes sur tous les écrans (`_bandeaupublication.scss`).
+@mixin ife-tokens-mobile {
+    --ife-band-gradient: #{$ife-band-gradient-mobile};
+    --ife-fs-sm: 0.75rem;
+    --ife-fs-lg: 1.125rem;
+    --ife-fs-base: 0.875rem;
+    --ife-fs-h1: 3rem;
+    --ife-fs-h2-lg: 2.4375rem;
+    --ife-fs-h2-sm: 1.125rem;
+    --ife-fs-h3-lg: 1.125rem;
+    --ife-fs-h3-sm: 1rem;
+    --ife-fs-h4: 0.875rem;
+    --ife-fs-h5: 0.75rem;
+    --ife-fs-h6: 0.75rem;
+    --ife-fs-tag: 0.75rem;
+    --ife-fs-category: 0.75rem;
+    --ife-spacer-4: 1.25rem;
+    --ife-spacer-5: 2.25rem;
+    --ife-page-pad: var(--ife-spacer-3);
+    --ife-gutter: var(--ife-spacer-3);
+    --ife-header-height: auto;
+}
+
 @include ife-below($ife-bp-nav) {
     :root {
-        --ife-band-gradient: #{$ife-band-gradient-mobile};
-        --ife-fs-sm: 0.75rem;
-        --ife-fs-lg: 1.125rem;
-        --ife-fs-base: 0.875rem;
-        --ife-fs-h1: 3rem;
-        --ife-fs-h2-lg: 2.4375rem;
-        --ife-fs-h2-sm: 1.125rem;
-        --ife-fs-h3-lg: 1.125rem;
-        --ife-fs-h3-sm: 1rem;
-        --ife-fs-h4: 0.875rem;
-        --ife-fs-h5: 0.75rem;
-        --ife-fs-h6: 0.75rem;
-        --ife-fs-tag: 0.75rem;
-        --ife-fs-category: 0.75rem;
-        --ife-spacer-4: 1.25rem;
-        --ife-spacer-5: 2.25rem;
-        --ife-page-pad: var(--ife-spacer-3);
-        --ife-gutter: var(--ife-spacer-3);
-        --ife-header-height: auto;
+        @include ife-tokens-mobile;
     }
 }
