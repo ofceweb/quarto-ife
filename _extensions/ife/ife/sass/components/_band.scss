@@ -12,6 +12,9 @@
     position: relative;
     overflow: hidden;
     width: 100%;
+    // Filet blanc en haut et en bas de tous les bandeaux : sépare deux bandeaux sombres qui se suivent.
+    border-top: 1px solid var(--ife-blanc);
+    border-bottom: 1px solid var(--ife-blanc);
     background-color: var(--ife-primary);
     color: var(--ife-blanc);
     a:not(.ife-btn) {

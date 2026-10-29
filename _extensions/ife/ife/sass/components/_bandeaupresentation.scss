@@ -4,7 +4,6 @@
 // Pas de hauteur fixe : le bandeau suit son contenu, avec le padding vertical de la maquette.
 .bandeaupresentation {
     box-sizing: border-box;
-    border-bottom: 1px solid var(--ife-blanc);
     .ife-band__inner {
         min-height: 0;
         flex-direction: column;

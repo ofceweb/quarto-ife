@@ -10,7 +10,7 @@
     }
 }
 
-// Cartes : chaque carte porte son `.ife-band__media`, filets blancs sur les côtés et en bas.
+// Cartes : chaque carte porte son `.ife-band__media`, filets blancs sur les côtés (haut et bas : `.ife-band`).
 .bandeaupublication--cards .ife-band__inner {
     padding-block: 0;
 }
@@ -29,7 +29,7 @@
         min-width: 0;
         overflow: hidden;
         border-style: solid;
-        border-width: 0 1px 1px;
+        border-width: 0 1px;
         border-color: var(--ife-blanc);
     }
     &__card-content {
@@ -44,16 +44,6 @@
     }
 }
 
-// Trois cartes : espacements et tailles de la maquette mobile, plus compacts.
-.bandeaupublication--cards-3 {
-    .bandeaupublication__card-content {
-        padding: 2.25rem;
-    }
-    .bandeaupublication__title {
-        font-size: 2.25rem;
-    }
-}
-
 @include ife-below($ife-bp-nav) {
     .bandeaupublication__cards {
         flex-direction: column;
@@ -62,7 +52,8 @@
     .bandeaupublication__card {
         flex: none;
     }
-    .bandeaupublication--cards-3 .bandeaupublication__title {
-        font-size: var(--ife-fs-h2-lg);
+    // Cartes empilées : filet entre deux cartes ; sous la dernière, c'est celui du bandeau.
+    .bandeaupublication__card:not(:last-child) {
+        border-bottom-width: 1px;
     }
 }
