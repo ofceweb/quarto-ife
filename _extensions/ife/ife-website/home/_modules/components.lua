@@ -44,7 +44,7 @@ local LANG_TITLES = {
 }
 
 local REGION_ICONS = {
-    fr = "/www/flags/fr.svg",
+    fr = "/www/flags/fr_icon.svg",
     us = "/www/flags/us.svg",
     de = "/www/flags/de.svg",
     eu = "/www/flags/eu_icon.svg",
