@@ -4,10 +4,12 @@ body {
     font-size: var(--ife-fs-base);
 }
 
+// Quarto rend h3 à h6 transparents à 90 % : annulé, les titres gardent leur couleur pleine.
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
     font-family: var(--ife-font-title);
     border-bottom: none;
+    opacity: 1;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -29,13 +31,11 @@ h2, .h2 {
 }
 
 h3, .h3 {
-    opacity: .9;
     margin-top: var(--ife-spacer-2);
     @include ife-h3-sm;
 }
 
 h4, .h4 {
-    opacity: .9;
     margin-top: var(--ife-spacer-2);
     font-size: var(--ife-fs-h4);
 }

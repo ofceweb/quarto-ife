@@ -18,6 +18,13 @@ main li a {
     box-shadow: 0 0 0 2px var(--ife-blanc);
 }
 
+// Annexe Quarto (notes, références) : pas de transparence à 90 %, comme les titres.
+#quarto-appendix.default .quarto-appendix-heading,
+#quarto-appendix.default section *[role=doc-endnotes],
+#quarto-appendix.default section > *:not(a) {
+    opacity: 1;
+}
+
 // Pas d'icône de lien externe Quarto sur les boutons ni dans le header et le footer.
 .ife-btn.external::after,
 .ife-chrome a.external::after {

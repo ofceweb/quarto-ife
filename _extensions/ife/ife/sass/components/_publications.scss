@@ -42,7 +42,6 @@
         margin: 0;
         @include ife-h3-lg;
         color: var(--ife-primary);
-        opacity: 1;
         a {
             @include ife-underline-on-hover;
         }
@@ -89,12 +88,11 @@
         margin: 0;
         @include ife-h3-lg;
         color: var(--ife-blanc);
-        opacity: 1;
     }
     &__panel-text {
         margin: var(--ife-spacer-3) 0 0;
         @include ife-text-base;
-        color: var(--ife-text-color-light);
+        color: var(--ife-blanc);
     }
     &__sites {
         display: contents;
@@ -170,7 +168,6 @@
         @include ife-h3-lg;
         color: var(--ife-blanc);
         text-align: center;
-        opacity: 1;
     }
     &__site-description {
         margin: 0;
