@@ -6,10 +6,13 @@
 --       alaune:
 --         items: "_index_jsons/alaune.json"
 --
--- JSON: { "items": [ { "url", "image", "image_alt", "kicker", "title",
+-- JSON: { "items": [ { "url", "image", "kicker", "title",
 --                     "date", "authors", "excerpt", "type", "lang",
---                     "keywords", "source", "region" } ] }
+--                     "keywords", "source", "region", "updated" } ] }
+-- `updated` (facultatif) : date de mise à jour, affichée sous la date si renseignée.
 -- `region` : un code (`"fr"`) ou une liste (`["fr", "de", "eu"]`).
+-- `image` est décorative (`alt=""`) : pas de champ `image_alt`.
+-- Elle est cliquable via alaune.js, sans second lien (voir le script).
 
 local utils = require(
     quarto.utils.resolve_path("_modules/utils.lua"):gsub("%.lua$", "")
@@ -20,39 +23,22 @@ local components = require(
 
 local FEATURED_COUNT = 3
 
-local function title_html(title, url)
+local function title_html(title, url, lang)
     local text = utils.html_escape(title)
     if text == "" then return "" end
     local href = utils.to_str(url)
+    local lang_attr = utils.lang_attr(lang)
     if href == "" then
-        return string.format('<h3 class="alaune__title">%s</h3>', text)
+        return string.format('<h3 class="alaune__title"%s>%s</h3>', lang_attr, text)
     end
     return string.format(
-        '<h3 class="alaune__title"><a href="%s"%s>%s</a></h3>',
+        '<h3 class="alaune__title"%s><a href="%s"%s>%s%s</a></h3>',
+        lang_attr,
         utils.html_escape(href),
         utils.link_attrs(href),
-        text
+        text,
+        utils.new_window_hint(href)
     )
-end
-
-local function chart_html(image, alt, url)
-    local src = utils.to_str(image)
-    if src == "" then return "" end
-    local img = string.format(
-        '<img src="%s" alt="%s" />',
-        utils.html_escape(src),
-        utils.html_escape(utils.to_str(alt))
-    )
-    local href = utils.to_str(url)
-    if href ~= "" then
-        img = string.format(
-            '<a href="%s"%s>%s</a>',
-            utils.html_escape(href),
-            utils.link_attrs(href),
-            img
-        )
-    end
-    return string.format('<div class="alaune__chart">%s</div>', img)
 end
 
 local function head_html(item)
@@ -78,8 +64,6 @@ local function create_item(item, opts)
     local url = utils.pick(item, "url", 1)
     local title = utils.pick(item, "title", 3)
     local image = utils.pick(item, "image", "img", "cover", 2)
-    local alt = utils.pick(item, "image_alt", "alt")
-    if alt == "" then alt = title end
 
     local classes = { "alaune__item" }
     if featured then
@@ -97,9 +81,10 @@ local function create_item(item, opts)
         excerpt_html = utils.el(
             "p",
             "alaune__excerpt",
-            utils.rich_inline(utils.pick(item, "excerpt", "subtitle", "description"))
+            utils.rich_inline(utils.pick(item, "excerpt", "subtitle", "description")),
+            utils.lang_attr(utils.pick(item, "lang"))
         )
-        chart = chart_html(image, alt, url)
+        chart = utils.image_html(image, "", "alaune__chart", true)
     end
 
     local source_html = components.source_badge(
@@ -127,12 +112,12 @@ local function create_item(item, opts)
     ]],
         table.concat(classes, " "),
         head_html(item),
-        utils.el(
-            "p",
+        components.pub_date(
             "alaune__date",
-            utils.html_escape(utils.format_date_fr(utils.raw_pick(item, "date", "published")))
+            utils.raw_pick(item, "date", "published"),
+            utils.raw_pick(item, "updated")
         ),
-        title_html(title, url),
+        title_html(title, url, utils.pick(item, "lang")),
         excerpt_html,
         components.authors_html(
             utils.pick(item, "authors", "author"),
@@ -168,6 +153,12 @@ return {
             return pandoc.Str("")
         end
 
+        quarto.doc.add_html_dependency({
+            name = "ife-alaune",
+            version = "0.1.0",
+            scripts = { "alaune.js" },
+        })
+
         local featured, compact = {}, {}
         for i, item in ipairs(cfg.items) do
             if i <= FEATURED_COUNT then
@@ -190,7 +181,7 @@ return {
         ]], row_html(featured, true), row_html(compact, false))
 
         local html = utils.section_html(
-            utils.section_header_html(title, cfg.url, cfg.more_url, cfg.more_label),
+            utils.section_header_html(title, cfg.url, components.section_more_button(cfg, title)),
             body
         )
         return pandoc.RawBlock("html", html)

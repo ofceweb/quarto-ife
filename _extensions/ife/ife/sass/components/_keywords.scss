@@ -4,7 +4,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.35rem 0.5rem;
+    gap: var(--ife-spacer-1) var(--ife-spacer-2);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -13,16 +13,14 @@
         align-items: center;
         line-height: 1;
         i {
-            font-size: 0.875rem;
+            font-size: var(--ife-icon-size);
             line-height: 1;
         }
     }
     &__item {
-        font-family: var(--ife-font-body);
-        font-size: var(--ife-fs-category);
+        @include ife-category;
         font-weight: 400;
-        line-height: 1.3;
-        color: var(--ife-anthracite);
+        color: var(--ife-primary);
         text-transform: uppercase;
         // &:hover {
         //     text-decoration: underline;

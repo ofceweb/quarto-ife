@@ -1,5 +1,5 @@
 .section {
-    padding: 3rem 0;
+    padding: var(--ife-spacer-5) 0;
     > .container {
         box-sizing: border-box;
         max-width: var(--ife-page-max);
@@ -9,11 +9,5 @@
     }
     .header-anchor {
         display: none !important;
-    }
-}
-
-@media (max-width: #{$ife-bp-nav - 0.02px}) {
-    .section {
-        padding: 2rem 0;
     }
 }

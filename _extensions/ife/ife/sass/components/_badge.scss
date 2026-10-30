@@ -1,18 +1,38 @@
 // Badges, chips, icône PDF, source OFCE/CEPII, ligne de méta.
 // Contrat de classes pour `_modules/components.lua`.
+// Badge de catégorie : barre de couleur à gauche + libellé sur fond gris.
+// La barre est décorative (pseudo-élément, non restituée) : le libellé porte
+// l'information, la couleur ne fait que la renforcer. Hors contrainte de
+// contraste des éléments graphiques (RGAA 3.3), elle disparaît sans perte
+// en mode contraste forcé.
 .ife-badge {
+    --ife-category-color: var(--ife-category-default);
     display: inline-flex;
-    align-items: center;
-    padding: 0.5rem 0.5rem;
-    background-color: var(--ife-gris);
-    color: var(--ife-anthracite);
-    font-family: var(--ife-font-body);
-    font-size: var(--ife-fs-tag);
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    line-height: 1.2;
+    align-items: stretch;
+    color: var(--ife-primary);
+    @include ife-category;
+    line-height: var(--ife-label-line-height);
     text-transform: uppercase;
     white-space: nowrap;
+    &::before {
+        content: "";
+        flex: none;
+        width: 6px;
+        background-color: var(--ife-category-color);
+        border-right: 1px solid var(--ife-blanc);
+    }
+    &__label {
+        padding: var(--ife-label-padding);
+        background-color: var(--ife-grey-light);
+    }
+    &--blog { --ife-category-color: var(--ife-category-blog); }
+    &--ecograph { --ife-category-color: var(--ife-category-ecograph); }
+    &--prevision { --ife-category-color: var(--ife-category-prevision); }
+    &--lettre { --ife-category-color: var(--ife-category-lettre); }
+    &--policy { --ife-category-color: var(--ife-category-policy); }
+    &--working { --ife-category-color: var(--ife-category-working); }
+    &--revue { --ife-category-color: var(--ife-category-revue); }
+    &--rapport { --ife-category-color: var(--ife-category-rapport); }
 }
 
 .ife-lang-chip {
@@ -20,49 +40,56 @@
     align-items: center;
     justify-content: center;
     min-width: 1.5rem;
-    padding: 0.35rem 0.35rem;
-    border: 1px solid var(--ife-gris);
-    color: var(--ife-anthracite);
-    font-family: var(--ife-font-body);
-    font-size: var(--ife-fs-tag);
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    line-height: 1.2;
+    padding: var(--ife-spacer-1);
+    border: 1px solid var(--ife-grey-light);
+    color: var(--ife-primary);
+    @include ife-tag;
     text-transform: uppercase;
     white-space: nowrap;
+    abbr[title] {
+        text-decoration: none;
+        cursor: inherit;
+    }
 }
 
 .ife-pdf {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: var(--ife-anthracite);
+    color: var(--ife-primary);
     line-height: 1;
-    opacity: 0.7;
 }
 
 .ife-source {
+    --ife-source-color: var(--ife-primary);
     display: inline-flex;
+    flex-direction: row-reverse;
     align-items: center;
-    gap: 0.35rem;
-    color: var(--ife-anthracite);
-    font-family: var(--ife-font-body);
-    font-size: var(--ife-fs-category);
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    line-height: 1;
+    gap: var(--ife-spacer-1);
+    color: var(--ife-source-color);
+    @include ife-category;
     text-transform: uppercase;
     white-space: nowrap;
+    &__label {
+        padding: var(--ife-label-padding);
+        line-height: var(--ife-label-line-height);
+        color: var(--ife-blanc);
+        background-color: var(--ife-source-color);
+    }
     &__flags {
         display: inline-flex;
         align-items: center;
-        gap: 0.25rem;
+        gap: var(--ife-spacer-1);
+    }
+    &__flag {
+        height: 24px;
+        width: auto;
     }
     &--ofce {
-        color: var(--ife-bordeaux);
+        --ife-source-color: var(--ife-ofce);
     }
     &--cepii {
-        color: var(--ife-turquoise);
+        --ife-source-color: var(--ife-cepii);
     }
 }
 
@@ -70,30 +97,22 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 1rem;
-    font-family: var(--ife-font-body);
-    font-size: var(--ife-fs-date);
-    color: var(--ife-anthracite);
+    gap: var(--ife-spacer-3);
+    @include ife-date;
+    color: var(--ife-primary);
     &__date,
     &__location {
         display: inline-flex;
         align-items: center;
-        gap: 0.35rem;
+        gap: var(--ife-spacer-2);
     }
     &__location {
-        color: inherit;
-        text-decoration: none;
-        &:hover,
-        &:focus {
-            color: inherit;
-            text-decoration: underline;
-            text-underline-offset: 0.15em;
-        }
+        @include ife-underline-on-hover;
     }
 }
 
-@media (max-width: #{$ife-bp-sm - 0.02px}) {
+@include ife-below($ife-bp-sm) {
     .ife-meta {
-        gap: 0.75rem;
+        gap: var(--ife-spacer-2);
     }
 }

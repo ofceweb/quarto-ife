@@ -10,10 +10,7 @@
     &__heading {
         min-width: 0;
         margin: 0;
-        font-family: var(--ife-font-title);
-        font-size: var(--ife-fs-h2);
-        font-weight: 600;
-        line-height: 1.1;
+        @include ife-h2-lg;
         color: var(--ife-blanc);
     }
     &__grid {
@@ -25,36 +22,31 @@
         align-items: center;
         box-sizing: border-box;
         height: 100%;
-        padding: 2rem 1.5rem;
+        padding: var(--ife-spacer-5);
         border: 1px solid var(--ife-blanc);
         background-color: transparent;
         text-align: center;
+        @include ife-cut-corner(sm, var(--ife-blanc));
     }
     &__title {
         margin: 0;
-        font-family: var(--ife-font-title);
-        font-size: var(--ife-fs-h3-article);
-        font-weight: 600;
-        line-height: 1.2;
+        @include ife-h3-lg;
         color: var(--ife-blanc);
         text-align: center;
-        opacity: 1;
     }
     &__description {
-        margin: 1rem 0 0;
+        margin: var(--ife-spacer-3) 0 0;
         flex: 1;
-        font-family: var(--ife-font-body);
-        font-size: var(--ife-fs-base);
-        font-weight: 400;
-        line-height: 1.5;
+        @include ife-text-base;
         color: var(--ife-blanc);
+        text-align: left;
     }
     .ife-btn {
-        margin-top: 1.5rem;
+        margin-top: var(--ife-spacer-4);
     }
 }
 
-@media (max-width: #{$ife-bp-nav - 0.02px}) {
+@include ife-below($ife-bp-nav) {
     .outils .ife-band__inner {
         display: flex;
         flex-direction: column;
@@ -68,8 +60,8 @@
     }
 }
 
-@media (max-width: #{$ife-bp-sm - 0.02px}) {
+@include ife-below($ife-bp-sm) {
     .outils__card {
-        padding: 1.5rem 1rem;
+        padding: var(--ife-spacer-4) var(--ife-spacer-3);
     }
 }

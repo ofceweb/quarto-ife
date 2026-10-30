@@ -10,10 +10,13 @@
 --
 -- JSON: { "intro_title", "intro_text",
 --         "sites": [ { "url", "title", "description", "cta_label",
---                      "theme", "image", "image_alt" } ],
+--                      "theme", "image" } ],
 --         "items": [ { "url", "kicker", "title", "authors", "date",
---                      "type", "lang", "keywords", "source", "region" } ] }
+--                      "type", "lang", "keywords", "source", "region",
+--                      "updated" } ] }
+-- `updated` (facultatif) : date de mise à jour, affichée sous la date si renseignée.
 -- `region` : un code (`"fr"`) ou une liste (`["fr", "de", "eu"]`).
+-- `image` est décorative (`alt=""`) : pas de champ `image_alt`.
 
 local utils = require(
     quarto.utils.resolve_path("_modules/utils.lua"):gsub("%.lua$", "")
@@ -22,18 +25,21 @@ local components = require(
     quarto.utils.resolve_path("_modules/components.lua"):gsub("%.lua$", "")
 )
 
-local function title_html(title, url)
+local function title_html(title, url, lang)
     local text = utils.html_escape(title)
     if text == "" then return "" end
     local href = utils.to_str(url)
+    local lang_attr = utils.lang_attr(lang)
     if href == "" then
-        return string.format('<h3 class="publications__title">%s</h3>', text)
+        return string.format('<h3 class="publications__title"%s>%s</h3>', lang_attr, text)
     end
     return string.format(
-        '<h3 class="publications__title"><a href="%s"%s>%s</a></h3>',
+        '<h3 class="publications__title"%s><a href="%s"%s>%s%s</a></h3>',
+        lang_attr,
         utils.html_escape(href),
         utils.link_attrs(href),
-        text
+        text,
+        utils.new_window_hint(href)
     )
 end
 
@@ -75,12 +81,12 @@ local function create_item(item)
         </article>
     ]],
         head_html(item),
-        utils.el(
-            "p",
+        components.pub_date(
             "publications__date",
-            utils.html_escape(utils.format_date_fr(utils.raw_pick(item, "date", "published")))
+            utils.raw_pick(item, "date", "published"),
+            utils.raw_pick(item, "updated")
         ),
-        title_html(title, url),
+        title_html(title, url, utils.pick(item, "lang")),
         components.authors_html(
             utils.pick(item, "authors", "author"),
             "publications__authors"
@@ -112,8 +118,6 @@ end
 local function create_card(item)
     local title = utils.pick(item, "title")
     local image = utils.pick(item, "image", "img", "cover")
-    local alt = utils.pick(item, "image_alt", "alt")
-    if alt == "" then alt = title end
     local cta = utils.pick(item, "cta_label", "cta")
     if cta == "" then cta = "Visiter le site" end
 
@@ -128,7 +132,7 @@ local function create_card(item)
         </article>
     ]],
         card_class(item),
-        utils.image_html(image, alt, "publications__site-media"),
+        utils.image_html(image, "", "publications__site-media", true),
         utils.el("h3", "publications__site-title", utils.html_escape(title)),
         utils.el(
             "p",
@@ -138,7 +142,7 @@ local function create_card(item)
         components.cta_button(
             cta,
             utils.pick(item, "url"),
-            "solid",
+            "solid-light",
             "arrow"
         )
     )
@@ -206,7 +210,7 @@ return {
         end
 
         local html = utils.section_html(
-            utils.section_header_html(title, cfg.url, cfg.more_url, cfg.more_label),
+            utils.section_header_html(title, cfg.url, components.section_more_button(cfg, title)),
             body,
             "",
             "publications"

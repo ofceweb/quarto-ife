@@ -138,7 +138,7 @@ end
 
 --- Lit la config d'un shortcode sous `extensions: ife-website: <key>:`
 --- @param meta table Métadonnées Pandoc du document
---- @param key string Clé du bloc (`quisommesnous`, `alaune`, ...)
+--- @param key string Clé du bloc (`bandeauspecial`, `alaune`, ...)
 --- @return table|nil `{ items, title, url, more_url, more_label,
 ---                     intro_title, intro_text, json, raw }`
 function utils.block_config(meta, key)
@@ -245,13 +245,30 @@ end
 --- @param tag string
 --- @param class_name string|nil
 --- @param content string|nil Déjà échappé si besoin
+--- @param attrs string|nil Attributs HTML déjà formatés (ex. ` lang="en"`)
 --- @return string
-function utils.el(tag, class_name, content)
+function utils.el(tag, class_name, content, attrs)
     if not content or content == "" then return "" end
+    attrs = attrs or ""
     if class_name and class_name ~= "" then
-        return string.format('<%s class="%s">%s</%s>', tag, class_name, content, tag)
+        return string.format('<%s class="%s"%s>%s</%s>', tag, class_name, attrs, content, tag)
     end
-    return string.format("<%s>%s</%s>", tag, content, tag)
+    return string.format("<%s%s>%s</%s>", tag, attrs, content, tag)
+end
+
+local page_has_h1 = false
+
+--- Niveau du titre d'un bandeau : 1 si la page n'a pas encore de h1, sinon 2.
+--- La page a un h1 quand `title` est renseigné ou qu'un bandeau précédent l'a pris.
+--- Un titre Markdown `#` dans le corps de la page n'est pas détecté.
+--- @param meta table Métadonnées du document
+--- @return number
+function utils.band_heading_level(meta)
+    if page_has_h1 or utils.to_str(meta and meta.title) ~= "" then
+        return 2
+    end
+    page_has_h1 = true
+    return 1
 end
 
 --- Encodage pourcent d'une chaîne destinée à une query d'URL.
@@ -266,12 +283,32 @@ function utils.url_encode(text)
     end))
 end
 
+--- Attribut `lang="en"` si le champ langue vaut EN, sinon chaîne vide
+--- @param lang string|nil
+--- @return string
+function utils.lang_attr(lang)
+    if utils.to_str(lang):upper() == "EN" then
+        return ' lang="en"'
+    end
+    return ""
+end
+
 --- Attributs `target`/`rel` pour une URL http(s)
 --- @param url string
 --- @return string
 function utils.link_attrs(url)
     if utils.to_str(url):match("^https?://") then
         return ' target="_blank" rel="noopener noreferrer"'
+    end
+    return ""
+end
+
+--- Mention masquée « nouvelle fenêtre » pour une URL http(s)
+--- @param url string
+--- @return string
+function utils.new_window_hint(url)
+    if utils.to_str(url):match("^https?://") then
+        return '<span class="visually-hidden"> (nouvelle fenêtre)</span>'
     end
     return ""
 end
@@ -298,37 +335,48 @@ end
 --- @return string
 function utils.item_close(url)
     if utils.to_str(url) == "" then return "</div>" end
-    return "</a>"
+    return utils.new_window_hint(url) .. "</a>"
 end
 
---- Bloc image BEM, omis si `src` est vide
+--- Bloc image BEM, omis si `src` est vide.
+--- Si `decorative` est vrai, `alt` est une chaîne vide (RGAA 1.1 / 1.2).
+--- Sinon `alt` est obligatoire : son absence interrompt le rendu.
 --- @param src string|nil
 --- @param alt string|nil
 --- @param wrapper_class string
+--- @param decorative boolean|nil
 --- @return string
-function utils.image_html(src, alt, wrapper_class)
+function utils.image_html(src, alt, wrapper_class, decorative)
     local href = utils.html_escape(utils.to_str(src))
     if href == "" then return "" end
+    local alt_text = ""
+    if not decorative then
+        alt_text = utils.html_escape(utils.to_str(alt))
+        if alt_text == "" then
+            error(string.format(
+                "image_alt manquant pour l'image informative « %s ». Renseigne le champ image_alt dans le JSON.",
+                utils.to_str(src)
+            ))
+        end
+    end
     return string.format(
         '<div class="%s"><img src="%s" alt="%s" /></div>',
         wrapper_class,
         href,
-        utils.html_escape(utils.to_str(alt))
+        alt_text
     )
 end
 
---- En-tête de section (titre serif, lien optionnel, « voir tout » optionnel)
+--- En-tête de section (titre serif, lien optionnel, bouton optionnel à droite)
 --- @param title string|nil
 --- @param href string|nil
---- @param more_url string|nil
---- @param more_label string|nil
+--- @param more_html string|nil Bouton déjà rendu (`components.section_more_button`)
 --- @return string
-function utils.section_header_html(title, href, more_url, more_label)
+function utils.section_header_html(title, href, more_html)
     title = utils.html_escape(utils.to_str(title))
     if title == "" then return "" end
     href = utils.to_str(href)
-    more_url = utils.to_str(more_url)
-    more_label = utils.html_escape(utils.to_str(more_label))
+    more_html = utils.to_str(more_html)
 
     local inner = string.format([[
             <h2 class="ife-section-title">%s</h2>
@@ -345,17 +393,13 @@ function utils.section_header_html(title, href, more_url, more_label)
         header = string.format('<div class="section-header">%s</div>', inner)
     end
 
-    if more_url == "" then return header end
-    if more_label == "" then more_label = "Voir tout" end
+    if more_html == "" then return header end
     return string.format([[
-        <div class="d-flex justify-content-between align-items-start">
+        <div class="section-header-row">
             %s
-            <a href="%s" class="section-header-link">
-                <span>%s</span>
-                <span class="section-header-link-arrow">→</span>
-            </a>
+            %s
         </div>
-    ]], header, utils.html_escape(more_url), more_label)
+    ]], header, more_html)
 end
 
 --- Enveloppe `section.section > .container`, plus HTML optionnel hors conteneur

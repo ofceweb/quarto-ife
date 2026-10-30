@@ -59,81 +59,93 @@ $for(include-before)$
 $include-before$
 $endfor$
 
+<a class="ife-skip-link" href="#quarto-document-content">Aller au contenu</a>
+
 <header class="ife-chrome ife-header">
   <div class="ife-chrome__inner">
     <a class="ife-lockup" href="/" aria-label="IFE, Institut Français d’Économie — Accueil">
-      <img class="ife-lockup__logo" src="/www/IFE_Institut_logo_anthrancite.svg" alt="log de l'Institut Français d'Economie"/>
+      <img class="ife-lockup__logo" src="/www/IFE_Institut_logo_anthrancite.svg" alt=""/>
     </a>
     <button type="button" class="ife-nav-toggle" aria-controls="ife-header-menu" aria-expanded="false" aria-label="Ouvrir le menu">
       <i class="bi bi-list" aria-hidden="true"></i>
     </button>
-    <div class="ife-header__end" id="ife-header-menu">
-      <a class="ife-header__about" href="/ife/qui_sommes_nous.html">À propos &amp; contact</a>
+    <nav class="ife-header__end" id="ife-header-menu" aria-label="Menu principal">
+      <a class="ife-header__about" href="/ife/qui_sommes_nous.html">À propos et contact</a>
       <div class="ife-brand-btns">
         <a class="ife-brand-btn ife-brand-btn--ofce" href="https://www.ofce.fr/" target="_blank" rel="noopener noreferrer">
 <!--          <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> -->
-          <img src="/www/ifeofce.png" alt="logo de l'OFCE" height="16" />
-          <span class="visually-hidden"> (nouvelle fenêtre)</span>
+          <span class="ife-brand-btn__logo" aria-hidden="true"></span>
+          <span class="visually-hidden">Site de l’OFCE (nouvelle fenêtre)</span>
         </a>
         <a class="ife-brand-btn ife-brand-btn--cepii" href="https://www.cepii.fr/" target="_blank" rel="noopener noreferrer">
 <!--          <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> -->
-          <img src="/www/ifecepii.png" alt="logo du CEPII" height="16" />
-          <span class="visually-hidden"> (nouvelle fenêtre)</span>
+          <span class="ife-brand-btn__logo" aria-hidden="true"></span>
+          <span class="visually-hidden">Site du CEPII (nouvelle fenêtre)</span>
         </a>
       </div>
-      <nav class="ife-social" aria-label="Contact et réseaux sociaux">
-        <a href="https://bsky.app/profile/ife-eco.bsky.social" target="_blank" rel="noopener noreferrer">
+      <ul class="ife-social" aria-label="Contact et réseaux sociaux">
+        <li><a href="https://bsky.app/profile/ife-eco.bsky.social" target="_blank" rel="noopener noreferrer">
           <img src="/www/bluesky_icon.svg" alt="Bluesky" />
           <span class="visually-hidden"> (nouvelle fenêtre)</span>
-        </a>
-        <a href="https://www.linkedin.com/company/ife-eco/" target="_blank" rel="noopener noreferrer">
+        </a></li>
+        <li><a href="https://www.linkedin.com/company/ife-eco/" target="_blank" rel="noopener noreferrer">
           <img src="/www/linkedin_icon.svg" alt="LinkedIn" />
           <span class="visually-hidden"> (nouvelle fenêtre)</span>
-        </a>
+        </a></li>
 <!-- Facebook : icône de la maquette. Renseigner href, puis retirer ce commentaire.
-        <a href="URL_DE_LA_PAGE_FACEBOOK" target="_blank" rel="noopener noreferrer">
+        <li><a href="URL_DE_LA_PAGE_FACEBOOK" target="_blank" rel="noopener noreferrer">
           <img src="/www/facebook_icon.svg" alt="Facebook" />
           <span class="visually-hidden"> (nouvelle fenêtre)</span>
-        </a>
+        </a></li>
 -->
-        <a href="https://www.youtube.com/@IFE-eco" target="_blank" rel="noopener noreferrer">
+        <li><a href="https://www.youtube.com/@IFE-eco" target="_blank" rel="noopener noreferrer">
           <img src="/www/youtube_icon.svg" alt="YouTube" />
           <span class="visually-hidden"> (nouvelle fenêtre)</span>
-        </a>
+        </a></li>
 <!-- Flux RSS : icône de la maquette. Renseigner href, puis retirer ce commentaire.
-        <a href="URL_DU_FLUX_RSS">
+        <li><a href="URL_DU_FLUX_RSS">
           <img src="/www/rss_icon.svg" alt="Flux RSS" />
-        </a>
+        </a></li>
 -->
-        <a href="mailto:contact@ife.eco">
-          <img src="/www/envelope_icon.svg" alt="Courriel" />
-        </a>
-      </nav>
+        <li><a href="mailto:contact@ife.eco">
+          <img src="/www/envelope_icon.svg" alt="Écrire à contact@ife.eco" />
+        </a></li>
+      </ul>
       <nav class="ife-lang" aria-label="Choix de la langue">
-        <a class="ife-lang__current" href="/" lang="fr" hreflang="fr" aria-current="page">FR</a>
+        <a class="ife-lang__current" href="/" lang="fr" hreflang="fr">FR</a>
         <span class="ife-lang__sep" aria-hidden="true"> / </span>
-        <a class="ife-lang__other" href="#" lang="en" hreflang="en" aria-disabled="true" tabindex="-1" title="Version anglaise à venir">EN</a>
+        <span class="ife-lang__other" lang="en">EN <span class="visually-hidden">(Coming soon)</span></span>
       </nav>
-    </div>
+    </nav>
   </div>
 </header>
 <script>
 (function () {
   var header = document.querySelector("header.ife-header");
-  if (header && header.parentElement !== document.body) {
-    document.body.insertBefore(header, document.body.firstChild);
+  var skipLink = document.querySelector(".ife-skip-link");
+  if (header && skipLink && header.parentElement !== document.body) {
+    document.body.prepend(skipLink, header);
   }
   var toggle = document.querySelector(".ife-nav-toggle");
   if (!header || !toggle) return;
   var icon = toggle.querySelector("i");
-  toggle.addEventListener("click", function () {
-    var open = header.classList.toggle("is-open");
+  function setOpen(open) {
+    header.classList.toggle("is-open", open);
     toggle.setAttribute("aria-expanded", open ? "true" : "false");
     toggle.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
     if (icon) {
       icon.classList.toggle("bi-list", !open);
       icon.classList.toggle("bi-x-lg", open);
     }
+  }
+  toggle.addEventListener("click", function () {
+    setOpen(!header.classList.contains("is-open"));
+  });
+  // Échap ferme le menu et rend le focus au bouton.
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape" || !header.classList.contains("is-open")) return;
+    setOpen(false);
+    toggle.focus();
   });
 })();
 </script>
@@ -156,6 +168,9 @@ $elseif(abstract)$
 $title-block.html()$
 $elseif(keywords)$
 $title-block.html()$
+$else$
+<!-- Sans title-block, Quarto y déplace le premier h1 de la page (celui d'un bandeau). -->
+<header id="title-block-header" class="quarto-title-block"></header>
 $endif$
 
 
@@ -176,26 +191,28 @@ $endfor$
       <img class="ife-lockup__logo" src="/www/IFE_Institut_logo_anthrancite.svg" alt="" />
     </a>
     <div class="ife-footer__end">
+      <div class="ife-brand-btns">
+        <a class="ife-brand-btn ife-brand-btn--ofce" href="https://www.ofce.fr/" target="_blank" rel="noopener noreferrer">
+<!--          <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> -->
+          <span class="ife-brand-btn__logo" aria-hidden="true"></span>
+          <span class="visually-hidden">Site de l’OFCE (nouvelle fenêtre)</span>
+        </a>
+        <a class="ife-brand-btn ife-brand-btn--cepii" href="https://www.cepii.fr/" target="_blank" rel="noopener noreferrer">
+<!--          <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> -->
+          <span class="ife-brand-btn__logo" aria-hidden="true"></span>
+          <span class="visually-hidden">Site du CEPII (nouvelle fenêtre)</span>
+        </a>
+      </div>
       <nav class="ife-footer__legal" aria-label="Liens légaux">
         <ul>
           <li><a href="/legal/cookies.html">Cookies</a></li>
           <li><a href="/legal/mentions_legales.html">Mentions légales</a></li>
           <li><a href="/legal/conditions_generales.html">Conditions générales</a></li>
+          <li><a href="/legal/plan_du_site.html">Plan du site</a></li>
+          <li><a href="https://www.sciencespo.fr/fr/accessibilite/" target="_blank" rel="noopener noreferrer">Accessibilité : en cours d’audit<span class="visually-hidden"> (nouvelle fenêtre)</span></a></li>
           <li><a href="/ife/qui_sommes_nous.html">Contact</a></li>
         </ul>
       </nav>
-      <div class="ife-brand-btns">
-        <a class="ife-brand-btn ife-brand-btn--ofce" href="https://www.ofce.fr/" target="_blank" rel="noopener noreferrer">
-<!--          <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> -->
-          <img src="/www/ifeofce.png" alt="logo de l'OFCE" height="16" />
-          <span class="visually-hidden"> (nouvelle fenêtre)</span>
-        </a>
-        <a class="ife-brand-btn ife-brand-btn--cepii" href="https://www.cepii.fr/" target="_blank" rel="noopener noreferrer">
-<!--          <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> -->
-          <img src="/www/ifecepii.png" alt="logo du CEPII" height="16" />
-          <span class="visually-hidden"> (nouvelle fenêtre)</span>
-        </a>
-      </div>
     </div>
   </div>
 </footer>

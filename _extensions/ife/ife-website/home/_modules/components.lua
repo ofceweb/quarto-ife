@@ -22,8 +22,29 @@ local SOURCE_LABELS = {
     cepii = "IFE|CEPII",
 }
 
+-- Catégorie de contenu → couleur décorative du badge (`ife-badge--<clé>`).
+-- Premier motif trouvé dans le libellé normalisé (minuscules, sans accent).
+-- Un libellé absent de la liste garde la couleur par défaut.
+-- Troisième champ : langue du libellé, si elle diffère de la page (RGAA 8.7).
+local CATEGORY_PATTERNS = {
+    { "blog", "blog" },
+    { "ecograph", "ecograph" },
+    { "prevision", "prevision" },
+    { "lettre", "lettre" },
+    { "policy brief", "policy", "EN" },
+    { "working paper", "working", "EN" },
+    { "revue", "revue" },
+    { "rapport", "rapport" },
+    { "etude", "rapport" },
+}
+
+local LANG_TITLES = {
+    EN = "Publication en anglais",
+    FR = "Publication en français",
+}
+
 local REGION_ICONS = {
-    fr = "/www/flags/fr.svg",
+    fr = "/www/flags/fr_icon.svg",
     us = "/www/flags/us.svg",
     de = "/www/flags/de.svg",
     eu = "/www/flags/eu_icon.svg",
@@ -31,14 +52,10 @@ local REGION_ICONS = {
 }
 
 local VARIANTS = {
-    solid = "solid",
-    fill = "solid",
-    primary = "solid",
-    outline = "outline",
-    ghost = "outline",
-    light = "outline",
+    ["solid-light"] = "solid-light",
+    ["solid-dark"] = "solid-dark",
+    ["outline-light"] = "outline-light",
     ["outline-dark"] = "outline-dark",
-    dark = "outline-dark",
 }
 
 --- Classe Bootstrap Icons (`bi bi-…`), chaîne vide si name est vide
@@ -85,6 +102,20 @@ local function source_key(source)
     if s:find("cepii", 1, true) then return "cepii" end
     if s:find("ofce", 1, true) then return "ofce" end
     return css_token(s)
+end
+
+--- @param label any
+--- @return string|nil Clé de `CATEGORY_PATTERNS`, nil pour la couleur par défaut
+--- @return string|nil Langue du libellé (`EN`), nil si celle de la page
+local function category_key(label)
+    local s = utils.to_str(label):lower()
+    for _, accent in ipairs({ "É", "é", "È", "è", "Ê", "ê" }) do
+        s = s:gsub(accent, "e")
+    end
+    for _, entry in ipairs(CATEGORY_PATTERNS) do
+        if s:find(entry[1], 1, true) then return entry[2], entry[3] end
+    end
+    return nil
 end
 
 --- @param region any
@@ -177,21 +208,45 @@ local function flag_src(key)
 end
 
 --- Badge de type de contenu (Policy Brief, Séminaire, …). Omis si vide.
+--- La barre de couleur est décorative : le libellé porte l'information.
 --- @param label string|nil
 --- @return string
 function components.badge_type(label)
     local text = utils.html_escape(utils.to_str(label))
     if text == "" then return "" end
-    return string.format('<span class="ife-badge">%s</span>', text)
+    local key, lang = category_key(label)
+    local class_name = key and ("ife-badge ife-badge--" .. key) or "ife-badge"
+    return string.format(
+        '<span class="%s"><span class="ife-badge__label"%s>%s</span></span>',
+        class_name,
+        utils.lang_attr(lang),
+        text
+    )
 end
 
 --- Chip de langue (`FR`, `EN`). Omis si vide.
+--- L'`abbr` porte l'intitulé complet en français.
+--- `lang="en"` est sur le code `EN`, pas sur le titre.
 --- @param lang string|nil
 --- @return string
 function components.lang_chip(lang)
-    local text = utils.html_escape(utils.to_str(lang))
-    if text == "" then return "" end
-    return string.format('<span class="ife-lang-chip">%s</span>', text)
+    local raw = utils.to_str(lang)
+    if raw == "" then return "" end
+    local text = utils.html_escape(raw)
+    local title = LANG_TITLES[raw:upper()]
+    if not title then
+        return string.format('<span class="ife-lang-chip">%s</span>', text)
+    end
+    local code = text
+    local lang_attr = utils.lang_attr(raw)
+    if lang_attr ~= "" then
+        code = string.format("<span%s>%s</span>", lang_attr, text)
+    end
+    return string.format(
+        '<span class="ife-lang-chip"><abbr title="%s">%s</abbr></span>',
+        utils.html_escape(title),
+        code
+    )
 end
 
 --- Marqueur PDF non cliquable. Affiché quand l'URL pointe un fichier .pdf,
@@ -265,19 +320,42 @@ function components.keywords_row(keywords)
     )
 end
 
---- Bouton d'action. Variantes : `solid`, `outline`, `outline-dark`.
+--- Bouton d'action. Variantes : `solid-light`, `solid-dark`, `outline-light`, `outline-dark`.
 --- `icon` : `arrow` (Bootstrap), `envelope` (`mail_icon.svg`), ou une classe Bootstrap Icons.
 --- Omis si le libellé est vide. Sans URL, rend un `span`.
+--- `hidden_prefix` : texte masqué lu avant le libellé (ex. « Écrire à »).
+--- `hidden_suffix` : texte masqué lu après le libellé (ex. « sur Macroéconomie »).
+--- `extra_class` : classe ajoutée au bouton, pour un script ou un bloc (ex. `ife-band__cta`).
 --- @param label string|nil
 --- @param url string|nil
 --- @param variant string|nil
 --- @param icon string|nil
+--- @param hidden_prefix string|nil
+--- @param hidden_suffix string|nil
+--- @param extra_class string|nil
 --- @return string
-function components.cta_button(label, url, variant, icon)
+function components.cta_button(label, url, variant, icon, hidden_prefix, hidden_suffix, extra_class)
     local text = utils.html_escape(utils.to_str(label))
     if text == "" then return "" end
 
-    local variant_key = VARIANTS[utils.to_str(variant):lower()] or "solid"
+    local prefix = utils.to_str(hidden_prefix)
+    if prefix ~= "" then
+        text = string.format(
+            '<span class="visually-hidden">%s</span>%s',
+            utils.html_escape(prefix),
+            text
+        )
+    end
+    local suffix = utils.to_str(hidden_suffix)
+    if suffix ~= "" then
+        text = string.format(
+            '%s<span class="visually-hidden">%s</span>',
+            text,
+            utils.html_escape(suffix)
+        )
+    end
+
+    local variant_key = VARIANTS[utils.to_str(variant):lower()] or "solid-light"
     local icon_html = cta_icon(icon)
     local inner = text
     if icon_html ~= "" then
@@ -285,17 +363,34 @@ function components.cta_button(label, url, variant, icon)
     end
 
     local class_name = "ife-btn ife-btn--" .. variant_key
+    local extra = utils.to_str(extra_class)
+    if extra ~= "" then class_name = class_name .. " " .. extra end
     local href = utils.to_str(url)
     if href == "" then
         return string.format('<span class="%s">%s</span>', class_name, inner)
     end
     return string.format(
-        '<a class="%s" href="%s"%s>%s</a>',
+        '<a class="%s" href="%s"%s>%s%s</a>',
         class_name,
         utils.html_escape(href),
         utils.link_attrs(href),
-        inner
+        inner,
+        utils.new_window_hint(href)
     )
+end
+
+--- Bouton contour d'en-tête de section, vers la liste complète du bloc.
+--- Omis sans `more_url`. Libellé par défaut : « Voir tout ».
+--- Le titre du bloc complète le libellé en texte masqué : deux blocs peuvent
+--- afficher le même libellé vers des pages différentes (RGAA 6.1).
+--- @param cfg table Config du bloc (`utils.block_config`)
+--- @param title string Titre du bloc
+--- @return string
+function components.section_more_button(cfg, title)
+    if utils.to_str(cfg.more_url) == "" then return "" end
+    local label = utils.to_str(cfg.more_label)
+    if label == "" then label = "Voir tout" end
+    return components.cta_button(label, cfg.more_url, "outline-dark", "arrow", nil, " : " .. utils.to_str(title))
 end
 
 --- Ligne d'auteurs. Chaque nom porte `ife-author`. Omis si vide.
@@ -317,6 +412,142 @@ function components.authors_html(raw, class_name)
     end
     if #spans == 0 then return "" end
     return utils.el("p", class_name, table.concat(spans, ", "))
+end
+
+--- Boutons d'un bandeau de publication, empilés dans `<block>__actions`.
+--- « Lire cet article » (`cta_*`, blanc) mène à la publication du bandeau.
+--- « Nos publications » (`more_*`, contour) mène à la liste des publications.
+--- Chaque bouton est omis sans lien, le conteneur sans bouton.
+--- « Lire cet article » reçoit le titre de la publication en texte masqué :
+--- plusieurs bandeaux d'une page portent ce libellé (RGAA 6.1).
+--- Il porte `ife-band__cta`, que band-publication.js relie au titre de la publication.
+--- @param block string Classe du bloc (`ecograph`, …)
+--- @param item table
+--- @return string
+function components.publication_actions(block, item)
+    local buttons = {}
+
+    local url = utils.pick(item, "cta_url", "url")
+    if url ~= "" then
+        local label = utils.pick(item, "cta_label")
+        if label == "" then label = "Lire cet article" end
+        local subtitle = pandoc.utils.stringify(
+            pandoc.read(utils.pick(item, "subtitle"), "markdown").blocks
+        )
+        table.insert(buttons, components.cta_button(
+            label,
+            url,
+            "solid-light",
+            "arrow",
+            nil,
+            subtitle ~= "" and (" : " .. subtitle) or nil,
+            "ife-band__cta"
+        ))
+    end
+
+    local more_url = utils.pick(item, "more_url")
+    if more_url ~= "" then
+        local more_label = utils.pick(item, "more_label")
+        if more_label == "" then more_label = "Nos publications" end
+        table.insert(buttons, components.cta_button(
+            more_label,
+            more_url,
+            "outline-light",
+            "arrow"
+        ))
+    end
+
+    if #buttons == 0 then return "" end
+    return utils.el("div", block .. "__actions", table.concat(buttons))
+end
+
+--- Date de publication précédée de l'icône stylo, puis la ligne « Mise à jour le : … »
+--- si `updated` est renseigné (publication republiée avec des modifications).
+--- « Publié le » est masqué à l'écran : l'icône seule ne porte pas le sens. Omise si la date est vide.
+--- @param class_name string Classe du bloc (`alaune__date`, …)
+--- @param date any Date ISO de publication
+--- @param updated any Date ISO de mise à jour, facultative
+--- @return string
+function components.pub_date(class_name, date, updated)
+    local published = utils.html_escape(utils.format_date_fr(date))
+    if published == "" then return "" end
+    local updated_html = ""
+    local updated_text = utils.html_escape(utils.format_date_fr(updated))
+    if updated_text ~= "" then
+        updated_html = string.format(
+            '<p class="ife-pubdate__updated"><span class="ife-pubdate__label">Mise à jour le :</span> %s</p>',
+            updated_text
+        )
+    end
+    return string.format(
+        '<div class="%s ife-pubdate"><p class="ife-pubdate__published"><span class="ife-pubdate__icon" aria-hidden="true"></span><span class="visually-hidden">Publié le </span>%s</p>%s</div>',
+        class_name,
+        published,
+        updated_html
+    )
+end
+
+--- Bandeau de publication pleine largeur, image décorative en fond.
+--- Thème (titre du bandeau), date, titre de la publication, extrait, auteurs, boutons.
+--- Partagé par `bandeaupublication`, `bandeauspecial` et `ecograph`.
+--- Les classes suivent le bloc : `<block>__title`, `<block>__date`, …
+--- Le titre de la publication prend le niveau sous le thème.
+--- Boutons : voir `components.publication_actions`.
+--- Le titre de la publication (`ife-band__subtitle`) ouvre la publication au clic
+--- via band-publication.js, sans second lien (voir le script).
+--- @param block string Classe du bloc (`ecograph`, …)
+--- @param item table
+--- @param level number Niveau du thème (voir `utils.band_heading_level`)
+--- @param title string Texte du thème, non échappé
+--- @return string
+function components.publication_band(block, item, level, title)
+    quarto.doc.add_html_dependency({
+        name = "ife-band-publication",
+        version = "0.1.0",
+        scripts = { "band-publication.js" },
+    })
+
+    return string.format([[
+        <section class="ife-band ife-band--cover %s">
+            %s
+            <div class="ife-band__inner">
+                <div class="ife-band__content">
+                    %s
+                    %s
+                    %s
+                    %s
+                    %s
+                    %s
+                </div>
+            </div>
+        </section>
+    ]],
+        block,
+        utils.image_html(
+            utils.pick(item, "image", "img", "cover"),
+            "",
+            "ife-band__media",
+            true
+        ),
+        utils.el("h" .. level, block .. "__title", utils.html_escape(title)),
+        components.pub_date(
+            block .. "__date",
+            utils.pick(item, "date"),
+            utils.pick(item, "updated")
+        ),
+        utils.el(
+            "h" .. (level + 1),
+            block .. "__subtitle ife-band__subtitle",
+            utils.rich_inline(utils.pick(item, "subtitle"))
+        ),
+        utils.el(
+            "p",
+            block .. "__excerpt",
+            utils.rich_inline(utils.pick(item, "excerpt"))
+        ),
+        components.authors_html(utils.pick(item, "author"), block .. "__author"),
+        components.publication_actions(block, item)
+    )
 end
 
 --- Titre de section, serif, sans filet. Omis si vide.
@@ -353,10 +584,11 @@ function components.meta_line(type_label, date, location)
     if loc ~= "" then
         local href = "https://www.google.com/maps/search/?api=1&query=" .. utils.url_encode(loc)
         table.insert(parts, string.format(
-            '<a class="ife-meta__location" href="%s"%s><img src="/www/localisation_icon.svg" alt="" aria-hidden="true" />%s</a>',
+            '<a class="ife-meta__location" href="%s"%s><img src="/www/localisation_icon.svg" alt="" aria-hidden="true" /><span class="visually-hidden">Voir sur Google Maps : </span>%s%s</a>',
             utils.html_escape(href),
             utils.link_attrs(href),
-            utils.html_escape(loc)
+            utils.html_escape(loc),
+            utils.new_window_hint(href)
         ))
     end
 

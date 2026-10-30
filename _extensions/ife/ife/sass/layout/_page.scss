@@ -1,9 +1,5 @@
 // Grille de page : 1184px + pad 48px au desktop, 361px + pad 16px à 393px.
-html {
-    overflow-x: hidden;
-}
-
-body.fullcontent {
+body {
     #quarto-sidebar,
     #quarto-sidebar-glass {
         display: none;
@@ -13,21 +9,21 @@ body.fullcontent {
     }
 }
 
-body:not(.fullcontent) {
-    #quarto-sidebar,
-    #quarto-sidebar-glass {
-        display: none;
-    }
-
-    main {
-        margin: 0;
-    }
+main.content > p:has(+section) {
+    margin-bottom: var(--ife-spacer-2);
 }
 
-@media (max-width: #{$ife-bp-nav - 0.02px}) {
-    :root {
-        --ife-page-pad: #{$ife-page-pad-sm};
-        --ife-gutter: #{$ife-gutter-sm};
-        --ife-header-height: auto;
-    }
+main.content > section:first-of-type > h2:nth-child(1),
+main.content > section:first-of-type > .h2:nth-child(1) {
+    margin-top: 1em;
+}
+
+#quarto-content > * {
+    padding-top: 0;
+}
+
+.page-columns.page-full,
+.content,
+.body {
+    text-align: left !important;
 }

@@ -12,7 +12,10 @@
     position: relative;
     overflow: hidden;
     width: 100%;
-    background-color: var(--ife-anthracite);
+    // Filet blanc en haut et en bas de tous les bandeaux : sépare deux bandeaux sombres qui se suivent.
+    border-top: 1px solid var(--ife-blanc);
+    border-bottom: 1px solid var(--ife-blanc);
+    background-color: var(--ife-primary);
     color: var(--ife-blanc);
     a:not(.ife-btn) {
         color: inherit;
@@ -20,6 +23,14 @@
         &:focus {
             color: inherit;
         }
+        &:focus-visible {
+            outline-color: var(--ife-blanc);
+        }
+    }
+    // Le titre est un h1 ou un h2 selon la page (voir `utils.band_heading_level`).
+    :is(h1, h2, h3, h4, h5, h6) {
+        padding-bottom: 0;
+        border-bottom: none;
     }
     &__inner {
         position: relative;
@@ -30,7 +41,7 @@
         max-width: var(--ife-page-max);
         min-height: 25.625rem;
         margin-inline: auto;
-        padding: 3rem var(--ife-page-pad);
+        padding: var(--ife-spacer-5) var(--ife-page-pad);
         gap: var(--ife-gutter);
     }
     &__content {
@@ -51,7 +62,7 @@
             inset: 0;
             background: linear-gradient(
                 to right,
-                var(--ife-anthracite) 0%,
+                var(--ife-primary) 0%,
                 transparent 55%
             );
         }
@@ -78,14 +89,13 @@
     }
 }
 
-@media (max-width: #{$ife-bp-nav - 0.02px}) {
+@include ife-below($ife-bp-nav) {
     .ife-band:not(.ife-band--cover) {
         display: flex;
         flex-direction: column-reverse;
     }
     .ife-band__inner {
         min-height: 0;
-        padding-block: 2rem;
     }
     .ife-band__content {
         max-width: none;
@@ -97,7 +107,7 @@
         &::after {
             background: linear-gradient(
                 to bottom,
-                var(--ife-anthracite) 0%,
+                var(--ife-primary) 0%,
                 transparent 50%
             );
         }

@@ -37,7 +37,7 @@ local function create_card(item)
         components.cta_button(
             cta,
             utils.pick(item, "url"),
-            "outline",
+            "outline-light",
             "arrow"
         )
     )

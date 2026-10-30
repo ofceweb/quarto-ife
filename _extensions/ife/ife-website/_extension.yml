@@ -13,19 +13,22 @@ contributes:
       title: "IFE"
       favicon: "img/IFE_logo_anthracite.ico"
       cookie-consent:
-        type: implied
+        type: express
         style: simple
         palette: light
         language: fr
         policy-url: https://ife.eco/legal/cookies.html
-      google-analytics: G-TRYS77TF8H
+      # GA n'est pas déclaré via google-analytics : Quarto chargerait gtag.js
+      # avant le consentement. Voir ife/html/analytics.html.
       navbar: false
 
   shortcodes:
-    - home/quisommesnous.lua
+    - home/bandeauinformatif.lua
+    - home/bandeauspecial.lua
     - home/alaune.lua
     - home/ecograph.lua
+    - home/bandeaupublication.lua
     - home/actualite.lua
     - home/publications.lua
     - home/outils.lua
-    - home/apropos.lua
+    - home/bandeaupresentation.lua
