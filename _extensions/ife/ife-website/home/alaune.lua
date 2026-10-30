@@ -181,7 +181,7 @@ return {
         ]], row_html(featured, true), row_html(compact, false))
 
         local html = utils.section_html(
-            utils.section_header_html(title, cfg.url, cfg.more_url, cfg.more_label),
+            utils.section_header_html(title, cfg.url, components.section_more_button(cfg, title)),
             body
         )
         return pandoc.RawBlock("html", html)

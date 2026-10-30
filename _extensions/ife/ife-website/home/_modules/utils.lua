@@ -367,18 +367,16 @@ function utils.image_html(src, alt, wrapper_class, decorative)
     )
 end
 
---- En-tête de section (titre serif, lien optionnel, « voir tout » optionnel)
+--- En-tête de section (titre serif, lien optionnel, bouton optionnel à droite)
 --- @param title string|nil
 --- @param href string|nil
---- @param more_url string|nil
---- @param more_label string|nil
+--- @param more_html string|nil Bouton déjà rendu (`components.section_more_button`)
 --- @return string
-function utils.section_header_html(title, href, more_url, more_label)
+function utils.section_header_html(title, href, more_html)
     title = utils.html_escape(utils.to_str(title))
     if title == "" then return "" end
     href = utils.to_str(href)
-    more_url = utils.to_str(more_url)
-    more_label = utils.html_escape(utils.to_str(more_label))
+    more_html = utils.to_str(more_html)
 
     local inner = string.format([[
             <h2 class="ife-section-title">%s</h2>
@@ -395,17 +393,13 @@ function utils.section_header_html(title, href, more_url, more_label)
         header = string.format('<div class="section-header">%s</div>', inner)
     end
 
-    if more_url == "" then return header end
-    if more_label == "" then more_label = "Voir tout" end
+    if more_html == "" then return header end
     return string.format([[
-        <div class="d-flex justify-content-between align-items-start">
+        <div class="section-header-row">
             %s
-            <a href="%s" class="section-header-link">
-                <span>%s</span>
-                <span class="section-header-link-arrow" aria-hidden="true">→</span>
-            </a>
+            %s
         </div>
-    ]], header, utils.html_escape(more_url), more_label)
+    ]], header, more_html)
 end
 
 --- Enveloppe `section.section > .container`, plus HTML optionnel hors conteneur

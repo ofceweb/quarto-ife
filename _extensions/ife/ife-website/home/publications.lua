@@ -210,7 +210,7 @@ return {
         end
 
         local html = utils.section_html(
-            utils.section_header_html(title, cfg.url, cfg.more_url, cfg.more_label),
+            utils.section_header_html(title, cfg.url, components.section_more_button(cfg, title)),
             body,
             "",
             "publications"

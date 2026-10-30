@@ -24,37 +24,16 @@ a.section-header:hover {
     }
 }
 
-.section-header-link {
+// Titre à gauche, bouton `components.section_more_button()` à droite.
+// Le bouton passe sous le titre quand la place manque.
+.section-header-row {
     display: flex;
-    align-items: center;
-    gap: var(--ife-spacer-2);
-    color: var(--ife-primary);
-    @include ife-text-base-bold;
-    text-decoration: none;
-    transition: opacity 0.2s ease;
-    &-arrow {
-        display: inline-block;
-        font-size: var(--ife-fs-lg);
-        opacity: 0;
-        transition: transform 0.2s ease, opacity 0.2s ease;
-    }
-    &:hover,
-    &:focus-visible {
-        opacity: 0.85;
-        .section-header-link-arrow {
-            transform: translateX(4px);
-            opacity: 1;
-        }
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .section-header-link,
-    .section-header-link-arrow {
-        transition: none;
-    }
-    .section-header-link:hover .section-header-link-arrow,
-    .section-header-link:focus-visible .section-header-link-arrow {
-        transform: none;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--ife-spacer-3);
+    margin-bottom: var(--ife-spacer-4);
+    .section-header {
+        margin-bottom: 0;
     }
 }

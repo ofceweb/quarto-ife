@@ -379,6 +379,20 @@ function components.cta_button(label, url, variant, icon, hidden_prefix, hidden_
     )
 end
 
+--- Bouton contour d'en-tête de section, vers la liste complète du bloc.
+--- Omis sans `more_url`. Libellé par défaut : « Voir tout ».
+--- Le titre du bloc complète le libellé en texte masqué : deux blocs peuvent
+--- afficher le même libellé vers des pages différentes (RGAA 6.1).
+--- @param cfg table Config du bloc (`utils.block_config`)
+--- @param title string Titre du bloc
+--- @return string
+function components.section_more_button(cfg, title)
+    if utils.to_str(cfg.more_url) == "" then return "" end
+    local label = utils.to_str(cfg.more_label)
+    if label == "" then label = "Voir tout" end
+    return components.cta_button(label, cfg.more_url, "outline-dark", "arrow", nil, " : " .. utils.to_str(title))
+end
+
 --- Ligne d'auteurs. Chaque nom porte `ife-author`. Omis si vide.
 --- @param raw string|nil Chaîne unique, noms séparés par des virgules
 --- @param class_name string Classe du paragraphe (`alaune__authors`, …)
