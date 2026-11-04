@@ -1,6 +1,8 @@
 // Semantic tokens consumed by layout/ and components/.
 :root {
     --ife-primary: #{$ife-primary};
+    // Couleur d'accent de la marque (institution), changée par .ife-brand--*.
+    --ife-accent: #{$ife-primary};
     --ife-blanc: #{$ife-blanc};
     --ife-grey-light: #{$ife-grey-light};
     --ife-ofce: #{$ife-ofce};
@@ -82,6 +84,14 @@
     --ife-page-pad: var(--ife-spacer-3);
     --ife-gutter: var(--ife-spacer-3);
     --ife-header-height: auto;
+}
+
+.ife-brand--ofce {
+    --ife-accent: #{$ife-ofce};
+}
+
+.ife-brand--cepii {
+    --ife-accent: #{$ife-cepii};
 }
 
 @include ife-below($ife-bp-nav) {
