@@ -15,4 +15,4 @@ Une version publiée est une étiquette `vX.Y.Z` du dépôt. L'extension s'insta
 quarto add ofceweb/quarto-ife@v0.1.0 --no-prompt
 ```
 
-Quarto copie l'extension dans `_extensions/ife/`, qui se commite avec le dépôt.
+Quarto nomme le dossier d'installation d'après le propriétaire du dépôt GitHub : l'extension arrive dans `_extensions/ofceweb/`, qui se commite avec le projet.
