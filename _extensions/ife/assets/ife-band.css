@@ -222,22 +222,6 @@
   opacity: 0.85;
 }
 
-#title-block-header {
-  margin: 0;
-}
-
-#title-block-header:empty,
-.quarto-title-block:empty {
-  display: none;
-}
-
-.quarto-title-block:not(:empty) {
-  background-color: var(--ife-blanc);
-  margin: var(--ife-spacer-1) -1px 1em 0 !important;
-  padding: 0 var(--ife-spacer-3) !important;
-  border-left: 1px solid var(--ife-primary) !important;
-}
-
 .ife-chrome {
   background-color: var(--ife-blanc);
   width: 100%;
@@ -386,10 +370,6 @@ main > .ife-header {
     height: 40px;
   }
 }
-body > footer.footer {
-  display: none;
-}
-
 .ife-footer__end {
   display: flex;
   flex-direction: column;
