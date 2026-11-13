@@ -10,7 +10,8 @@ La bande s'écrit à un seul endroit, dans l'extension :
 
 - `_extensions/ife/html/header.html` et `html/footer.html` : le balisage de l'en-tête et du pied de page, partials Pandoc appelés par `template.html` ;
 - `_extensions/ife/sass/` : les styles, dans `layout/_header.scss`, `layout/_footer.scss`, `components/_brand-button.scss`, `_social.scss` et `_skip-link.scss` ;
-- `_extensions/ife/html/ife-band.js` : le script d'injection, sans le fragment ;
+- `_extensions/ife/html/ife-band.js` : le script d'injection, sans le fragment ni le bouton du menu ;
+- `_extensions/ife/html/nav-toggle.js` : le bouton du menu mobile, partial de `template.html`, sans signe dollar puisque Pandoc le lit comme un modèle ;
 - `_extensions/ife/assets/img/` : les images de la bande ;
 - `_extensions/ife/assets/.htaccess` : la règle de cache sous Apache.
 
@@ -18,7 +19,7 @@ La bande s'écrit à un seul endroit, dans l'extension :
 
 `scripts/build-assets.sh` construit deux fichiers à partir des sources, dans `_extensions/ife/assets/` :
 
-- `ife-band.js`, le script d'injection, qui porte le fragment HTML de l'en-tête et du pied de page, avec l'habillage IFE par défaut ;
+- `ife-band.js`, le script d'injection, qui porte le fragment HTML de l'en-tête et du pied de page, avec l'habillage IFE par défaut, et le bouton du menu de `nav-toggle.js` ;
 - `ife-band.css`, compilé à partir de `sass/band.scss`, qui habille la bande dans une page qui n'est pas rendue avec `quarto-ife`.
 
 Les deux fichiers sont commités. `scripts/build-assets.sh --check` échoue s'ils ne correspondent plus aux sources.
@@ -33,7 +34,7 @@ Le navigateur revalide les fichiers communs à chaque page : `Cache-Control: no-
 
 Une page rendue avec `ife-html` charge `/assets/ife-band.css` et `/assets/ife-band.js` par un petit script en ligne de `<head>`. Quarto rend relatives les adresses écrites dans les attributs des balises : une page de `webhome`, servie sous `/ofce/`, chercherait alors les fichiers sous `/ofce/assets/`. Le script en ligne garde l'adresse absolue.
 
-Au chargement, `ife-band.js` remplace `header.ife-header` et `footer.ife-footer`. Une page IFE|OFCE ou IFE|CEPII garde son logo : le script le lit dans la classe `ife-brand--ofce` ou `ife-brand--cepii` de `<body>`. Le bouton du menu mobile est branché par délégation sur `document`, et fonctionne donc sur la bande injectée.
+Au chargement, `ife-band.js` remplace `header.ife-header` et `footer.ife-footer`. Une page IFE|OFCE ou IFE|CEPII garde son logo : le script le lit dans la classe `ife-brand--ofce` ou `ife-brand--cepii` de `<body>`. Le bouton du menu mobile est branché par délégation sur `document`, et fonctionne donc sur la bande injectée. Le même code, `nav-toggle.js`, est écrit dans la page au rendu et porté par `ife-band.js`. Chaque branchement retire le précédent, et `ife-band.js` branche le sien après le chargement de la page : le comportement du menu suit donc lui aussi la dernière version publiée, et la page garde celui de son rendu si `ife-band.js` ne répond pas.
 
 Une page figée, qui n'est plus rendue, reçoit l'accroche une seule fois, par `scripts/poser-accroche.R <dossier>` : la feuille et le script avant `</head>`, `<div data-ife-band="header"></div>` après `<body>` et `<div data-ife-band="footer"></div>` avant `</body>`. Un second passage ne change rien. La pose sur les pages publiées et le masquage de leur ancien en-tête se font à la bascule (#4124).
 

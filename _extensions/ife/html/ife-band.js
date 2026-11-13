@@ -53,36 +53,11 @@ __IFE_BAND_FRAGMENT__
     if (oldFooter) oldFooter.replaceWith(document.adoptNode(footer));
   }
 
-  // Bouton du menu mobile, par délégation, pour une page figée qui n'a pas le
-  // script de template.html. Une page rendue avec quarto-ife l'a déjà branché.
+  // Bouton du menu mobile, tiré de html/nav-toggle.js par build-assets.sh.
+  // Appelé après DOMContentLoaded, donc après le script de la page rendue, dont
+  // il remplace le branchement ; il branche aussi le bouton d'une page figée.
   function bindMenu() {
-    if (window.ifeNavBound) return;
-    window.ifeNavBound = true;
-    function setOpen(header, toggle, open) {
-      header.classList.toggle("is-open", open);
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      toggle.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
-      var icon = toggle.querySelector("i");
-      if (icon) {
-        icon.classList.toggle("bi-list", !open);
-        icon.classList.toggle("bi-x-lg", open);
-      }
-    }
-    document.addEventListener("click", function (e) {
-      var toggle = e.target.closest && e.target.closest(".ife-nav-toggle");
-      var header = toggle && toggle.closest("header.ife-header");
-      if (!header) return;
-      setOpen(header, toggle, !header.classList.contains("is-open"));
-    });
-    // Échap ferme le menu et rend le focus au bouton.
-    document.addEventListener("keydown", function (e) {
-      var header = document.querySelector("header.ife-header");
-      if (e.key !== "Escape" || !header || !header.classList.contains("is-open")) return;
-      var toggle = header.querySelector(".ife-nav-toggle");
-      if (!toggle) return;
-      setOpen(header, toggle, false);
-      toggle.focus();
-    });
+__IFE_NAV_TOGGLE__
   }
 
   function run() {

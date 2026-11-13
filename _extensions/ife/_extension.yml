@@ -72,6 +72,7 @@ contributes:
         - html/title-block.html
         - html/header.html
         - html/footer.html
+        - html/nav-toggle.js
       include-in-header:
         - html/analytics.html
         - html/cookie-consent-a11y.html

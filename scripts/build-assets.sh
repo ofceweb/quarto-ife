@@ -3,7 +3,7 @@
 # à partir des sources de l'extension (docs/injection-bande.md) :
 #   - _extensions/ife/assets/ife-band.js, à partir de html/ife-band.js, où il
 #     place le fragment tiré de html/header.html et html/footer.html, avec
-#     l'habillage IFE par défaut ;
+#     l'habillage IFE par défaut, et le bouton du menu de html/nav-toggle.js ;
 #   - _extensions/ife/assets/ife-band.css, à partir de sass/band.scss.
 # img/ et .htaccess sont des sources, écrites à la main.
 #
@@ -50,8 +50,16 @@ if grep -qE '`|\$\{|\\' "$tmp/fragment.lf"; then
   echo "L'en-tête ou le pied contient \`, \${ ou \\, que le script ne peut pas porter." >&2
   exit 1
 fi
+# Le bouton du menu est aussi un partial de template.html : Pandoc y lirait un
+# signe dollar comme une variable.
+if grep -q '\$' "$ext/html/nav-toggle.js"; then
+  echo "html/nav-toggle.js contient un signe dollar, que Pandoc interpréterait." >&2
+  exit 1
+fi
+tr -d '\r' < "$ext/html/nav-toggle.js" > "$tmp/nav-toggle.lf"
 tr -d '\r' < "$ext/html/ife-band.js" \
-  | sed -e "/^__IFE_BAND_FRAGMENT__\$/{r $tmp/fragment.lf" -e 'd' -e '}' > "$tmp/ife-band.js"
+  | sed -e "/^__IFE_BAND_FRAGMENT__\$/{r $tmp/fragment.lf" -e 'd' -e '}' \
+        -e "/^__IFE_NAV_TOGGLE__\$/{r $tmp/nav-toggle.lf" -e 'd' -e '}' > "$tmp/ife-band.js"
 
 "$sass" --silence-deprecation=import --no-source-map --style=expanded "$ext/sass/band.scss" "$tmp/ife-band.css"
 

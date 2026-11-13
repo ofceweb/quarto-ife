@@ -85,37 +85,8 @@ $header.html()$
   if (header && skipLink && header.parentElement !== document.body) {
     document.body.prepend(skipLink, header);
   }
-  // Délégation sur document : le bouton fonctionne aussi sur la bande que
-  // /assets/ife-band.js met à la place de celle-ci. Ce script porte le même
-  // branchement pour les pages figées ; le drapeau évite un double branchement.
-  if (window.ifeNavBound) return;
-  window.ifeNavBound = true;
-  function setOpen(header, toggle, open) {
-    header.classList.toggle("is-open", open);
-    toggle.setAttribute("aria-expanded", open ? "true" : "false");
-    toggle.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
-    var icon = toggle.querySelector("i");
-    if (icon) {
-      icon.classList.toggle("bi-list", !open);
-      icon.classList.toggle("bi-x-lg", open);
-    }
-  }
-  document.addEventListener("click", function (e) {
-    var toggle = e.target.closest && e.target.closest(".ife-nav-toggle");
-    var header = toggle && toggle.closest("header.ife-header");
-    if (!header) return;
-    setOpen(header, toggle, !header.classList.contains("is-open"));
-  });
-  // Échap ferme le menu et rend le focus au bouton.
-  document.addEventListener("keydown", function (e) {
-    var header = document.querySelector("header.ife-header");
-    if (e.key !== "Escape" || !header || !header.classList.contains("is-open")) return;
-    var toggle = header.querySelector(".ife-nav-toggle");
-    if (!toggle) return;
-    setOpen(header, toggle, false);
-    toggle.focus();
-  });
 })();
+$nav-toggle.js()$
 </script>
 
 $if(title)$
