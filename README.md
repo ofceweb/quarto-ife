@@ -4,7 +4,9 @@ L'extension Quarto `quarto-ife` porte la charte du site de l'IFE : le format `if
 
 ## Contenu
 
-- `_extensions/ife/` fournit le format `ife-html`. `template.html` dessine l'en-tête et le pied de page, `sass/` porte la charte et le rendu visuel, et `brand.lua` choisit l'habillage selon la marque du dépôt.
+- `_extensions/ife/` fournit le format `ife-html`. `template.html` dessine la page, avec l'en-tête et le pied de page de `html/header.html` et `html/footer.html`. `sass/` porte la charte et le rendu visuel, et `brand.lua` choisit l'habillage selon la marque du dépôt. `assets/` contient les fichiers communs de la bande et ses images, que le site sert sous `/assets/`.
+- `scripts/` contient `build-assets.sh`, qui construit les fichiers communs de la bande, et `poser-accroche.R`, qui prépare une page figée à recevoir la bande.
+- `docs/injection-bande.md` décrit l'injection de la bande commune dans toutes les pages du site.
 - `_extensions/ife-website/` définit le type de projet `ife-website`. Il pose le favicon et le bandeau cookies, et déclare les shortcodes des blocs, un fichier par bloc dans `home/`.
 
 ## Installer l'extension
@@ -33,13 +35,13 @@ institution: ofce
 
 | `institution` | Habillage | Logo | Couleur d'accent |
 |---|---|---|---|
-| `ife`, ou champ absent | IFE | `/www/IFE_Institut_logo_anthrancite.svg` | anthracite `#29242F` |
-| `ofce` | IFE\|OFCE | `/www/IFE-OFCE_logo_anthracite.svg` | bordeaux `#7D0000` |
-| `cepii` | IFE\|CEPII | `/www/IFE-CEPII_logo_anthracite.svg` | turquoise `#21606E` |
+| `ife`, ou champ absent | IFE | `/assets/img/IFE_Institut_logo_anthrancite.svg` | anthracite `#29242F` |
+| `ofce` | IFE\|OFCE | `/assets/img/IFE-OFCE_logo_anthracite.svg` | bordeaux `#7D0000` |
+| `cepii` | IFE\|CEPII | `/assets/img/IFE-CEPII_logo_anthracite.svg` | turquoise `#21606E` |
 
 Une autre valeur produit un avertissement au rendu et l'habillage de l'IFE. Pour IFE|OFCE et IFE|CEPII, `<body>` porte la classe `ife-brand--ofce` ou `ife-brand--cepii`. La couleur d'accent est la variable CSS `--ife-accent`, que les styles des pages emploient à mesure que les maquettes en fixent l'usage.
 
-Les images de l'extension (logos, icônes, masques) ne sont pas dans l'extension : la page les appelle en `/www/…`, et le dossier `www/` du dépôt `ife_webhome` les fournit sous `ife.eco`. Un dépôt rendu ailleurs, sans copie de ces images, affiche ses pages sans logo ni icônes.
+Les images de la bande (logos, icônes, masques) sont dans `_extensions/ife/assets/img/`. La page les appelle en `/assets/img/…`, et `ife_webhome` les publie sous `ife.eco` avec les autres fichiers communs. Le thème garde `/www/…` pour les deux logos en masque des boutons IFE|OFCE et IFE|CEPII, car Quarto exige qu'une image appelée par la feuille de style soit dans le projet rendu, et `www/` d'`ife_webhome` continue de les servir. Un dépôt rendu ailleurs, sans ces images, affiche ses pages sans logo ni icônes.
 
 ## Mettre à jour l'extension
 
@@ -57,7 +59,9 @@ Un dépôt de document (working paper, policy brief, prévision) garde la versio
 Une modification de l'extension n'atteint aucun dépôt tant qu'elle n'est pas publiée. Pour publier une version :
 
 1. Passer `version` au nouveau numéro dans `_extensions/ife/_extension.yml` et `_extensions/ife-website/_extension.yml`, qui gardent toujours le même.
-2. Commiter, puis pousser `main`.
-3. Créer sur GitHub l'étiquette `vX.Y.Z` et sa release.
+2. Lancer `scripts/build-assets.sh`, qui reconstruit les fichiers communs de la bande à partir de l'en-tête, du pied de page et de leurs styles.
+3. Commiter, puis pousser `main`.
+4. Vérifier avec `scripts/build-assets.sh --check` que les fichiers communs correspondent aux sources, puis créer sur GitHub l'étiquette `vX.Y.Z` et sa release.
+5. Déployer `ife_webhome`, dont le rendu met en ligne les fichiers communs sous `/assets/` : une modification de la bande atteint alors toutes les pages, sans nouveau rendu des autres dépôts ([docs/injection-bande.md](docs/injection-bande.md)).
 
 Les sites prennent la nouvelle version à leur rendu suivant.
