@@ -7,8 +7,8 @@
 local BRANDS = { "ife", "ofce", "cepii" }
 
 local LOGOS = {
-    ofce = "/www/IFE-OFCE_logo_anthracite.svg",
-    cepii = "/www/IFE-CEPII_logo_anthracite.svg",
+    ofce = "/assets/img/IFE-OFCE_logo_anthracite.svg",
+    cepii = "/assets/img/IFE-CEPII_logo_anthracite.svg",
 }
 
 local function is_brand(value)
