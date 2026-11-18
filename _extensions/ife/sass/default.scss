@@ -61,6 +61,10 @@ $ife-header-height: 119px;
 $ife-bp-nav: 900px;
 $ife-bp-sm: 600px;
 
+// Dossier des images appelées par les styles. Le thème des pages garde /www,
+// que le rendu doit trouver dans le projet ; band.scss passe à /assets/img.
+$ife-img-path: "/www" !default;
+
 // Bootstrap / Quarto mapping
 $font-size-root: 100%;
 $font-family-sans-serif: $ife-font-body;

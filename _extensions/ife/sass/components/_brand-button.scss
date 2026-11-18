@@ -60,14 +60,14 @@
         --ife-brand-color: var(--ife-ofce);
         .ife-brand-btn__logo {
             aspect-ratio: 422 / 104;
-            mask-image: url("/www/IFE-OFCE_logo_blanc.svg");
+            mask-image: url("#{$ife-img-path}/IFE-OFCE_logo_blanc.svg");
         }
     }
     &--cepii {
         --ife-brand-color: var(--ife-cepii);
         .ife-brand-btn__logo {
             aspect-ratio: 499 / 105;
-            mask-image: url("/www/IFE-CEPII_logo_blanc.svg");
+            mask-image: url("#{$ife-img-path}/IFE-CEPII_logo_blanc.svg");
         }
     }
 }
