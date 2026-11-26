@@ -4,6 +4,8 @@
 # et par leurs feuilles de style (url()) a un chemin relatif et existe dans
 # _site/, à la racine comme dans le sous-dossier. Le site de test n'a pas de
 # dossier www/ : une image appelée hors de l'extension y manque.
+# Il vérifie aussi que l'accueil appelle les images attendues dont l'absence
+# ne casserait aucun lien, comme un drapeau trouvé par son code de pays.
 #
 # Le rendu se fait dans un dossier temporaire, où l'extension est installée
 # sous _extensions/ofceweb/, comme le fait quarto add : le dépôt reste propre.
@@ -47,6 +49,12 @@ pages = sorted(site.rglob("*.html"))
 sheets = sorted(site.rglob("*.css"))
 missing = []
 checked = 0
+# Images que la page doit appeler. Un drapeau introuvable est simplement omis
+# par components.lua : sans cette liste, sa disparition passerait inaperçue.
+expected = {
+    "index.html": ["site_libs/quarto-contrib/ife-img/flags/it.svg"],
+}
+called = {}
 
 def local(ref):
     ref = ref.strip().strip("'\"")
@@ -63,6 +71,7 @@ def check(owner, ref):
     if path is None:
         return
     checked += 1
+    called.setdefault(owner, set()).add(path)
     # Un chemin absolu casse les pages ouvertes depuis le disque ou servies
     # dans un sous-dossier : seul un chemin relatif à la page est admis.
     if path.startswith("/"):
@@ -89,6 +98,12 @@ for sheet in sheets:
 
 if not pages:
     sys.exit("Aucune page rendue.")
+for name, images in expected.items():
+    page = site / name
+    refs = {(page.parent / ref).resolve() for ref in called.get(page, ())}
+    for image in images:
+        if (site / image).resolve() not in refs:
+            missing.append(f"{name} : {image} (attendue, non appelée)")
 if missing:
     print(f"{len(missing)} image(s) introuvable(s) dans _site/ :", file=sys.stderr)
     for line in missing:

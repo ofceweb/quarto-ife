@@ -196,7 +196,7 @@ local function flag_src(key)
     if key == "" then return nil end
     local mapped = REGION_ICONS[key]
     if mapped then return mapped end
-    if not key:match("^[a-z]{2}$") and not key:match("^[a-z]{2}%-[a-z0-9]+$") then
+    if not key:match("^%l%l$") and not key:match("^%l%l%-[%l%d]+$") then
         return nil
     end
 
