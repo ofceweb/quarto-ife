@@ -1,0 +1,12 @@
+// Feuille ife-images.css de la dépendance ife-img, déclarée par brand.lua et
+// compilée par scripts/build-assets.sh. Quarto la copie à côté des images de
+// assets/img/ : leurs adresses sont relatives à la feuille.
+//
+// Les partiels des images s'appellent _img-*.scss, et aucun partiel de sass/
+// ne porte le nom d'un partiel de Bootstrap (_images.scss par exemple) :
+// Quarto compile le thème avec ce dossier dans son chemin de recherche, et
+// l'import de Bootstrap prendrait le fichier de l'extension.
+
+$ife-img-path: ".";
+
+@import "img-pages";

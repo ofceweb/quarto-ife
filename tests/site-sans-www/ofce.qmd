@@ -1,0 +1,6 @@
+---
+title: Page habillée IFE|OFCE
+institution: ofce
+---
+
+La marque déclarée par `institution` remplace le logo de l'IFE par celui d'IFE|OFCE dans l'en-tête et le pied de page.

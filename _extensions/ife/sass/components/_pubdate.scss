@@ -14,12 +14,12 @@
         gap: var(--ife-spacer-2);
     }
     // Icône décorative découpée par un masque SVG : elle prend la couleur du texte.
+    // Le masque est dans _img-pages.scss.
     &__icon {
         flex: none;
         width: var(--ife-icon-size);
         height: var(--ife-icon-size);
         background-color: currentColor;
-        mask: url("/www/pen_icon.svg") no-repeat center / contain;
     }
     &__updated {
         display: flex;

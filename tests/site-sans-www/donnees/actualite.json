@@ -1,0 +1,12 @@
+{
+  "items": [
+    {
+      "type": "Séminaire",
+      "title": "Séminaire de test",
+      "date": "2026-11-03T11:30",
+      "location": "10 Place de Catalogne, Paris 14eme",
+      "url": "https://www.ofce.fr/",
+      "lang": "FR"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+# Site de test de quarto-ife, sans dossier www/ (D16 du ticket OP #4118).
+# scripts/test-site.sh le copie hors du dépôt, y installe l'extension sous
+# _extensions/ofceweb/, comme quarto add, le rend, puis vérifie que chaque
+# image appelée par les pages et les feuilles de style existe dans _site/.
+project:
+  type: ife-website
+  output-dir: _site
+
+format: ife-html
+
+website:
+  title: "Site de test quarto-ife"
+
+extensions:
+  ife-website:
+    bandeauinformatif:
+      items: "donnees/bandeauinformatif.json"
+    publications:
+      items: "donnees/publications.json"
+    actualite:
+      items: "donnees/actualite.json"
+    bandeaupresentation:
+      items: "donnees/bandeaupresentation.json"

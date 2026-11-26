@@ -1,0 +1,20 @@
+---
+title: Page dans un sous-dossier
+format:
+  ife-html:
+    toc: false
+---
+
+Les mêmes images, appelées depuis une page rangée dans un dossier : leurs chemins doivent remonter d'un niveau.
+
+::: column-screen
+{{< bandeauinformatif >}}
+:::
+
+::: column-screen
+{{< publications >}}
+:::
+
+::: column-screen-inset
+{{< actualite >}}
+:::

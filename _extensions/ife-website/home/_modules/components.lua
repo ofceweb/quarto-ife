@@ -9,12 +9,28 @@ local utils = require(
 
 local components = {}
 
+-- Dossier où Quarto copie les images de l'extension (ife/assets/img/) : la
+-- dépendance ife-img déclarée par ife/brand.lua. Quarto rend relative à
+-- chaque page une adresse en /site_libs/.
+local IMG = "/site_libs/quarto-contrib/ife-img"
+
+-- Dossier source des drapeaux, pour savoir si un drapeau existe. Résolu
+-- depuis le shortcode qui charge ce module (home/), comme utils.lua.
+local FLAGS_DIR = quarto.utils.resolve_path("../../ife/assets/img/flags")
+
 local ICONS = {
     arrow = "bi-arrow-right",
 }
 
 local SVG_ICONS = {
-    envelope = "/www/mail_icon.svg",
+    envelope = IMG .. "/mail_icon.svg",
+}
+
+-- Pictos décoratifs des lignes de publication et d'actualité.
+local PICTOS = {
+    pdf = IMG .. "/pdf_icon.svg",
+    calendar = IMG .. "/calendar_icon.svg",
+    location = IMG .. "/localisation_icon.svg",
 }
 
 local SOURCE_LABELS = {
@@ -44,11 +60,11 @@ local LANG_TITLES = {
 }
 
 local REGION_ICONS = {
-    fr = "/www/flags/fr_icon.svg",
-    us = "/www/flags/us.svg",
-    de = "/www/flags/de.svg",
-    eu = "/www/flags/eu_icon.svg",
-    world = "/www/flags/world_icon.svg",
+    fr = IMG .. "/flags/fr_icon.svg",
+    us = IMG .. "/flags/us.svg",
+    de = IMG .. "/flags/de.svg",
+    eu = IMG .. "/flags/eu_icon.svg",
+    world = IMG .. "/flags/world_icon.svg",
 }
 
 local VARIANTS = {
@@ -172,39 +188,22 @@ local function region_keys(region)
 end
 
 --- Chemin du drapeau. Les codes connus ont une icône dédiée.
---- Les autres codes ISO utilisent `www/flags/<code>.svg` s'il existe.
+--- Les autres codes ISO utilisent `flags/<code>.svg` des images de
+--- l'extension, s'il existe.
 --- @param key string
 --- @return string|nil
 local function flag_src(key)
     if key == "" then return nil end
     local mapped = REGION_ICONS[key]
     if mapped then return mapped end
-    if not key:match("^[a-z]{2}$") and not key:match("^[a-z]{2}%-[a-z0-9]+$") then
+    if not key:match("^%l%l$") and not key:match("^%l%l%-[%l%d]+$") then
         return nil
     end
 
-    local rel = "www/flags/" .. key .. ".svg"
-    local cwd = "."
-    if pandoc.system and pandoc.system.get_working_directory then
-        cwd = pandoc.system.get_working_directory()
-    end
-    local project_dir = cwd
-    if quarto.project and quarto.project.directory then
-        project_dir = quarto.project.directory
-    end
-    local candidates = {
-        project_dir .. "/" .. rel,
-        cwd .. "/" .. rel,
-        rel,
-    }
-    for _, path in ipairs(candidates) do
-        local file = io.open(path, "r")
-        if file then
-            file:close()
-            return "/" .. rel
-        end
-    end
-    return nil
+    local file = io.open(FLAGS_DIR .. "/" .. key .. ".svg", "r")
+    if not file then return nil end
+    file:close()
+    return IMG .. "/flags/" .. key .. ".svg"
 end
 
 --- Badge de type de contenu (Policy Brief, Séminaire, …). Omis si vide.
@@ -255,7 +254,10 @@ end
 --- @return string
 function components.pdf_icon(url)
     if not utils.to_str(url):lower():match("%.pdf$") then return "" end
-    return '<span class="ife-pdf" aria-label="Disponible en PDF uniquement"><img src="/www/pdf_icon.svg" alt="" aria-hidden="true" /></span>'
+    return string.format(
+        '<span class="ife-pdf" aria-label="Disponible en PDF uniquement"><img src="%s" alt="" aria-hidden="true" /></span>',
+        PICTOS.pdf
+    )
 end
 
 --- Badge de source OFCE / CEPII, un drapeau par région.
@@ -575,8 +577,8 @@ function components.meta_line(type_label, date, location)
     local date_text = utils.html_escape(utils.format_date_fr(date))
     if date_text ~= "" then
         table.insert(parts, string.format(
-            '<span class="ife-meta__date"><img src="/www/calendar_icon.svg" alt="" aria-hidden="true" />%s</span>',
-            date_text
+            '<span class="ife-meta__date"><img src="%s" alt="" aria-hidden="true" />%s</span>',
+            PICTOS.calendar, date_text
         ))
     end
 
@@ -584,9 +586,10 @@ function components.meta_line(type_label, date, location)
     if loc ~= "" then
         local href = "https://www.google.com/maps/search/?api=1&query=" .. utils.url_encode(loc)
         table.insert(parts, string.format(
-            '<a class="ife-meta__location" href="%s"%s><img src="/www/localisation_icon.svg" alt="" aria-hidden="true" /><span class="visually-hidden">Voir sur Google Maps : </span>%s%s</a>',
+            '<a class="ife-meta__location" href="%s"%s><img src="%s" alt="" aria-hidden="true" /><span class="visually-hidden">Voir sur Google Maps : </span>%s%s</a>',
             utils.html_escape(href),
             utils.link_attrs(href),
+            PICTOS.location,
             utils.html_escape(loc),
             utils.new_window_hint(href)
         ))

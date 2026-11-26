@@ -1,0 +1,17 @@
+.ife-brand-btn--ofce .ife-brand-btn__logo {
+  mask-image: url("./IFE-OFCE_logo_blanc.svg");
+}
+.ife-brand-btn--cepii .ife-brand-btn__logo {
+  mask-image: url("./IFE-CEPII_logo_blanc.svg");
+}
+
+.bandeauinformatif__logo--ofce {
+  mask-image: url("./ofce_logo_masque.svg");
+}
+.bandeauinformatif__logo--cepii {
+  mask-image: url("./cepii_logo_masque.svg");
+}
+
+.ife-pubdate__icon {
+  mask: url("./pen_icon.svg") no-repeat center/contain;
+}
