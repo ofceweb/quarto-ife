@@ -1,7 +1,7 @@
 <header class="ife-chrome ife-header">
   <div class="ife-chrome__inner">
     <a class="ife-lockup" href="/" aria-label="IFE, Institut Français d’Économie — Accueil">
-      <img class="ife-lockup__logo" src="$if(ife-brand-logo)$$ife-brand-logo$$else$/assets/img/IFE_Institut_logo_anthrancite.svg$endif$" alt=""/>
+      <img class="ife-lockup__logo" src="$if(ife-brand-logo)$$ife-brand-logo$$else$$ife-img$/IFE_Institut_logo_anthrancite.svg$endif$" alt=""/>
     </a>
     <button type="button" class="ife-nav-toggle" aria-controls="ife-header-menu" aria-expanded="false" aria-label="Ouvrir le menu">
       <i class="bi bi-list" aria-hidden="true"></i>
@@ -22,30 +22,30 @@
       </div>
       <ul class="ife-social" aria-label="Contact et réseaux sociaux">
         <li><a href="https://bsky.app/profile/ife-eco.bsky.social" target="_blank" rel="noopener noreferrer">
-          <img src="/assets/img/bluesky_icon.svg" alt="Bluesky" />
+          <img src="$ife-img$/bluesky_icon.svg" alt="Bluesky" />
           <span class="visually-hidden"> (nouvelle fenêtre)</span>
         </a></li>
         <li><a href="https://www.linkedin.com/company/ife-eco/" target="_blank" rel="noopener noreferrer">
-          <img src="/assets/img/linkedin_icon.svg" alt="LinkedIn" />
+          <img src="$ife-img$/linkedin_icon.svg" alt="LinkedIn" />
           <span class="visually-hidden"> (nouvelle fenêtre)</span>
         </a></li>
 <!-- Facebook : icône de la maquette. Renseigner href, puis retirer ce commentaire.
         <li><a href="URL_DE_LA_PAGE_FACEBOOK" target="_blank" rel="noopener noreferrer">
-          <img src="/assets/img/facebook_icon.svg" alt="Facebook" />
+          <img src="$ife-img$/facebook_icon.svg" alt="Facebook" />
           <span class="visually-hidden"> (nouvelle fenêtre)</span>
         </a></li>
 -->
         <li><a href="https://www.youtube.com/@IFE-eco" target="_blank" rel="noopener noreferrer">
-          <img src="/assets/img/youtube_icon.svg" alt="YouTube" />
+          <img src="$ife-img$/youtube_icon.svg" alt="YouTube" />
           <span class="visually-hidden"> (nouvelle fenêtre)</span>
         </a></li>
 <!-- Flux RSS : icône de la maquette. Renseigner href, puis retirer ce commentaire.
         <li><a href="URL_DU_FLUX_RSS">
-          <img src="/assets/img/rss_icon.svg" alt="Flux RSS" />
+          <img src="$ife-img$/rss_icon.svg" alt="Flux RSS" />
         </a></li>
 -->
         <li><a href="mailto:contact@ife.eco">
-          <img src="/assets/img/envelope_icon.svg" alt="Écrire à contact@ife.eco" />
+          <img src="$ife-img$/envelope_icon.svg" alt="Écrire à contact@ife.eco" />
         </a></li>
       </ul>
       <nav class="ife-lang" aria-label="Choix de la langue">

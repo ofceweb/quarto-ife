@@ -27,6 +27,7 @@
         line-height: 1;
     }
     // Logo blanc découpé par un masque SVG : il prend la couleur du texte du bouton.
+    // L'image du masque est dans _img-band.scss.
     &__logo {
         display: block;
         height: 1rem;
@@ -60,14 +61,12 @@
         --ife-brand-color: var(--ife-ofce);
         .ife-brand-btn__logo {
             aspect-ratio: 422 / 104;
-            mask-image: url("#{$ife-img-path}/IFE-OFCE_logo_blanc.svg");
         }
     }
     &--cepii {
         --ife-brand-color: var(--ife-cepii);
         .ife-brand-btn__logo {
             aspect-ratio: 499 / 105;
-            mask-image: url("#{$ife-img-path}/IFE-CEPII_logo_blanc.svg");
         }
     }
 }

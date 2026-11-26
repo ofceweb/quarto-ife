@@ -9,10 +9,10 @@ L'en-tête et le pied de page du site de l'IFE forment la bande commune. Une pag
 La bande s'écrit à un seul endroit, dans l'extension :
 
 - `_extensions/ife/html/header.html` et `html/footer.html` : le balisage de l'en-tête et du pied de page, partials Pandoc appelés par `template.html` ;
-- `_extensions/ife/sass/` : les styles, dans `layout/_header.scss`, `layout/_footer.scss`, `components/_brand-button.scss`, `_social.scss` et `_skip-link.scss` ;
+- `_extensions/ife/sass/` : les styles, dans `layout/_header.scss`, `layout/_footer.scss`, `components/_brand-button.scss`, `_social.scss` et `_skip-link.scss`, et les images de ces styles dans `_img-band.scss` ;
 - `_extensions/ife/html/ife-band.js` : le script d'injection, sans le fragment ni le bouton du menu ;
 - `_extensions/ife/html/nav-toggle.js` : le bouton du menu mobile, partial de `template.html`, sans signe dollar puisque Pandoc le lit comme un modèle ;
-- `_extensions/ife/assets/img/` : les images de la bande ;
+- `_extensions/ife/assets/img/` : les images de la bande, parmi toutes celles du format ;
 - `_extensions/ife/assets/.htaccess` : la règle de cache sous Apache.
 
 ### Fichiers communs
@@ -46,9 +46,16 @@ En local, avec `quarto preview`, `/assets/` n'existe pas : l'auteur voit la band
 
 ### Images
 
-Les images de la bande sont servies sous `/assets/img/`. Les adresses `/www/…` restent servies par `ife_webhome`, pour qu'aucune page déjà publiée ne perde ses images.
+La bande appelle ses images par deux chemins, selon la version qui s'affiche :
 
-Le thème compilé dans les pages garde `/www/` pour les deux logos en masque des boutons IFE|OFCE et IFE|CEPII : Quarto fait échouer le rendu quand une image appelée par la feuille de style manque dans le projet, et `ife_webhome` n'a ces images que dans `www/`. La variable Sass `$ife-img-path` vaut `/www` pour le thème et `/assets/img` pour `ife-band.css`.
+| Version de la bande | Chemin des images | Fichiers servis |
+|---|---|---|
+| Écrite au rendu dans la page | `site_libs/quarto-contrib/ife-img/`, relatif à la page | Copiés par Quarto dans le site rendu (README, « Images du format ») |
+| Injectée par `ife-band.js`, ou habillée par `ife-band.css` | `/assets/img/` | Copiés par `scripts/assets.R` d'`ife_webhome`, servis par ife.eco seul |
+
+`scripts/build-assets.sh` construit le fragment de `ife-band.js` avec `ife-img` à `/assets/img`, et `ife-band.css` avec `$ife-img-path` à `/assets/img`. Une page ouverte ailleurs qu'ife.eco garde la bande écrite au rendu, dont les images ne dépendent d'aucun site.
+
+Les adresses `/www/…` et `/assets/img/…` restent servies par `ife_webhome`, pour qu'aucune page déjà publiée ni aucun lien extérieur ne perde ses images.
 
 Les logos anthracite IFE|OFCE et IFE|CEPII sont tirés des logos noirs de `ife_webhome/assets/`, avec la couleur `#29242F`, comme celui de l'IFE.
 
@@ -92,3 +99,4 @@ Restent à refaire sur les vrais serveurs : sur la recette `ife.staging.datacham
 
 - **2026-11-13** : la bande commune s'injecte par un script, servi sous `/assets/`. Il fonctionne de la même façon sous Apache et sous nginx, y compris pour les pages de `/ofce/` servies par un autre conteneur sur la recette, et il garde la bande écrite au rendu quand les fichiers communs manquent. Le SSI n'a pas de repli : sous Apache, il affiche un message d'erreur dans la page, et sous nginx il laisse la page sans bande. Décision de l'équipe Data Champ' (#4119).
 - **2026-11-13** : le fragment HTML de la bande est dans `ife-band.js`, pas dans un fichier HTML à part, pour que le filtre du widget de la recette garde la revalidation (#4119).
+- **2026-11-26** : les images de la bande écrite au rendu sont livrées par l'extension, dans `site_libs/quarto-contrib/ife-img/`, comme toutes les images du format, pour qu'une page affiche ses images hors d'ife.eco et qu'un dépôt fonctionne sans `www/`. La bande injectée garde `/assets/img/`, puisqu'elle n'est servie que par ife.eco (#4118).

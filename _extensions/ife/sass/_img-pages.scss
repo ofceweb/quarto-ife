@@ -1,0 +1,17 @@
+// Images appelées par les styles des pages : celles de la bande, puis celles
+// des blocs. Le thème n'appelle aucune image : Quarto chercherait une url()
+// du thème dans le dossier du projet, et le rendu échouerait sans elle.
+@import "img-band";
+
+.bandeauinformatif__logo {
+    &--ofce {
+        mask-image: url("#{$ife-img-path}/ofce_logo_masque.svg");
+    }
+    &--cepii {
+        mask-image: url("#{$ife-img-path}/cepii_logo_masque.svg");
+    }
+}
+
+.ife-pubdate__icon {
+    mask: url("#{$ife-img-path}/pen_icon.svg") no-repeat center / contain;
+}

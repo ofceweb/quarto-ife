@@ -1,0 +1,11 @@
+{
+  "items": [
+    {
+      "id": "contact",
+      "title": "Nous contacter",
+      "text": "Le bouton en mailto: porte l'icône enveloppe.",
+      "cta_title": "Courriel :",
+      "cta_url": "mailto:contact@ife.eco"
+    }
+  ]
+}

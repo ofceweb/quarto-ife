@@ -1,0 +1,29 @@
+{
+  "intro_title": "Publications de test",
+  "intro_text": "Une publication en PDF avec un drapeau d'une région nommée, une autre avec un drapeau trouvé par son code de pays.",
+  "items": [
+    {
+      "url": "https://www.ofce.fr/pdf/test.pdf",
+      "title": "Publication disponible en PDF",
+      "authors": "Autrice Test",
+      "date": "2026-11-19",
+      "updated": "2026-11-20",
+      "type": "working paper",
+      "lang": "EN",
+      "keywords": ["dette publique"],
+      "source": "ofce",
+      "region": ["fr", "eu"]
+    },
+    {
+      "url": "https://www.cepii.fr/",
+      "title": "Publication avec le drapeau de l'Italie",
+      "authors": "Auteur Test",
+      "date": "2026-11-18",
+      "type": "Post de blog",
+      "lang": "FR",
+      "keywords": ["commerce international"],
+      "source": "cepii",
+      "region": ["it", "world"]
+    }
+  ]
+}

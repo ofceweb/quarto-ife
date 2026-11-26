@@ -1,0 +1,14 @@
+// Images des styles de la bande (masques des boutons de marque), sur
+// $ife-img-path, que la feuille qui importe ce fichier fixe :
+//   - ife-images.scss, feuille de la dépendance ife-img (brand.lua) : ".", le
+//     dossier où Quarto copie assets/img/ ;
+//   - band.scss, bande injectée sur ife.eco : "/assets/img".
+// Les autres propriétés de ces règles restent dans components/.
+.ife-brand-btn {
+    &--ofce .ife-brand-btn__logo {
+        mask-image: url("#{$ife-img-path}/IFE-OFCE_logo_blanc.svg");
+    }
+    &--cepii .ife-brand-btn__logo {
+        mask-image: url("#{$ife-img-path}/IFE-CEPII_logo_blanc.svg");
+    }
+}

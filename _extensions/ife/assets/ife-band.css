@@ -187,14 +187,12 @@
 }
 .ife-brand-btn--ofce .ife-brand-btn__logo {
   aspect-ratio: 422/104;
-  mask-image: url("/assets/img/IFE-OFCE_logo_blanc.svg");
 }
 .ife-brand-btn--cepii {
   --ife-brand-color: var(--ife-cepii);
 }
 .ife-brand-btn--cepii .ife-brand-btn__logo {
   aspect-ratio: 499/105;
-  mask-image: url("/assets/img/IFE-CEPII_logo_blanc.svg");
 }
 
 @media (forced-colors: active) {
@@ -418,4 +416,10 @@ main > .ife-header {
     align-items: flex-start;
     gap: var(--ife-spacer-2);
   }
+}
+.ife-brand-btn--ofce .ife-brand-btn__logo {
+  mask-image: url("/assets/img/IFE-OFCE_logo_blanc.svg");
+}
+.ife-brand-btn--cepii .ife-brand-btn__logo {
+  mask-image: url("/assets/img/IFE-CEPII_logo_blanc.svg");
 }

@@ -1,0 +1,24 @@
+---
+title: Accueil du site de test
+format:
+  ife-html:
+    toc: false
+---
+
+Blocs de l'accueil qui appellent des images de l'extension : logos du bandeau informatif, drapeaux et icône PDF des publications, plume de la date, calendrier et lieu des actualités, enveloppe du bandeau de présentation.
+
+::: column-screen
+{{< bandeauinformatif >}}
+:::
+
+::: column-screen
+{{< publications >}}
+:::
+
+::: column-screen-inset
+{{< actualite >}}
+:::
+
+::: column-screen
+{{< bandeaupresentation >}}
+:::

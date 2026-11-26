@@ -22,6 +22,7 @@
         text-shadow: var(--ife-text-shadow-dark);
     }
     // Logo blanc découpé par un masque SVG. Son nom est lu dans le texte masqué qu'il contient.
+    // L'image du masque est dans _img-pages.scss.
     &__logo {
         display: inline-block;
         height: 1.875rem;
@@ -32,11 +33,9 @@
         mask-size: contain;
         &--ofce {
             aspect-ratio: 73.856 / 30;
-            mask-image: url("/www/ofce_logo_masque.svg");
         }
         &--cepii {
             aspect-ratio: 105.08 / 30;
-            mask-image: url("/www/cepii_logo_masque.svg");
         }
     }
 }
