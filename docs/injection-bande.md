@@ -26,7 +26,7 @@ Les deux fichiers sont commités. `scripts/build-assets.sh --check` échoue s'il
 
 ### Mise en ligne
 
-Les fichiers communs voyagent avec l'extension. Au rendu d'`ife_webhome`, son post-render `scripts/assets.R` copie `_extensions/ofceweb/ife/assets/` dans `_site/assets/`. Le site les sert alors sous `https://ife.eco/assets/`, et la recette sous `https://ife.staging.datachamp.fr/assets/`. Une modification de la bande se met donc en ligne par une version publiée de `quarto-ife`, suivie d'un déploiement d'`ife_webhome`.
+Les fichiers communs voyagent avec l'extension. Au rendu d'`ife_webhome`, son post-render `scripts/assets.R` copie dans `_site/assets/` les fichiers de `_extensions/ofceweb/ife/assets/` et les seules images que `ife-band.js` et `ife-band.css` appellent sous `/assets/img/`. Le site les sert alors sous `https://ife.eco/assets/`, et la recette sous `https://ife.staging.datachamp.fr/assets/`. Une modification de la bande se met donc en ligne par une version publiée de `quarto-ife`, suivie d'un déploiement d'`ife_webhome`.
 
 Le navigateur revalide les fichiers communs à chaque page : `Cache-Control: no-cache` vient du `.htaccess` sous Apache, et de la location `/assets/` de `site/nginx.conf` du dépôt `clients/ofce/staging` sur la recette. Tant qu'un fichier n'a pas changé, le serveur répond 304, sans le renvoyer.
 
@@ -55,7 +55,7 @@ La bande appelle ses images par deux chemins, selon la version qui s'affiche :
 
 `scripts/build-assets.sh` construit le fragment de `ife-band.js` avec `ife-img` à `/assets/img`, et `ife-band.css` avec `$ife-img-path` à `/assets/img`. Une page ouverte ailleurs qu'ife.eco garde la bande écrite au rendu, dont les images ne dépendent d'aucun site.
 
-Les adresses `/www/…` et `/assets/img/…` restent servies par `ife_webhome`, pour qu'aucune page déjà publiée ni aucun lien extérieur ne perde ses images.
+Une image du format n'existe qu'à un seul endroit, l'extension : `www/` d'`ife_webhome` ne garde que les images de contenu, et `/assets/img/` les images de la bande. Les anciennes adresses `ife.eco/www/<image>` des images du format ne sont plus servies, sans redirection, faute d'appel extérieur connu.
 
 Les logos anthracite IFE|OFCE et IFE|CEPII sont tirés des logos noirs de `ife_webhome/assets/`, avec la couleur `#29242F`, comme celui de l'IFE.
 
