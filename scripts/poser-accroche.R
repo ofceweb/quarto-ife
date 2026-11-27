@@ -4,8 +4,8 @@
 # /assets/ife-band.js remplace au chargement.
 #
 # Le script insère du texte sans réécrire le HTML, et ne touche pas une page
-# qui porte déjà l'accroche : un second passage ne change rien. Le masquage de
-# l'ancien en-tête des pages figées relève de la bascule (#4124).
+# qui porte déjà l'accroche : un second passage ne change rien. Le script ne
+# masque pas l'ancien en-tête des pages figées.
 #
 # Usage : Rscript scripts/poser-accroche.R <dossier>
 #   traite tous les fichiers .html du dossier et de ses sous-dossiers.
