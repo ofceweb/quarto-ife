@@ -26,9 +26,9 @@ Les deux fichiers sont commités. `scripts/build-assets.sh --check` échoue s'il
 
 ### Mise en ligne
 
-Les fichiers communs voyagent avec l'extension. Au rendu d'`ife_webhome`, son post-render `scripts/assets.R` copie dans `_site/assets/` les fichiers de `_extensions/ofceweb/ife/assets/` et les seules images que `ife-band.js` et `ife-band.css` appellent sous `/assets/img/`. Le site les sert alors sous `https://ife.eco/assets/`, et la recette sous `https://ife.staging.datachamp.fr/assets/`. Une modification de la bande se met donc en ligne par une version publiée de `quarto-ife`, suivie d'un déploiement d'`ife_webhome`.
+Les fichiers communs voyagent avec l'extension. Au rendu d'`ife_webhome`, son post-render `scripts/assets.R` copie dans `_site/assets/` les fichiers de `_extensions/ofceweb/ife/assets/` et les seules images que `ife-band.js` et `ife-band.css` appellent sous `/assets/img/`. Le site les sert alors sous `https://ife.eco/assets/`. Une modification de la bande se met donc en ligne par une version publiée de `quarto-ife`, suivie d'un déploiement d'`ife_webhome`.
 
-Le navigateur revalide les fichiers communs à chaque page : `Cache-Control: no-cache` vient du `.htaccess` sous Apache, et de la location `/assets/` de `site/nginx.conf` du dépôt `clients/ofce/staging` sur la recette. Tant qu'un fichier n'a pas changé, le serveur répond 304, sans le renvoyer.
+Le navigateur revalide les fichiers communs à chaque page : `Cache-Control: no-cache` vient du `.htaccess`. Tant qu'un fichier n'a pas changé, le serveur répond 304, sans le renvoyer.
 
 ### Dans la page
 
@@ -36,7 +36,7 @@ Une page rendue avec `ife-html` charge `/assets/ife-band.css` et `/assets/ife-ba
 
 Au chargement, `ife-band.js` remplace `header.ife-header` et `footer.ife-footer`. Une page IFE|OFCE ou IFE|CEPII garde son logo : le script le lit dans la classe `ife-brand--ofce` ou `ife-brand--cepii` de `<body>`. Le bouton du menu mobile est branché par délégation sur `document`, et fonctionne donc sur la bande injectée. Le même code, `nav-toggle.js`, est écrit dans la page au rendu et porté par `ife-band.js`. Chaque branchement retire le précédent, et `ife-band.js` branche le sien après le chargement de la page : le comportement du menu suit donc lui aussi la dernière version publiée, et la page garde celui de son rendu si `ife-band.js` ne répond pas.
 
-Une page figée, qui n'est plus rendue, reçoit l'accroche une seule fois, par `scripts/poser-accroche.R <dossier>` : la feuille et le script avant `</head>`, `<div data-ife-band="header"></div>` après `<body>` et `<div data-ife-band="footer"></div>` avant `</body>`. Un second passage ne change rien. La pose sur les pages publiées et le masquage de leur ancien en-tête se font à la bascule (#4124).
+Une page figée, qui n'est plus rendue, reçoit l'accroche une seule fois, par `scripts/poser-accroche.R <dossier>` : la feuille et le script avant `</head>`, `<div data-ife-band="header"></div>` après `<body>` et `<div data-ife-band="footer"></div>` avant `</body>`. Un second passage ne change rien.
 
 ### Repli
 
@@ -66,37 +66,6 @@ Les logos anthracite IFE|OFCE et IFE|CEPII sont tirés des logos noirs de `ife_w
 3. Publier une version (README, « Publier une version »).
 4. Déployer `ife_webhome`, qui met les nouveaux fichiers communs en ligne.
 
-## Essais
-
-Deux techniques ont été comparées sur une page de test d'`ife_webhome`, avec ses pages IFE|OFCE et IFE|CEPII et trois pages figées de `webhome`, du blog et du nowcast :
-
-- le script, décrit plus haut ;
-- l'inclusion par le serveur (SSI), `<!--#include virtual="/assets/…" -->`, avec `Options +Includes` et `AddOutputFilter INCLUDES .html` dans un `.htaccess` sous Apache, et `ssi on` sous nginx.
-
-Les essais du 2026-11-13 se sont faits en local, dans Chrome :
-
-- **nginx** : la recette reproduite, avec le vhost d'`ansible-config` (`sub_filter` du widget de commentaires, `Accept-Encoding ""`), un conteneur `racine` à `/` et un conteneur `ofce` à `/ofce/`, chacun en `nginx:1.30-alpine` avec `site/nginx.conf` ;
-- **Apache** : `httpd:2.4`, avec `.htaccess` permis et un cache par défaut de 15 minutes, comme l'en-tête que sert aujourd'hui `ife.eco`.
-
-| Critère | Script, nginx | Script, Apache | SSI, nginx | SSI, Apache |
-|---|---|---|---|---|
-| Bande remplacée, pages IFE, IFE\|OFCE, IFE\|CEPII | oui | oui | oui | oui |
-| Page servie sous `/ofce/` sur la recette | oui | sans objet | non : `/assets/` est dans un autre conteneur | sans objet |
-| Pages figées avec l'accroche | oui, trois sur trois | oui, trois sur trois | non essayé | non essayé |
-| Libellé modifié sur le serveur, visible sans nouveau rendu | oui | oui | non essayé | non essayé |
-| 304 au second chargement | oui pour le script et la feuille | oui | non essayé | non essayé |
-| Fichier commun absent | bande du rendu | bande du rendu | page sans bande | `[an error occurred while processing this directive]` affiché |
-| JavaScript désactivé | bande du rendu | bande du rendu | sans objet : le serveur insère la bande | sans objet |
-| À maintenir | une location nginx, un `.htaccess` | un `.htaccess` | `ssi on` et l'inclusion entre conteneurs | `Options +Includes` et le filtre `INCLUDES` |
-
-Le premier essai servait le fragment dans un fichier `ife-band.html`, lu par le script. Sur la recette, le `sub_filter` du widget traite toute réponse `text/html` et retire son `ETag` et son `Last-Modified` : le fragment était renvoyé en entier à chaque page, sans 304. Le fragment est donc passé dans `ife-band.js`, que le filtre ne touche pas.
-
-La bande injectée a été comparée, en capture d'écran au pixel, à celle de `main` (`73d88c4`), en bureau et en mobile : elle est identique pour l'IFE. Pour IFE|OFCE et IFE|CEPII, le logo s'affiche, alors qu'il manquait sur `main`, faute de fichier.
-
-Restent à refaire sur les vrais serveurs : sur la recette `ife.staging.datachamp.fr` après la fusion dans `staging`, et sur l'hébergement OVH Pro, d'abord dans un dossier de test, puis sur `ife.eco` une fois le domaine rattaché (#4125).
-
 ## Décisions
 
-- **2026-11-13** : la bande commune s'injecte par un script, servi sous `/assets/`. Il fonctionne de la même façon sous Apache et sous nginx, y compris pour les pages de `/ofce/` servies par un autre conteneur sur la recette, et il garde la bande écrite au rendu quand les fichiers communs manquent. Le SSI n'a pas de repli : sous Apache, il affiche un message d'erreur dans la page, et sous nginx il laisse la page sans bande. Décision de l'équipe Data Champ' (#4119).
-- **2026-11-13** : le fragment HTML de la bande est dans `ife-band.js`, pas dans un fichier HTML à part, pour que le filtre du widget de la recette garde la revalidation (#4119).
 - **2026-11-26** : les images de la bande écrite au rendu sont livrées par l'extension, dans `site_libs/quarto-contrib/ife-img/`, comme toutes les images du format, pour qu'une page affiche ses images hors d'ife.eco et qu'un dépôt fonctionne sans `www/`. La bande injectée garde `/assets/img/`, puisqu'elle n'est servie que par ife.eco (#4118).
